@@ -23,11 +23,11 @@ public class PlayerControl : MonoBehaviour {
 	void Update () {
 		myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
 
-		playerMove ();
-		shootProjectile ();
+		PlayerMove ();
+		ShootProjectile ();
 	}
 
-	void playerMove(){
+	void PlayerMove(){
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = true;
@@ -50,7 +50,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-	void shootProjectile(){
+	void ShootProjectile(){
 		if (Input.GetKeyDown (KeyCode.X)) {
 			GameObject newSoundwaveObj = Instantiate (soundwavePrefab);
 			if (mySpriteRenderer.flipX == false) {
