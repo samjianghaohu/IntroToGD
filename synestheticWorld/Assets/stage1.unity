@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 244536439}
   m_Layer: 9
   m_Name: Noise
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -426,7 +426,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1188134188906016, guid: f77055a8ca85f4cd9ada6a93014ae565, type: 2}
       propertyPath: m_TagString
-      value: Untagged
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1188134188906016, guid: f77055a8ca85f4cd9ada6a93014ae565, type: 2}
       propertyPath: m_Layer

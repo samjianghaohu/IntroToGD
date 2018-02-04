@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoveProjectile : MonoBehaviour {
 	public float projectileSpeed;
+	public GameObject camera;
+
 	SpriteRenderer mySpriteRenderer;
 
 	// Use this for initialization
@@ -14,6 +16,7 @@ public class MoveProjectile : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ProjectileFly ();
+		ProjectileDisappear ();
 	}
 
 	void ProjectileFly(){
@@ -21,6 +24,23 @@ public class MoveProjectile : MonoBehaviour {
 			transform.position += projectileSpeed * Vector3.right;
 		} else {
 			transform.position += projectileSpeed * Vector3.left;
+		}
+	}
+
+	void ProjectileDisappear(){
+//		if (transform.position.x > camera.transform.position.x + 10 || transform.position.x < camera.transform.position.x - 10 || transform.position.y > camera.transform.position.y + 6 || transform.position.y < camera.transform.position.y - 6) {
+//			Destroy (this.gameObject);
+//		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+		Debug.Log (other.gameObject);
+		if (this.tag == "PlayerProjectile" && other.gameObject.tag == "Enemy") {
+			Destroy (this.gameObject);
+			Destroy (other.gameObject);
+		}
+		if (this.tag == "EnemyProjectile" && other.gameObject.tag == "Player") {
+			Destroy (this.gameObject);
 		}
 	}
 }
