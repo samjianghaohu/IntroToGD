@@ -13,6 +13,10 @@ public class MoveProjectile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		ProjectileFly ();
+	}
+
+	void ProjectileFly(){
 		if (mySpriteRenderer.flipX == false) {
 			transform.position += projectileSpeed * Vector3.right;
 		} else {

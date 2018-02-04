@@ -248,8 +248,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
-  speed: 0.1
+  howLongUntilNextShoot: 1.7
+  moveSpeed: 0.1
   player: {fileID: 1390123872}
+  noisewavePrefab: {fileID: 1647258819570866, guid: 11615822eb4a84a9b967822d6de363ed,
+    type: 2}
 --- !u!1 &415480581
 GameObject:
   m_ObjectHideFlags: 0

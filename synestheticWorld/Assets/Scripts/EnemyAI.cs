@@ -7,17 +7,22 @@ public class EnemyAI : MonoBehaviour {
 	int FIRE = 1;
 	int state;
 	float timeUntilTurnBack;
+	float timeUntilNextShoot;
 
 	public float howLongUntilTurnBack;
-	public float speed;
+	public float howLongUntilNextShoot;
+	public float moveSpeed;
 	public GameObject player;
+	public GameObject noisewavePrefab;
 
 	SpriteRenderer mySpriteRenderer;
 
 	// Use this for initialization
 	void Start () {
 		state = PATROL;
+
 		timeUntilTurnBack = howLongUntilTurnBack;
+		timeUntilNextShoot = 0;
 
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		
@@ -28,11 +33,14 @@ public class EnemyAI : MonoBehaviour {
 		CheckPlayer ();
 
 		if (state == PATROL) {
-			Debug.Log ("I'm patroling.");
 			MoveAround ();
 		}
 		if (state == FIRE) {
-			Debug.Log ("I see you!");
+			timeUntilNextShoot -= Time.deltaTime;
+			if (timeUntilNextShoot <= 0) {
+				ShootProjectile ();
+				timeUntilNextShoot = howLongUntilNextShoot;
+			}
 		}
 
 	}
@@ -70,20 +78,30 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	void MoveAround (){
-		transform.position += speed * Vector3.left;
+		transform.position += moveSpeed * Vector3.left;
 
 		timeUntilTurnBack -= Time.deltaTime;
 		if (timeUntilTurnBack < 0) {
-			speed *= -1;
+			moveSpeed *= -1;
 			timeUntilTurnBack = howLongUntilTurnBack;
 		}
 
-		if (speed < 0) {
+		if (moveSpeed < 0) {
 			mySpriteRenderer.flipX = true;
 		} else {
 			mySpriteRenderer.flipX = false;
 		}
 
+	}
+
+	void ShootProjectile (){
+		GameObject newNoisewaveObj = Instantiate (noisewavePrefab);
+		if (mySpriteRenderer.flipX == true) {
+			newNoisewaveObj.transform.position = transform.position + Vector3.right;
+		} else {
+			newNoisewaveObj.GetComponent<SpriteRenderer> ().flipX = true;
+			newNoisewaveObj.transform.position = transform.position + Vector3.left;
+		}
 	}
 
 }
