@@ -31,7 +31,7 @@ public class Enemy_AI : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		CheckPlayer ();
 
 		if (state == PATROL) {

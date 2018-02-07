@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stage_Info : MonoBehaviour {
 	public static float stageLeftBoarder = -9;
-	public static float stageRightBoarder = 27;
+	public static float stageRightBoarder = 45;
 	public static float stageUpBoarder = 5;
 	public static float stageDownBoarder = -5;
 
