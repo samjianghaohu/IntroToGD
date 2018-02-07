@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveProjectile : MonoBehaviour {
+public class Projectile_Move : MonoBehaviour {
 	public float projectileSpeed;
 	public GameObject camera;
 
@@ -40,6 +40,7 @@ public class MoveProjectile : MonoBehaviour {
 			Destroy (other.gameObject);
 		}
 		if (this.tag == "EnemyProjectile" && other.gameObject.tag == "Player") {
+			Player_Control.takeDamage (2);
 			Destroy (this.gameObject);
 		}
 	}

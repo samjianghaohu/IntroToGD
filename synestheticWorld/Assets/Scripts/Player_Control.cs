@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour {
+public class Player_Control : MonoBehaviour {
 	
 	public float xSpeed = 1f;
 	public float jumpHeight = 1f;
 	public GameObject soundwavePrefab;
 
 	bool canJump = false;
+	static float playerHealth = 20;
 
 	SpriteRenderer mySpriteRenderer;
 	Rigidbody2D myRigidbody;
@@ -22,7 +23,7 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
-
+		Debug.Log (playerHealth);
 		PlayerMove ();
 		ShootProjectile ();
 	}
@@ -39,6 +40,7 @@ public class PlayerControl : MonoBehaviour {
 		if (Input.GetKey(KeyCode.C)) {
 			if (canJump == true) {
 				myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, jumpHeight);
+				//myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
 				canJump = false;
 			}
 		}
@@ -59,6 +61,14 @@ public class PlayerControl : MonoBehaviour {
 				newSoundwaveObj.GetComponent<SpriteRenderer> ().flipX = true;
 				newSoundwaveObj.transform.position = transform.position + Vector3.left;
 			}
+		}
+	}
+
+	public static void takeDamage(float damage){
+		playerHealth -= damage;
+
+		if (playerHealth <= 0) {
+			Debug.Log ("You Died!");
 		}
 	}
 

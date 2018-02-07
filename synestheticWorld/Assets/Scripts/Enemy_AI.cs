@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour {
+public class Enemy_AI : MonoBehaviour {
 	int PATROL = 0;
 	int FIRE = 1;
 	int state;
@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour {
 	public float moveSpeed;
 	public GameObject player;
 	public GameObject noisewavePrefab;
+	public LayerMask rayLayerMask;
 
 	SpriteRenderer mySpriteRenderer;
 
@@ -57,7 +58,7 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	void RaycastCheck(){
-		RaycastHit2D hit = Physics2D.Raycast (transform.position, (player.transform.position - transform.position), Mathf.Infinity);
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, (player.transform.position - transform.position), Mathf.Infinity, rayLayerMask);
 
 		if (hit.collider.gameObject.tag == "Player") {
 			if (hit.distance <= 7.2f) {
