@@ -352,7 +352,7 @@ MonoBehaviour:
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,
     type: 2}
-  rayLayerMask:
+  myLayerMask:
     serializedVersion: 2
     m_Bits: 1280
 --- !u!1 &415480581
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 869888591}
   m_Layer: 0
   m_Name: Floors
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -755,6 +755,7 @@ GameObject:
   - component: {fileID: 1390123876}
   - component: {fileID: 1390123875}
   - component: {fileID: 1390123877}
+  - component: {fileID: 1390123878}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -869,6 +870,20 @@ MonoBehaviour:
   jumpHeight: 8
   soundwavePrefab: {fileID: 1420955708012116, guid: f7cd9109db03d4a98a68e8dc0f0b4f42,
     type: 2}
+  myLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &1390123878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1390123872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb8a487e95c84ef8897d9724fab503f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1395541977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,8 +1185,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1939421610}
   - component: {fileID: 1939421609}
+  - component: {fileID: 1939421611}
   m_Layer: 0
-  m_Name: Stage Info
+  m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1201,6 +1217,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1939421611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1939421608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a6347b9f12c4bbfb3a732f61e3e272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 637908827}
 --- !u!1 &2114408059
 GameObject:
   m_ObjectHideFlags: 0

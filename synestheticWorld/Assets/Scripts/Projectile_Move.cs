@@ -40,7 +40,7 @@ public class Projectile_Move : MonoBehaviour {
 			Destroy (other.gameObject);
 		}
 		if (this.tag == "EnemyProjectile" && other.gameObject.tag == "Player") {
-			Player_Control.takeDamage (2);
+			Player_Behavior.takeDamage (2);
 			Destroy (this.gameObject);
 		}
 	}

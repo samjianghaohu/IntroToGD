@@ -7,9 +7,9 @@ public class Player_Control : MonoBehaviour {
 	public float xSpeed = 1f;
 	public float jumpHeight = 1f;
 	public GameObject soundwavePrefab;
+	public LayerMask myLayerMask;
 
 	bool canJump = false;
-	static float playerHealth = 20;
 
 	SpriteRenderer mySpriteRenderer;
 	Rigidbody2D myRigidbody;
@@ -23,9 +23,23 @@ public class Player_Control : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
-		Debug.Log (playerHealth);
+
+		UpdateJumpState ();
 		PlayerMove ();
 		ShootProjectile ();
+	}
+
+	void UpdateJumpState(){
+//		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, Mathf.Infinity, myLayerMask);
+
+//		if (hit.collider.transform.parent.tag == "Floor") {
+//		}
+
+		if (myRigidbody.velocity.y == 0) {
+			canJump = true;
+		} else {
+			canJump = false;
+		}
 	}
 
 	void PlayerMove(){
@@ -44,12 +58,6 @@ public class Player_Control : MonoBehaviour {
 				canJump = false;
 			}
 		}
-
-		if (myRigidbody.velocity.y == 0) {
-			canJump = true;
-		} else {
-			canJump = false;
-		}
 	}
 
 	void ShootProjectile(){
@@ -61,14 +69,6 @@ public class Player_Control : MonoBehaviour {
 				newSoundwaveObj.GetComponent<SpriteRenderer> ().flipX = true;
 				newSoundwaveObj.transform.position = transform.position + Vector3.left;
 			}
-		}
-	}
-
-	public static void takeDamage(float damage){
-		playerHealth -= damage;
-
-		if (playerHealth <= 0) {
-			Debug.Log ("You Died!");
 		}
 	}
 

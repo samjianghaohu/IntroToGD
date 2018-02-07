@@ -6,6 +6,7 @@ public class Enemy_AI : MonoBehaviour {
 	int PATROL = 0;
 	int FIRE = 1;
 	int state;
+
 	float timeUntilTurnBack;
 	float timeUntilNextShoot;
 
@@ -14,7 +15,7 @@ public class Enemy_AI : MonoBehaviour {
 	public float moveSpeed;
 	public GameObject player;
 	public GameObject noisewavePrefab;
-	public LayerMask rayLayerMask;
+	public LayerMask myLayerMask;
 
 	SpriteRenderer mySpriteRenderer;
 
@@ -58,7 +59,7 @@ public class Enemy_AI : MonoBehaviour {
 	}
 
 	void RaycastCheck(){
-		RaycastHit2D hit = Physics2D.Raycast (transform.position, (player.transform.position - transform.position), Mathf.Infinity, rayLayerMask);
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, (player.transform.position - transform.position), Mathf.Infinity, myLayerMask);
 
 		if (hit.collider.gameObject.tag == "Player") {
 			if (hit.distance <= 7.2f) {
