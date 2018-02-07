@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_Move : MonoBehaviour {
+public class Projectile_Behavior : MonoBehaviour {
 	public float projectileSpeed;
-	public GameObject camera;
 
+	Vector2 originalPos;
 	SpriteRenderer mySpriteRenderer;
 
 	// Use this for initialization
 	void Start () {
+		originalPos = transform.position;
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 	
@@ -28,13 +29,12 @@ public class Projectile_Move : MonoBehaviour {
 	}
 
 	void ProjectileDisappear(){
-//		if (transform.position.x > camera.transform.position.x + 10 || transform.position.x < camera.transform.position.x - 10 || transform.position.y > camera.transform.position.y + 6 || transform.position.y < camera.transform.position.y - 6) {
-//			Destroy (this.gameObject);
-//		}
+		if (Mathf.Abs(transform.position.x - originalPos.x) >= 18) {
+			Destroy (this.gameObject);
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		Debug.Log (other.gameObject);
 		if (this.tag == "PlayerProjectile" && other.gameObject.tag == "Enemy") {
 			Destroy (this.gameObject);
 			Destroy (other.gameObject);

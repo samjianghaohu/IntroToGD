@@ -30,15 +30,15 @@ public class Player_Control : MonoBehaviour {
 	}
 
 	void UpdateJumpState(){
-//		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, Mathf.Infinity, myLayerMask);
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, Mathf.Infinity, myLayerMask);
 
-//		if (hit.collider.transform.parent.tag == "Floor") {
-//		}
-
-		if (myRigidbody.velocity.y == 0) {
-			canJump = true;
-		} else {
-			canJump = false;
+		if (hit.collider.transform.parent.tag == "Floor") {
+			if (hit.distance <= 0.5f) {
+				if (canJump == false) {
+					canJump = true;
+				}
+			}
+				
 		}
 	}
 
@@ -53,8 +53,8 @@ public class Player_Control : MonoBehaviour {
 		}
 		if (Input.GetKey(KeyCode.C)) {
 			if (canJump == true) {
-				myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, jumpHeight);
-				//myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+				//myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, jumpHeight);
+				myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
 				canJump = false;
 			}
 		}
