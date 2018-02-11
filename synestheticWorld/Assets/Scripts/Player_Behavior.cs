@@ -26,4 +26,15 @@ public class Player_Behavior : MonoBehaviour {
 	public static float getHealth(){
 		return playerHealth;
 	}
+
+	void OnTriggerStay2D(Collider2D other){
+		if (other.tag == "Crystal") {
+			int ifAbsorb = Crystal_Behavior.fadeOut ();
+			if (ifAbsorb == 1) {
+				Destroy (other.gameObject);
+			} else {
+				Debug.Log ("fade");
+			}
+		}
+	}
 }
