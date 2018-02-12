@@ -10,12 +10,13 @@ public class Player_Control : MonoBehaviour {
 	public LayerMask myLayerMask;
 
 	bool canJump = false;
-
+	GameObject projectilePrefab;
 	SpriteRenderer mySpriteRenderer;
 	Rigidbody2D myRigidbody;
 
 	// Use this for initialization
 	void Start () {
+		projectilePrefab = soundwavePrefab;
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 	}
@@ -27,6 +28,7 @@ public class Player_Control : MonoBehaviour {
 		UpdateJumpState ();
 		PlayerMove ();
 		ShootProjectile ();
+		SwitchForm ();
 	}
 
 	void UpdateJumpState(){
@@ -62,12 +64,36 @@ public class Player_Control : MonoBehaviour {
 
 	void ShootProjectile(){
 		if (Input.GetKeyDown (KeyCode.X)) {
-			GameObject newSoundwaveObj = Instantiate (soundwavePrefab);
+			GameObject newSoundwaveObj = Instantiate (projectilePrefab);
 			if (mySpriteRenderer.flipX == false) {
 				newSoundwaveObj.transform.position = transform.position + Vector3.right;
 			} else {
 				newSoundwaveObj.GetComponent<SpriteRenderer> ().flipX = true;
 				newSoundwaveObj.transform.position = transform.position + Vector3.left;
+			}
+		}
+	}
+
+	void SwitchForm(){
+		int abilityNum = Player_AbilityStack.GetAvaliableAbilityNum ();
+		List<Player_Ability> abilityList = Player_AbilityStack.GetAbilityList ();
+
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			if (abilityNum >= 1) {
+				mySpriteRenderer.color = abilityList [0].abilityColor;
+				projectilePrefab = abilityList [0].projectilePrefab;
+			}
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			if (abilityNum >= 2) {
+				mySpriteRenderer.color = abilityList [1].abilityColor;
+				projectilePrefab = abilityList [1].projectilePrefab;
+			}
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			if (abilityNum >= 3) {
+				mySpriteRenderer.color = abilityList [1].abilityColor;
+				projectilePrefab = abilityList [1].projectilePrefab;
 			}
 		}
 	}

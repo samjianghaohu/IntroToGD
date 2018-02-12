@@ -1080,11 +1080,13 @@ MonoBehaviour:
   crystal0: {fileID: 1825032114}
   a_icon0: {fileID: 21300000, guid: 7c074d0f7033f4bbf92be729f0c145c4, type: 3}
   a_color0: {r: 0.9647059, g: 0, b: 0.8980392, a: 1}
-  a_projectile0: {fileID: 0}
+  a_projectile0: {fileID: 1770059065292000, guid: b1cc64b1db90348499b8e4aa7d359c76,
+    type: 2}
   crystal1: {fileID: 594579342}
   a_icon1: {fileID: 21300000, guid: 7c074d0f7033f4bbf92be729f0c145c4, type: 3}
   a_color1: {r: 0.5529412, g: 0.8156863, b: 1, a: 1}
-  a_projectile1: {fileID: 0}
+  a_projectile1: {fileID: 1887265704692732, guid: e1308590724fb495396e490055519404,
+    type: 2}
   crystal2: {fileID: 0}
   a_icon2: {fileID: 0}
   a_color2: {r: 0, g: 0, b: 0, a: 0}
