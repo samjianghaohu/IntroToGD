@@ -22,7 +22,7 @@ public class Crystal_Behavior : MonoBehaviour {
 	}
 
 	void FadeOut(){
-		alpha -= 0.01f;
+		alpha -= 0.015f;
 	}
 
 	void OnTriggerStay2D(Collider2D other){

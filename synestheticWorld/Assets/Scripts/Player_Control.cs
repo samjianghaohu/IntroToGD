@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Control : MonoBehaviour {
 	
 	public float xSpeed = 1f;
 	public float jumpHeight = 1f;
 	public GameObject soundwavePrefab;
+	public GameObject portal;
 	public LayerMask myLayerMask;
+
+	public static bool ifWin = false;
 
 	GameObject projectilePrefab;
 	SpriteRenderer mySpriteRenderer;
@@ -22,18 +26,23 @@ public class Player_Control : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
+		if (ifWin == false) {
+			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
 			
-		PlayerMove ();
-		ShootProjectile ();
-		SwitchForm ();
+			PlayerMove ();
+			ShootProjectile ();
+			SwitchForm ();
+		} else {
+			Destroy(myRigidbody);
+			transform.position = Vector2.MoveTowards (transform.position, portal.transform.position, 2f * Time.deltaTime);
+			if (transform.position == portal.transform.position) {
+				SceneManager.LoadScene ("gameClear");
+			}
+		}
 	}
 
 	void PlayerMove(){
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, Mathf.Infinity, myLayerMask);
-
-		Debug.Log (hit.collider.transform.parent.tag);
-		Debug.Log (hit.distance);
 
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
@@ -65,7 +74,7 @@ public class Player_Control : MonoBehaviour {
 	}
 
 	void SwitchForm(){
-		int abilityNum = Player_AbilityStack.GetAvaliableAbilityNum ();
+		int abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
 		List<Player_Ability> abilityList = Player_AbilityStack.GetAbilityList ();
 
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {

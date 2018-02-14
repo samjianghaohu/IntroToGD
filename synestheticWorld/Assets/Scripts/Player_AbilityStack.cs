@@ -18,9 +18,9 @@ public class Player_AbilityStack : MonoBehaviour {
 	public Color a_color2;
 	public GameObject a_projectile2;
 
-	static int avaliableAbilityNum = 0;
+	static int availableAbilityNum = 0;
 	static Dictionary<GameObject, Player_Ability> paDict = new Dictionary<GameObject, Player_Ability>();
-	static List<Player_Ability> avaliableAbilityList = new List<Player_Ability>();
+	static List<Player_Ability> availableAbilityList = new List<Player_Ability>();
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +29,6 @@ public class Player_AbilityStack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		DisplayAbilities ();
 	}
 
 	void InitializePaDict(){
@@ -38,19 +37,16 @@ public class Player_AbilityStack : MonoBehaviour {
 		paDict.Add (crystal2, new Player_Ability (a_icon2, a_color2, a_projectile2));
 	}
 
-	void DisplayAbilities(){
-	}
-
 	public static void AddAbility(GameObject newCrystal){
-		avaliableAbilityList.Add (paDict [newCrystal]);
-		avaliableAbilityNum += 1;
+		availableAbilityList.Add (paDict [newCrystal]);
+		availableAbilityNum += 1;
 	}
 
 	public static List<Player_Ability> GetAbilityList(){
-		return avaliableAbilityList;
+		return availableAbilityList;
 	}
 
-	public static int GetAvaliableAbilityNum(){
-		return avaliableAbilityNum;
+	public static int GetAvailableAbilityNum(){
+		return availableAbilityNum;
 	}
 }

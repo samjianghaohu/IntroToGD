@@ -9,6 +9,7 @@ TagManager:
   - PlayerProjectile
   - Floor
   - Crystal
+  - Portal
   layers:
   - Default
   - TransparentFX

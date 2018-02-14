@@ -23,7 +23,7 @@ public class Stage_UI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		abilityNum = Player_AbilityStack.GetAvaliableAbilityNum ();
+		abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
 		abilityList = Player_AbilityStack.GetAbilityList ();
 
 		UpdateAbilityIcons ();
