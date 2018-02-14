@@ -9,7 +9,6 @@ public class Player_Control : MonoBehaviour {
 	public GameObject soundwavePrefab;
 	public LayerMask myLayerMask;
 
-	bool canJump = false;
 	GameObject projectilePrefab;
 	SpriteRenderer mySpriteRenderer;
 	Rigidbody2D myRigidbody;
@@ -24,27 +23,18 @@ public class Player_Control : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
-
-		UpdateJumpState ();
+			
 		PlayerMove ();
 		ShootProjectile ();
 		SwitchForm ();
 	}
 
-	void UpdateJumpState(){
+	void PlayerMove(){
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, Mathf.Infinity, myLayerMask);
 
-		if (hit.collider.transform.parent.tag == "Floor") {
-			if (hit.distance <= 0.5f) {
-				if (canJump == false) {
-					canJump = true;
-				}
-			}
-				
-		}
-	}
+		Debug.Log (hit.collider.transform.parent.tag);
+		Debug.Log (hit.distance);
 
-	void PlayerMove(){
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = true;
@@ -54,10 +44,10 @@ public class Player_Control : MonoBehaviour {
 			mySpriteRenderer.flipX = false;
 		}
 		if (Input.GetKey(KeyCode.C)) {
-			if (canJump == true) {
-				//myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, jumpHeight);
-				myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-				canJump = false;
+			if (hit.collider.transform.parent.tag == "Floor") {
+				if (hit.distance <= 0.6f) {
+					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+				}
 			}
 		}
 	}
@@ -79,18 +69,22 @@ public class Player_Control : MonoBehaviour {
 		List<Player_Ability> abilityList = Player_AbilityStack.GetAbilityList ();
 
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			mySpriteRenderer.color = new Color(1, 1, 1);
+			projectilePrefab = soundwavePrefab;
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			if (abilityNum >= 1) {
 				mySpriteRenderer.color = abilityList [0].abilityColor;
 				projectilePrefab = abilityList [0].projectilePrefab;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			if (abilityNum >= 2) {
 				mySpriteRenderer.color = abilityList [1].abilityColor;
 				projectilePrefab = abilityList [1].projectilePrefab;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha3)) {
+		if (Input.GetKeyDown (KeyCode.Alpha4)) {
 			if (abilityNum >= 3) {
 				mySpriteRenderer.color = abilityList [1].abilityColor;
 				projectilePrefab = abilityList [1].projectilePrefab;
