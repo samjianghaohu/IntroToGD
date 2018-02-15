@@ -33,15 +33,4 @@ public class Projectile_Behavior : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
-
-	void OnTriggerEnter2D(Collider2D other){
-		if (this.tag == "PlayerProjectile" && other.gameObject.tag == "Enemy") {
-			Destroy (this.gameObject);
-			Destroy (other.gameObject);
-		}
-		if (this.tag == "EnemyProjectile" && other.gameObject.tag == "Player") {
-			Player_Behavior.takeDamage (2);
-			Destroy (this.gameObject);
-		}
-	}
 }

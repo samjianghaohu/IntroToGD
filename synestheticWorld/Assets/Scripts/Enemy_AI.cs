@@ -16,6 +16,9 @@ public class Enemy_AI : MonoBehaviour {
 	public GameObject player;
 	public GameObject noisewavePrefab;
 	public LayerMask myLayerMask;
+	public Sprite weekPoint;
+
+	public static GameObject weakPoint;
 
 	SpriteRenderer mySpriteRenderer;
 
@@ -27,7 +30,6 @@ public class Enemy_AI : MonoBehaviour {
 		timeUntilNextShoot = 0;
 
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
-		
 	}
 	
 	// Update is called once per frame
@@ -103,6 +105,15 @@ public class Enemy_AI : MonoBehaviour {
 		} else {
 			newNoisewaveObj.GetComponent<SpriteRenderer> ().flipX = true;
 			newNoisewaveObj.transform.position = transform.position + Vector3.left;
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.tag == "PlayerProjectile") {
+			if (other.GetComponent<SpriteRenderer> ().sprite == weekPoint) {
+				Destroy (this.gameObject);
+				Destroy (other.gameObject);
+			}
 		}
 	}
 
