@@ -15,7 +15,7 @@ public class Player_Behavior : MonoBehaviour {
 		
 	}
 
-	void takeDamage(float damage){
+	void TakeDamage(float damage){
 		playerHealth -= damage;
 
 		if (playerHealth <= 0) {
@@ -23,14 +23,11 @@ public class Player_Behavior : MonoBehaviour {
 		}
 	}
 
-	public static float getHealth(){
-		return playerHealth;
-	}
-
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "EnemyProjectile") {
-			takeDamage (2);
 			Destroy (other.gameObject);
+			TakeDamage (2);
+			Player_Control.Stune ();
 		}
 		if (other.tag == "Portal") {
 			Player_Control.ifWin = CheckWinningCondition ();
@@ -60,5 +57,9 @@ public class Player_Behavior : MonoBehaviour {
 		} else {
 			return false;
 		}
+	}
+
+	public static float getHealth(){
+		return playerHealth;
 	}
 }

@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_AI : MonoBehaviour {
-	int PATROL = 0;
-	int FIRE = 1;
-	int state;
-
-	float timeUntilTurnBack;
-	float timeUntilNextShoot;
-
 	public float howLongUntilTurnBack;
 	public float howLongUntilNextShoot;
 	public float moveSpeed;
@@ -20,7 +13,19 @@ public class Enemy_AI : MonoBehaviour {
 
 	public static GameObject weakPoint;
 
+	int PATROL = 0;
+	int FIRE = 1;
+	int STUNNED = 2;
+	int state;
+	int prevState;
+
+	float timeUntilTurnBack;
+	float timeUntilNextShoot;
+	float timeOfStunned;
+	float myHealth = 3;
+
 	SpriteRenderer mySpriteRenderer;
+	Color prevColor;
 
 	// Use this for initialization
 	void Start () {
@@ -46,6 +51,16 @@ public class Enemy_AI : MonoBehaviour {
 				timeUntilNextShoot = howLongUntilNextShoot;
 			}
 		}
+		if (state == STUNNED) {
+			mySpriteRenderer.color = Color.white;
+			timeOfStunned -= Time.deltaTime;
+
+			if (timeOfStunned <= 0) {
+				mySpriteRenderer.color = prevColor;
+				state = prevState;
+			}
+
+		}
 
 	}
 
@@ -53,7 +68,7 @@ public class Enemy_AI : MonoBehaviour {
 		if ((transform.position.x >= player.transform.position.x && mySpriteRenderer.flipX == false) || (transform.position.x < player.transform.position.x && mySpriteRenderer.flipX == true)) {
 			RaycastCheck ();
 		} else {
-			if (state != PATROL) {
+			if (state == FIRE) {
 				state = PATROL;
 			}
 		}
@@ -65,16 +80,16 @@ public class Enemy_AI : MonoBehaviour {
 
 		if (hit.collider.gameObject.tag == "Player") {
 			if (hit.distance <= 7.2f) {
-				if (state != FIRE) {
+				if (state == PATROL) {
 					state = FIRE;
 				}
 			} else {
-				if (state != PATROL) {
+				if (state == FIRE) {
 					state = PATROL;
 				}
 			}
 		} else {
-			if (state != PATROL) {
+			if (state == FIRE) {
 				state = PATROL;
 			}
 		}
@@ -108,11 +123,23 @@ public class Enemy_AI : MonoBehaviour {
 		}
 	}
 
+	void TakeDamage(float damage){
+		myHealth -= damage;
+	}
+
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "PlayerProjectile") {
 			if (other.GetComponent<SpriteRenderer> ().sprite == weekPoint) {
-				Destroy (this.gameObject);
 				Destroy (other.gameObject);
+				TakeDamage (1);
+				if (myHealth <= 0) {
+					Destroy (this.gameObject);
+				} else {
+					timeOfStunned = 0.2f;
+					prevColor = mySpriteRenderer.color;
+					prevState = state;
+					state = STUNNED;
+				}
 			}
 		}
 	}

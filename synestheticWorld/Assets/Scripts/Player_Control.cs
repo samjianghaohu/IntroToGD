@@ -13,8 +13,12 @@ public class Player_Control : MonoBehaviour {
 
 	public static bool ifWin = false;
 
+	static bool ifStunned = false;
+	static float timeOfStunned;
+	static Color prevColor;
+	static SpriteRenderer mySpriteRenderer;
+
 	GameObject projectilePrefab;
-	SpriteRenderer mySpriteRenderer;
 	Rigidbody2D myRigidbody;
 
 	// Use this for initialization
@@ -26,18 +30,27 @@ public class Player_Control : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (ifWin == false) {
-			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
-			
-			PlayerMove ();
-			ShootProjectile ();
-			SwitchForm ();
-		} else {
-			Destroy(myRigidbody);
+		if (ifWin == true) {
+			Destroy (myRigidbody);
 			transform.position = Vector2.MoveTowards (transform.position, portal.transform.position, 2f * Time.deltaTime);
 			if (transform.position == portal.transform.position) {
 				SceneManager.LoadScene ("gameClear");
 			}
+		} else if (ifStunned == true) {
+			transform.position += 0.08f * Vector3.left;
+			mySpriteRenderer.color = Color.red;
+			timeOfStunned -= Time.deltaTime;
+
+			if (timeOfStunned <= 0) {
+				mySpriteRenderer.color = prevColor;
+				ifStunned = false;
+			}
+		} else {
+			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
+
+			PlayerMove ();
+			ShootProjectile ();
+			SwitchForm ();
 		}
 	}
 
@@ -99,6 +112,12 @@ public class Player_Control : MonoBehaviour {
 				projectilePrefab = abilityList [1].projectilePrefab;
 			}
 		}
+	}
+
+	public static void Stune(){
+		prevColor = mySpriteRenderer.color;
+		timeOfStunned = 0.2f;
+		ifStunned = true;
 	}
 
 }
