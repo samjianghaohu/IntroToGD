@@ -13,6 +13,7 @@ public class Player_Control : MonoBehaviour {
 
 	public static bool ifWin = false;
 
+	static int incomingDirect = 0;
 	static bool ifStunned = false;
 	static float timeOfStunned;
 	static Color prevColor;
@@ -37,10 +38,12 @@ public class Player_Control : MonoBehaviour {
 				SceneManager.LoadScene ("gameClear");
 			}
 		} else if (ifStunned == true) {
-			if (mySpriteRenderer.flipX == false) {
+			if (incomingDirect == 1) {
+				mySpriteRenderer.flipX = false;
 				transform.position += 0.04f * Vector3.left;
 			} else {
-				transform.position += 0.0f * Vector3.right;
+				mySpriteRenderer.flipX = true;
+				transform.position += 0.04f * Vector3.right;
 			}
 			mySpriteRenderer.color = Color.red;
 			timeOfStunned -= Time.deltaTime;
@@ -70,7 +73,7 @@ public class Player_Control : MonoBehaviour {
 			mySpriteRenderer.flipX = false;
 		}
 		if (Input.GetKeyDown(KeyCode.C)) {
-			if (hit.collider.transform.parent.tag == "Floor") {
+			if (hit != null && hit.collider != null && hit.collider.transform.parent.tag == "Floor") {
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
 				}
@@ -118,10 +121,11 @@ public class Player_Control : MonoBehaviour {
 		}
 	}
 
-	public static void Stune(){
+	public static void Stune(int damgeDirect){
 		prevColor = mySpriteRenderer.color;
 		timeOfStunned = 0.2f;
 		ifStunned = true;
+		incomingDirect = damgeDirect;
 	}
 
 	public static bool IfStunned(){

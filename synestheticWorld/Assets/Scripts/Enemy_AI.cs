@@ -128,16 +128,20 @@ public class Enemy_AI : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "PlayerProjectile") {
 			if (other.GetComponent<SpriteRenderer> ().sprite == weekPoint) {
-				Destroy (other.gameObject);
-				TakeDamage (1);
-				if (myHealth <= 0) {
-					Destroy (this.gameObject);
-				} else {
-					timeOfStunned = 0.2f;
-					prevColor = mySpriteRenderer.color;
-					prevState = state;
-					state = STUNNED;
+				if (state != STUNNED) {
+					
+					TakeDamage (1);
+					if (myHealth <= 0) {
+						Destroy (this.gameObject);
+					} else {
+						timeOfStunned = 0.2f;
+						prevColor = mySpriteRenderer.color;
+						prevState = state;
+						state = STUNNED;
+					}
+
 				}
+				Destroy (other.gameObject);
 			}
 		}
 	}
