@@ -124,4 +124,8 @@ public class Player_Control : MonoBehaviour {
 		ifStunned = true;
 	}
 
+	public static bool IfStunned(){
+		return ifStunned;
+	}
+
 }

@@ -26,8 +26,10 @@ public class Player_Behavior : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "EnemyProjectile") {
 			Destroy (other.gameObject);
-			TakeDamage (2);
-			Player_Control.Stune ();
+			if (Player_Control.IfStunned () == false) {
+				TakeDamage (2);
+				Player_Control.Stune ();
+			}
 		}
 		if (other.tag == "Portal") {
 			Player_Control.ifWin = CheckWinningCondition ();
