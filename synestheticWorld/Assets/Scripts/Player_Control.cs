@@ -37,7 +37,11 @@ public class Player_Control : MonoBehaviour {
 				SceneManager.LoadScene ("gameClear");
 			}
 		} else if (ifStunned == true) {
-			transform.position += 0.08f * Vector3.left;
+			if (mySpriteRenderer.flipX == false) {
+				transform.position += 0.04f * Vector3.left;
+			} else {
+				transform.position += 0.0f * Vector3.right;
+			}
 			mySpriteRenderer.color = Color.red;
 			timeOfStunned -= Time.deltaTime;
 
@@ -65,7 +69,7 @@ public class Player_Control : MonoBehaviour {
 			myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = false;
 		}
-		if (Input.GetKey(KeyCode.C)) {
+		if (Input.GetKeyDown(KeyCode.C)) {
 			if (hit.collider.transform.parent.tag == "Floor") {
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);

@@ -77,8 +77,7 @@ public class Enemy_AI : MonoBehaviour {
 
 	void RaycastCheck(){
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, (player.transform.position - transform.position), Mathf.Infinity, myLayerMask);
-
-		if (hit.collider.gameObject.tag == "Player") {
+		if (hit != null && hit.collider != null && hit.collider.gameObject.tag == "Player") {
 			if (hit.distance <= 7.2f) {
 				if (state == PATROL) {
 					state = FIRE;
@@ -93,7 +92,6 @@ public class Enemy_AI : MonoBehaviour {
 				state = PATROL;
 			}
 		}
-			
 	}
 
 	void MoveAround (){
