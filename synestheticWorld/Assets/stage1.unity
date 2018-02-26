@@ -403,6 +403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
   howLongUntilNextShoot: 1.7
+  howLongUntilSleep: 5
+  howLongUntilAwake: 2
   moveSpeed: 0.1
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,
@@ -533,7 +535,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 415480582}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &244536436
 SpriteRenderer:
@@ -638,6 +640,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 1.5
   howLongUntilNextShoot: 1.7
+  howLongUntilSleep: 5
+  howLongUntilAwake: 2
   moveSpeed: 0.05
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,
@@ -693,6 +697,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 1.5
   howLongUntilNextShoot: 1.7
+  howLongUntilSleep: 5
+  howLongUntilAwake: 2
   moveSpeed: 0.05
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,
@@ -820,8 +826,8 @@ Transform:
   - {fileID: 1857916191}
   - {fileID: 677025715}
   - {fileID: 256102860}
-  - {fileID: 1803599779}
   - {fileID: 244536435}
+  - {fileID: 1803599779}
   - {fileID: 151744686}
   - {fileID: 1766451238}
   m_Father: {fileID: 0}
@@ -1158,6 +1164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
   howLongUntilNextShoot: 1.7
+  howLongUntilSleep: 5
+  howLongUntilAwake: 2
   moveSpeed: 0.1
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,
@@ -1862,11 +1870,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4689154386497856, guid: f77055a8ca85f4cd9ada6a93014ae565, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1188134188906016, guid: f77055a8ca85f4cd9ada6a93014ae565, type: 2}
       propertyPath: m_Name
-      value: Noise
+      value: Noise (4)
       objectReference: {fileID: 0}
     - target: {fileID: 1188134188906016, guid: f77055a8ca85f4cd9ada6a93014ae565, type: 2}
       propertyPath: m_TagString
@@ -2404,6 +2412,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
   howLongUntilNextShoot: 1.7
+  howLongUntilSleep: 5
+  howLongUntilAwake: 2
   moveSpeed: 0.05
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,
@@ -2723,6 +2733,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
   howLongUntilNextShoot: 1.7
+  howLongUntilSleep: 5
+  howLongUntilAwake: 2
   moveSpeed: 0.05
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,
@@ -2853,7 +2865,7 @@ Transform:
   m_LocalScale: {x: 0.29999998, y: 0.29999998, z: 1}
   m_Children: []
   m_Father: {fileID: 415480582}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1803599780
 MonoBehaviour:
@@ -2868,6 +2880,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 1.5
   howLongUntilNextShoot: 1.7
+  howLongUntilSleep: 5
+  howLongUntilAwake: 2
   moveSpeed: 0.05
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,
@@ -3124,6 +3138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
   howLongUntilNextShoot: 1.7
+  howLongUntilSleep: 5
+  howLongUntilAwake: 2
   moveSpeed: 0.05
   player: {fileID: 1390123872}
   noisewavePrefab: {fileID: 1598401552568500, guid: 11615822eb4a84a9b967822d6de363ed,

@@ -5,7 +5,10 @@ using UnityEngine;
 public class Enemy_AI : MonoBehaviour {
 	public float howLongUntilTurnBack;
 	public float howLongUntilNextShoot;
+	public float howLongUntilSleep;
+	public float howLongUntilAwake;
 	public float moveSpeed;
+
 	public GameObject player;
 	public GameObject noisewavePrefab;
 	public LayerMask myLayerMask;
@@ -21,6 +24,8 @@ public class Enemy_AI : MonoBehaviour {
 
 	float timeUntilTurnBack;
 	float timeUntilNextShoot;
+	float timeUntilSleep;
+	float timeUntilAwake;
 	float timeOfStunned;
 	float myHealth = 3;
 
@@ -33,22 +38,38 @@ public class Enemy_AI : MonoBehaviour {
 
 		timeUntilTurnBack = howLongUntilTurnBack;
 		timeUntilNextShoot = 0;
+		timeUntilSleep = howLongUntilSleep;
+		timeUntilAwake = 0;
 
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		CheckPlayer ();
+		if (timeUntilAwake > 0) {
+			timeUntilAwake -= Time.deltaTime;
+		}
+		if (timeUntilAwake <= 0) {
+			CheckPlayer ();
+		}
+
 
 		if (state == PATROL) {
+			timeUntilSleep = howLongUntilSleep;
 			MoveAround ();
 		}
 		if (state == FIRE) {
+			timeUntilSleep -= Time.deltaTime;
 			timeUntilNextShoot -= Time.deltaTime;
+
 			if (timeUntilNextShoot <= 0) {
 				ShootProjectile ();
 				timeUntilNextShoot = howLongUntilNextShoot;
+			}
+
+			if (timeUntilSleep <= 0) {
+				state = PATROL;
+				timeUntilAwake = howLongUntilAwake;
 			}
 		}
 		if (state == STUNNED) {
