@@ -24,8 +24,7 @@ public class Crystal_Behavior : MonoBehaviour {
 			Player_AbilityStack.AddAbility (this.gameObject);
 			Destroy (this.gameObject);
 		}
-
-		Debug.Log (ifAbsorbing);
+				
 	}
 
 	void FadeOut(){

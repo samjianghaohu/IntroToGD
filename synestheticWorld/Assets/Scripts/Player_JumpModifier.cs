@@ -17,7 +17,7 @@ public class Player_JumpModifier : MonoBehaviour {
 		if (myrigidbody != null) {
 			if (myrigidbody.velocity.y < 0) {
 				myrigidbody.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-			} else if (myrigidbody.velocity.y > 0 && !Input.GetKey (KeyCode.C)) {
+			} else if (myrigidbody.velocity.y > 0 && !Input.GetKey (KeyCode.Space)) {
 				myrigidbody.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
 			}
 		}

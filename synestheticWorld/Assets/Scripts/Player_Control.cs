@@ -22,6 +22,7 @@ public class Player_Control : MonoBehaviour {
 	static Color prevColor;
 	static SpriteRenderer mySpriteRenderer;
 
+	int currentAbility = -1;
 	float sDelay = 0;
 	GameObject projectilePrefab;
 	Rigidbody2D myRigidbody;
@@ -34,7 +35,7 @@ public class Player_Control : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		if (ifWin == true) {
 			Destroy (myRigidbody);
 			transform.position = Vector2.MoveTowards (transform.position, portal.transform.position, 2f * Time.deltaTime);
@@ -76,7 +77,7 @@ public class Player_Control : MonoBehaviour {
 			myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = false;
 		}
-		if (Input.GetKeyDown(KeyCode.C)) {
+		if (Input.GetKeyDown(KeyCode.Space)) {
 			if (hit != null && hit.collider != null && hit.collider.transform.parent.tag == "Floor") {
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
@@ -106,29 +107,25 @@ public class Player_Control : MonoBehaviour {
 	}
 
 	void SwitchForm(){
-		int abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
+		int abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();	
 		List<Player_Ability> abilityList = Player_AbilityStack.GetAbilityList ();
 
-		if (Input.GetKeyDown (KeyCode.Alpha1)) {
-			mySpriteRenderer.color = new Color(1, 1, 1);
+		if (currentAbility < 0) {
+			mySpriteRenderer.color = new Color (1, 1, 1);
 			projectilePrefab = soundwavePrefab;
+		} else {
+			mySpriteRenderer.color = abilityList [currentAbility].abilityColor;
+			projectilePrefab = abilityList [currentAbility].projectilePrefab;
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha2)) {
-			if (abilityNum >= 1) {
-				mySpriteRenderer.color = abilityList [0].abilityColor;
-				projectilePrefab = abilityList [0].projectilePrefab;
+			
+		if (Input.GetKeyDown (KeyCode.A)) {
+			if (currentAbility > -1) {
+				currentAbility -= 1;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha3)) {
-			if (abilityNum >= 2) {
-				mySpriteRenderer.color = abilityList [1].abilityColor;
-				projectilePrefab = abilityList [1].projectilePrefab;
-			}
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha4)) {
-			if (abilityNum >= 3) {
-				mySpriteRenderer.color = abilityList [1].abilityColor;
-				projectilePrefab = abilityList [1].projectilePrefab;
+		if (Input.GetKeyDown (KeyCode.D)) {
+			if (currentAbility < (abilityNum - 1)) {
+				currentAbility += 1;
 			}
 		}
 	}
