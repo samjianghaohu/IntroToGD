@@ -7,18 +7,22 @@ public class Player_Control : MonoBehaviour {
 	
 	public float xSpeed = 1f;
 	public float jumpHeight = 1f;
+	public float shootDelay = 1f;
+	public int maxBulletNum = 1;
 	public GameObject soundwavePrefab;
 	public GameObject portal;
 	public LayerMask myLayerMask;
 
 	public static bool ifWin = false;
 
+	static int bulletNum = 0;
 	static int incomingDirect = 0;
 	static bool ifStunned = false;
 	static float timeOfStunned;
 	static Color prevColor;
 	static SpriteRenderer mySpriteRenderer;
 
+	float sDelay = 0;
 	GameObject projectilePrefab;
 	Rigidbody2D myRigidbody;
 
@@ -30,7 +34,7 @@ public class Player_Control : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (ifWin == true) {
 			Destroy (myRigidbody);
 			transform.position = Vector2.MoveTowards (transform.position, portal.transform.position, 2f * Time.deltaTime);
@@ -83,14 +87,22 @@ public class Player_Control : MonoBehaviour {
 
 	void ShootProjectile(){
 		if (Input.GetKeyDown (KeyCode.X)) {
-			GameObject newSoundwaveObj = Instantiate (projectilePrefab);
-			if (mySpriteRenderer.flipX == false) {
-				newSoundwaveObj.transform.position = transform.position + Vector3.right;
-			} else {
-				newSoundwaveObj.GetComponent<SpriteRenderer> ().flipX = true;
-				newSoundwaveObj.transform.position = transform.position + Vector3.left;
+			if (bulletNum < maxBulletNum && sDelay <= 0) {
+				GameObject newSoundwaveObj = Instantiate (projectilePrefab);
+				if (mySpriteRenderer.flipX == false) {
+					newSoundwaveObj.transform.position = transform.position + Vector3.right;
+				} else {
+					newSoundwaveObj.GetComponent<SpriteRenderer> ().flipX = true;
+					newSoundwaveObj.transform.position = transform.position + Vector3.left;
+				}
+
+				bulletNum += 1;
+				sDelay = shootDelay;
 			}
 		}
+
+		sDelay -= Time.deltaTime;
+
 	}
 
 	void SwitchForm(){
@@ -130,6 +142,10 @@ public class Player_Control : MonoBehaviour {
 
 	public static bool IfStunned(){
 		return ifStunned;
+	}
+
+	public static void decreaseBulletNum(){
+		bulletNum -= 1;
 	}
 
 }

@@ -30,6 +30,10 @@ public class Projectile_Behavior : MonoBehaviour {
 
 	void ProjectileDisappear(){
 		if (Mathf.Abs(transform.position.x - originalPos.x) >= 18) {
+			if (this.tag == "PlayerProjectile") {
+				Player_Control.decreaseBulletNum ();
+			}
+
 			Destroy (this.gameObject);
 		}
 	}

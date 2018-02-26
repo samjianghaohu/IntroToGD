@@ -141,6 +141,8 @@ public class Enemy_AI : MonoBehaviour {
 					}
 
 				}
+
+				Player_Control.decreaseBulletNum ();
 				Destroy (other.gameObject);
 			}
 		}
