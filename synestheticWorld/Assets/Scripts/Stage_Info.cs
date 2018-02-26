@@ -26,6 +26,8 @@ public class Stage_Info : MonoBehaviour {
 		
 	}
 
+
+
 	public static float getLeftBorder(){
 		return leftBorder;
 	}

@@ -9,6 +9,7 @@ public class Player_Control : MonoBehaviour {
 	public float jumpHeight = 1f;
 	public float shootDelay = 1f;
 	public int maxBulletNum = 1;
+	public int nextStage;
 	public GameObject soundwavePrefab;
 	public GameObject portal;
 	public LayerMask myLayerMask;
@@ -36,11 +37,15 @@ public class Player_Control : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (Stage_Info.getRightBorder ());
+
 		if (ifWin == true) {
 			Destroy (myRigidbody);
 			transform.position = Vector2.MoveTowards (transform.position, portal.transform.position, 2f * Time.deltaTime);
+
 			if (transform.position == portal.transform.position) {
-				SceneManager.LoadScene ("gameClear");
+				ResetGameParas ();
+				SceneManager.LoadScene (nextStage);
 			}
 		} else if (ifStunned == true) {
 			if (incomingDirect == 1) {
@@ -64,6 +69,13 @@ public class Player_Control : MonoBehaviour {
 			ShootProjectile ();
 			SwitchForm ();
 		}
+
+
+		if (transform.position.y < (Stage_Info.getDownBorder() - 2) || Player_Behavior.getHealth () <= 0) {
+			ResetGameParas ();
+			SceneManager.LoadScene ("stageFail");
+		}
+
 	}
 
 	void PlayerMove(){
@@ -129,6 +141,16 @@ public class Player_Control : MonoBehaviour {
 			}
 		}
 	}
+
+	void ResetGameParas(){
+		Player_AbilityStack.resetAbilities ();
+		Player_Behavior.resetHealth ();
+		ifWin = false;
+		mySpriteRenderer.color = new Color (1, 1, 1);
+		projectilePrefab = soundwavePrefab;
+	}
+
+
 
 	public static void Stune(int damgeDirect){
 		prevColor = mySpriteRenderer.color;

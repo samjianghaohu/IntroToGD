@@ -36,6 +36,8 @@ public class Player_AbilityStack : MonoBehaviour {
 		paDict.Add (crystal1, new Player_Ability (a_icon1, a_color1, a_projectile1));
 		paDict.Add (crystal2, new Player_Ability (a_icon2, a_color2, a_projectile2));
 	}
+		
+
 
 	public static void AddAbility(GameObject newCrystal){
 		availableAbilityList.Add (paDict [newCrystal]);
@@ -48,5 +50,11 @@ public class Player_AbilityStack : MonoBehaviour {
 
 	public static int GetAvailableAbilityNum(){
 		return availableAbilityNum;
+	}
+
+	public static void resetAbilities(){
+		paDict = new Dictionary<GameObject, Player_Ability> ();
+		availableAbilityList = new List<Player_Ability>();
+		availableAbilityNum = 0;
 	}
 }

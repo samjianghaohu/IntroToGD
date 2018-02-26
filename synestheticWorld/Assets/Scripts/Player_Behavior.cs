@@ -68,4 +68,8 @@ public class Player_Behavior : MonoBehaviour {
 	public static float getHealth(){
 		return playerHealth;
 	}
+
+	public static void resetHealth(){
+		playerHealth = 20;
+	}
 }
