@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 1.5
-  howLongUntilNextShoot: 1.7
+  howLongUntilNextShoot: 2
   howLongUntilSleep: 5
   howLongUntilAwake: 2
   moveSpeed: 0.05
@@ -1140,8 +1140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5066a81a1d784029925a05611a09b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallMultiplier: 2
-  lowJumpMultiplier: 1.8
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 100
 --- !u!1001 &1468208417
 Prefab:
   m_ObjectHideFlags: 0
@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
-  howLongUntilNextShoot: 1.7
+  howLongUntilNextShoot: 2
   howLongUntilSleep: 5
   howLongUntilAwake: 2
   moveSpeed: 0.05
@@ -1509,7 +1509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
-  howLongUntilNextShoot: 1.7
+  howLongUntilNextShoot: 2
   howLongUntilSleep: 5
   howLongUntilAwake: 2
   moveSpeed: 0.05
@@ -1656,7 +1656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 1.5
-  howLongUntilNextShoot: 1.7
+  howLongUntilNextShoot: 2
   howLongUntilSleep: 5
   howLongUntilAwake: 2
   moveSpeed: 0.05
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howLongUntilTurnBack: 3
-  howLongUntilNextShoot: 1.7
+  howLongUntilNextShoot: 2
   howLongUntilSleep: 5
   howLongUntilAwake: 2
   moveSpeed: 0.05

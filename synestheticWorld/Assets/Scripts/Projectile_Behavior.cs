@@ -5,12 +5,14 @@ using UnityEngine;
 public class Projectile_Behavior : MonoBehaviour {
 	public float projectileSpeed;
 
+	GameObject camera;
 	Vector2 originalPos;
 	SpriteRenderer mySpriteRenderer;
 
 	// Use this for initialization
 	void Start () {
 		originalPos = transform.position;
+		camera = GameObject.FindWithTag ("MainCamera");
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 	
@@ -29,7 +31,7 @@ public class Projectile_Behavior : MonoBehaviour {
 	}
 
 	void ProjectileDisappear(){
-		if (Mathf.Abs(transform.position.x - originalPos.x) >= 18) {
+		if ((camera != null) && (transform.position.x > (camera.transform.position.x + 9) || transform.position.x < (camera.transform.position.x - 9))) {
 			if (this.tag == "PlayerProjectile") {
 				Player_Control.decreaseBulletNum ();
 			}

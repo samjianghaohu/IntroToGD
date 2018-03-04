@@ -122,24 +122,40 @@ public class Player_Control : MonoBehaviour {
 		int abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();	
 		List<Player_Ability> abilityList = Player_AbilityStack.GetAbilityList ();
 
-		if (currentAbility < 0) {
+		if (Input.GetKeyDown (KeyCode.Z)) {
 			mySpriteRenderer.color = new Color (1, 1, 1);
 			projectilePrefab = soundwavePrefab;
-		} else {
-			mySpriteRenderer.color = abilityList [currentAbility].abilityColor;
-			projectilePrefab = abilityList [currentAbility].projectilePrefab;
 		}
-			
 		if (Input.GetKeyDown (KeyCode.A)) {
-			if (currentAbility > -1) {
-				currentAbility -= 1;
+			if (abilityNum >= 1) {
+				mySpriteRenderer.color = abilityList [0].abilityColor;
+				projectilePrefab = abilityList [0].projectilePrefab;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.D)) {
-			if (currentAbility < (abilityNum - 1)) {
-				currentAbility += 1;
+		if (Input.GetKeyDown (KeyCode.S)) {
+			if (abilityNum >= 2) {
+				mySpriteRenderer.color = abilityList [1].abilityColor;
+				projectilePrefab = abilityList [1].projectilePrefab;
 			}
 		}
+//		if (currentAbility < 0) {
+//			mySpriteRenderer.color = new Color (1, 1, 1);
+//			projectilePrefab = soundwavePrefab;
+//		} else {
+//			mySpriteRenderer.color = abilityList [currentAbility].abilityColor;
+//			projectilePrefab = abilityList [currentAbility].projectilePrefab;
+//		}
+//			
+//		if (Input.GetKeyDown (KeyCode.A)) {
+//			if (currentAbility > -1) {
+//				currentAbility -= 1;
+//			}
+//		}
+//		if (Input.GetKeyDown (KeyCode.D)) {
+//			if (currentAbility < (abilityNum - 1)) {
+//				currentAbility += 1;
+//			}
+//		}
 	}
 
 	void ResetGameParas(){
