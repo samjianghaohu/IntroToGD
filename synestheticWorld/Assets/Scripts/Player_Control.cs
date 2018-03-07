@@ -37,7 +37,6 @@ public class Player_Control : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (Stage_Info.getRightBorder ());
 
 		if (ifWin == true) {
 			Destroy (myRigidbody);
