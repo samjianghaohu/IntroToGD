@@ -27,12 +27,14 @@ public class Player_Control : MonoBehaviour {
 	float sDelay = 0;
 	GameObject projectilePrefab;
 	Rigidbody2D myRigidbody;
+	SpriteRenderer eyeSpriteRenderer;
 
 	// Use this for initialization
 	void Start () {
 		projectilePrefab = soundwavePrefab;
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
+		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
 	}
 	
 	// Update is called once per frame
@@ -49,9 +51,11 @@ public class Player_Control : MonoBehaviour {
 		} else if (ifStunned == true) {
 			if (incomingDirect == 1) {
 				mySpriteRenderer.flipX = false;
+				eyeSpriteRenderer.flipX = false;
 				transform.position += 0.04f * Vector3.left;
 			} else {
 				mySpriteRenderer.flipX = true;
+				eyeSpriteRenderer.flipX = true;
 				transform.position += 0.04f * Vector3.right;
 			}
 			mySpriteRenderer.color = Color.red;
@@ -83,10 +87,12 @@ public class Player_Control : MonoBehaviour {
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = true;
+			eyeSpriteRenderer.flipX = true;
 		} 
 		if (Input.GetKey (KeyCode.RightArrow)) {
 			myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = false;
+			eyeSpriteRenderer.flipX = false;
 		}
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			if (hit != null && hit.collider != null && hit.collider.transform.parent.tag == "Floor") {

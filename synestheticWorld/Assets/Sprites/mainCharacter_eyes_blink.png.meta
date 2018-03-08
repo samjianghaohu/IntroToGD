@@ -1,20 +1,20 @@
 fileFormatVersion: 2
-guid: f1e889280058841fc95008e15f62d703
-timeCreated: 1520399864
+guid: a0f08c5c9108d4101bdb25a1cc932b4c
+timeCreated: 1520468002
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: mainCharacter_blink_0
-    21300002: mainCharacter_blink_1
-    21300004: mainCharacter_blink_2
-    21300006: mainCharacter_blink_3
-    21300008: mainCharacter_blink_4
-    21300010: mainCharacter_blink_5
-    21300012: mainCharacter_blink_6
-    21300014: mainCharacter_blink_7
-    21300016: mainCharacter_blink_8
-    21300018: mainCharacter_blink_9
-    21300020: mainCharacter_blink_10
+    21300000: mainCharacter_eyes_blink_0
+    21300002: mainCharacter_eyes_blink_1
+    21300004: mainCharacter_eyes_blink_2
+    21300006: mainCharacter_eyes_blink_3
+    21300008: mainCharacter_eyes_blink_4
+    21300010: mainCharacter_eyes_blink_5
+    21300012: mainCharacter_eyes_blink_6
+    21300014: mainCharacter_eyes_blink_7
+    21300016: mainCharacter_eyes_blink_8
+    21300018: mainCharacter_eyes_blink_9
+    21300020: mainCharacter_eyes_blink_10
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -91,7 +91,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mainCharacter_blink_0
+      name: mainCharacter_eyes_blink_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,7 +105,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_1
+      name: mainCharacter_eyes_blink_1
       rect:
         serializedVersion: 2
         x: 1890
@@ -119,7 +119,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_2
+      name: mainCharacter_eyes_blink_2
       rect:
         serializedVersion: 2
         x: 3780
@@ -133,7 +133,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_3
+      name: mainCharacter_eyes_blink_3
       rect:
         serializedVersion: 2
         x: 5670
@@ -147,7 +147,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_4
+      name: mainCharacter_eyes_blink_4
       rect:
         serializedVersion: 2
         x: 0
@@ -161,7 +161,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_5
+      name: mainCharacter_eyes_blink_5
       rect:
         serializedVersion: 2
         x: 1890
@@ -175,7 +175,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_6
+      name: mainCharacter_eyes_blink_6
       rect:
         serializedVersion: 2
         x: 3780
@@ -189,7 +189,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_7
+      name: mainCharacter_eyes_blink_7
       rect:
         serializedVersion: 2
         x: 5670
@@ -203,7 +203,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_8
+      name: mainCharacter_eyes_blink_8
       rect:
         serializedVersion: 2
         x: 0
@@ -217,7 +217,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_9
+      name: mainCharacter_eyes_blink_9
       rect:
         serializedVersion: 2
         x: 1890
@@ -231,7 +231,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: mainCharacter_blink_10
+      name: mainCharacter_eyes_blink_10
       rect:
         serializedVersion: 2
         x: 3780
