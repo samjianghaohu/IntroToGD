@@ -5,8 +5,9 @@ using UnityEngine;
 public class Player_Animation : MonoBehaviour {
 	public float timeUntilBlink;
 
-	int STILL = 0;
-	int MOVE = 1;
+	int BREATHE = 0;
+	int WALK = 1;
+	int STOP = 2;
 	int state = 0;
 
 	float blinkDelay;
@@ -25,18 +26,36 @@ public class Player_Animation : MonoBehaviour {
 	void Update () {
 		UpdateState ();
 
-		if (state == STILL){
+		if (state == BREATHE){
 			MakeBlink ();
+		}
+		if (state == WALK) {
+		}
+		if (state == STOP) {
 		}
 	}
 
 	void UpdateState (){
-		if (myRigidbody.velocity == new Vector2 (0, 0)) {
-			state = STILL;
+//		if (myRigidbody.velocity == new Vector2 (0, 0) && state = BREATHE) {
+//			state = BREATHE;
+//		} else {
+//			blinkDelay = timeUntilBlink;
+//		}
+
+		if ((Input.GetKeyDown (KeyCode.LeftArrow) || Input.GetKeyDown (KeyCode.RightArrow)) && state != WALK) {
+			//state = WALK;
+			myAnim.SetTrigger ("MakeWalk");
+		} else if ((Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.RightArrow)) && state != STOP) {
+			//state = STOP;
+			myAnim.SetTrigger ("MakeStop");
 		} else {
-			state = MOVE;
+			state = BREATHE;
+		}
+
+		if (state != BREATHE) {
 			blinkDelay = timeUntilBlink;
 		}
+
 	}
 
 	void MakeBlink(){
