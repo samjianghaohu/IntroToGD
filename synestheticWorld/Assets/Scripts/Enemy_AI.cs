@@ -30,6 +30,8 @@ public class Enemy_AI : MonoBehaviour {
 	float myHealth = 3;
 
 	SpriteRenderer mySpriteRenderer;
+	SpriteRenderer eyeSpriteRenderer;
+	Rigidbody2D myRigidbody;
 	Color prevColor;
 
 	// Use this for initialization
@@ -42,6 +44,9 @@ public class Enemy_AI : MonoBehaviour {
 		timeUntilAwake = 0;
 
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
+		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
+		myRigidbody = GetComponent<Rigidbody2D> ();
+
 	}
 	
 	// Update is called once per frame
@@ -53,12 +58,15 @@ public class Enemy_AI : MonoBehaviour {
 			CheckPlayer ();
 		}
 
+		Debug.Log (moveSpeed);
 
 		if (state == PATROL) {
 			timeUntilSleep = howLongUntilSleep;
 			MoveAround ();
 		}
 		if (state == FIRE) {
+			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
+
 			timeUntilSleep -= Time.deltaTime;
 			timeUntilNextShoot -= Time.deltaTime;
 
@@ -73,6 +81,8 @@ public class Enemy_AI : MonoBehaviour {
 			}
 		}
 		if (state == STUNNED) {
+			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
+
 			mySpriteRenderer.color = Color.white;
 			timeOfStunned -= Time.deltaTime;
 
@@ -86,7 +96,7 @@ public class Enemy_AI : MonoBehaviour {
 	}
 
 	void CheckPlayer(){
-		if ((transform.position.x >= player.transform.position.x && mySpriteRenderer.flipX == false) || (transform.position.x < player.transform.position.x && mySpriteRenderer.flipX == true)) {
+		if ((transform.position.x >= player.transform.position.x && mySpriteRenderer.flipX == true) || (transform.position.x < player.transform.position.x && mySpriteRenderer.flipX == false)) {
 			RaycastCheck ();
 		} else {
 			if (state == FIRE) {
@@ -116,7 +126,8 @@ public class Enemy_AI : MonoBehaviour {
 	}
 
 	void MoveAround (){
-		transform.position += moveSpeed * Vector3.left;
+		//transform.position += moveSpeed * Vector3.left;
+		myRigidbody.velocity = new Vector2 (-moveSpeed, myRigidbody.velocity.y);
 
 		timeUntilTurnBack -= Time.deltaTime;
 		if (timeUntilTurnBack < 0) {
@@ -125,16 +136,18 @@ public class Enemy_AI : MonoBehaviour {
 		}
 
 		if (moveSpeed < 0) {
-			mySpriteRenderer.flipX = true;
-		} else {
 			mySpriteRenderer.flipX = false;
+			eyeSpriteRenderer.flipX = false;
+		} else {
+			mySpriteRenderer.flipX = true;
+			eyeSpriteRenderer.flipX = true;
 		}
 
 	}
 
 	void ShootProjectile (){
 		GameObject newNoisewaveObj = Instantiate (noisewavePrefab);
-		if (mySpriteRenderer.flipX == true) {
+		if (mySpriteRenderer.flipX == false) {
 			newNoisewaveObj.transform.position = transform.position + Vector3.right;
 		} else {
 			newNoisewaveObj.GetComponent<SpriteRenderer> ().flipX = true;

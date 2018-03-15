@@ -26,12 +26,15 @@ public class Player_Animation : MonoBehaviour {
 	void Update () {
 		UpdateState ();
 
+
 		if (state == BREATHE){
 			MakeBlink ();
 		}
 		if (state == WALK) {
+			//myAnim.SetTrigger ("MakeWalk");
 		}
 		if (state == STOP) {
+			//myAnim.SetTrigger ("MakeStop");
 		}
 	}
 
@@ -41,11 +44,11 @@ public class Player_Animation : MonoBehaviour {
 //		} else {
 //			blinkDelay = timeUntilBlink;
 //		}
-
-		if ((Input.GetKeyDown (KeyCode.LeftArrow) || Input.GetKeyDown (KeyCode.RightArrow)) && state != WALK) {
+		//if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) {
+		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (Player_Control.IfStunned() == false)){
 			//state = WALK;
 			myAnim.SetTrigger ("MakeWalk");
-		} else if ((Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.RightArrow)) && state != STOP) {
+		} else if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
 			//state = STOP;
 			myAnim.SetTrigger ("MakeStop");
 		} else {
