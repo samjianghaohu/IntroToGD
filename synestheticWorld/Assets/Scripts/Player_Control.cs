@@ -10,7 +10,7 @@ public class Player_Control : MonoBehaviour {
 	public float shootDelay = 1f;
 	public int maxBulletNum = 1;
 	public int nextStage;
-	public GameObject soundwavePrefab;
+	public GameObject bulletPrefab;
 	public GameObject portal;
 	public LayerMask myLayerMask;
 
@@ -31,7 +31,9 @@ public class Player_Control : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		projectilePrefab = soundwavePrefab;
+		projectilePrefab = bulletPrefab;
+		projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
@@ -129,18 +131,18 @@ public class Player_Control : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Z)) {
 			mySpriteRenderer.color = new Color (1, 1, 1);
-			projectilePrefab = soundwavePrefab;
+			projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
 		}
 		if (Input.GetKeyDown (KeyCode.A)) {
 			if (abilityNum >= 1) {
 				mySpriteRenderer.color = abilityList [0].abilityColor;
-				projectilePrefab = abilityList [0].projectilePrefab;
+				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.S)) {
 			if (abilityNum >= 2) {
 				mySpriteRenderer.color = abilityList [1].abilityColor;
-				projectilePrefab = abilityList [1].projectilePrefab;
+				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [1].abilityColor;
 			}
 		}
 //		if (currentAbility < 0) {
@@ -168,7 +170,7 @@ public class Player_Control : MonoBehaviour {
 		Player_Behavior.resetHealth ();
 		ifWin = false;
 		mySpriteRenderer.color = new Color (1, 1, 1);
-		projectilePrefab = soundwavePrefab;
+		projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
 	}
 
 

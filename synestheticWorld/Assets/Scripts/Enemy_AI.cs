@@ -12,7 +12,7 @@ public class Enemy_AI : MonoBehaviour {
 	public GameObject player;
 	public GameObject noisewavePrefab;
 	public LayerMask myLayerMask;
-	public Sprite weekPoint;
+	public Color weakColor;
 
 	public static GameObject weakPoint;
 
@@ -83,7 +83,7 @@ public class Enemy_AI : MonoBehaviour {
 		if (state == STUNNED) {
 			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
 
-			mySpriteRenderer.color = Color.white;
+			mySpriteRenderer.color = Color.red;
 			timeOfStunned -= Time.deltaTime;
 
 			if (timeOfStunned <= 0) {
@@ -161,7 +161,7 @@ public class Enemy_AI : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "PlayerProjectile") {
-			if (other.GetComponent<SpriteRenderer> ().sprite == weekPoint) {
+			if (Stage_Utilities.compareColorsLoose(other.GetComponent<SpriteRenderer> ().color, weakColor)) {
 				if (state != STUNNED) {
 					
 					TakeDamage (1);

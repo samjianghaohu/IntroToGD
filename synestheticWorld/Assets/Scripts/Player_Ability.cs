@@ -7,12 +7,12 @@ public class Player_Ability {
 
 	public Sprite abilitySprite;
 	public Color abilityColor;
-	public GameObject projectilePrefab;
+	//public GameObject projectilePrefab;
 
-	public Player_Ability(Sprite newIcon, Color newColor, GameObject newProjectile){
+	public Player_Ability(Sprite newIcon, Color newColor){
 		abilitySprite = newIcon;
 		abilityColor = newColor;
-		projectilePrefab = newProjectile;
+		//projectilePrefab = newProjectile;
 	}
 
 }

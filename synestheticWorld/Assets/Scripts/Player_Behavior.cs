@@ -44,14 +44,14 @@ public class Player_Behavior : MonoBehaviour {
 		int currentAbilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
 		List<Player_Ability> currentAbilityList = Player_AbilityStack.GetAbilityList ();
 
-		GameObject[] targetAbilities = Stage_WinningCondition.GetTargetList ();
+		Color[] targetAbilities = Stage_WinningCondition.GetTargetList ();
 
 		int collectedTargetNum = 0;
 
 
 		for (int i = 0; i < currentAbilityNum; i++) {
 			for (int j = 0; j < targetAbilities.Length; j++) {
-				if (currentAbilityList[i].projectilePrefab == targetAbilities [j]) {
+				if (Stage_Utilities.compareColorsLoose(currentAbilityList[i].abilityColor, targetAbilities [j])) {
 					collectedTargetNum += 1;
 					break;
 				}

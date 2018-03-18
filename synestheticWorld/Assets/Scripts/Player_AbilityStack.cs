@@ -6,17 +6,17 @@ public class Player_AbilityStack : MonoBehaviour {
 	public GameObject crystal0;
 	public Sprite a_icon0;
 	public Color a_color0;
-	public GameObject a_projectile0;
+	//public GameObject a_projectile0;
 
 	public GameObject crystal1;
 	public Sprite a_icon1;
 	public Color a_color1;
-	public GameObject a_projectile1;
+	//public GameObject a_projectile1;
 
 	public GameObject crystal2;
 	public Sprite a_icon2;
 	public Color a_color2;
-	public GameObject a_projectile2;
+	//public GameObject a_projectile2;
 
 	static int availableAbilityNum = 0;
 	static Dictionary<GameObject, Player_Ability> paDict = new Dictionary<GameObject, Player_Ability>();
@@ -32,9 +32,9 @@ public class Player_AbilityStack : MonoBehaviour {
 	}
 
 	void InitializePaDict(){
-		paDict.Add (crystal0, new Player_Ability (a_icon0, a_color0, a_projectile0));
-		paDict.Add (crystal1, new Player_Ability (a_icon1, a_color1, a_projectile1));
-		paDict.Add (crystal2, new Player_Ability (a_icon2, a_color2, a_projectile2));
+		paDict.Add (crystal0, new Player_Ability (a_icon0, a_color0));
+		paDict.Add (crystal1, new Player_Ability (a_icon1, a_color1));
+		paDict.Add (crystal2, new Player_Ability (a_icon2, a_color2));
 	}
 		
 
