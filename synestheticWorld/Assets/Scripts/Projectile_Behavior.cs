@@ -17,7 +17,7 @@ public class Projectile_Behavior : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		ProjectileFly ();
 		ProjectileDisappear ();
 	}

@@ -10,7 +10,7 @@ public class Enemy_AI : MonoBehaviour {
 	public float moveSpeed;
 
 	public GameObject player;
-	public GameObject noisewavePrefab;
+	public GameObject bulletPrefab;
 	public LayerMask myLayerMask;
 	public Color weakColor;
 
@@ -146,12 +146,13 @@ public class Enemy_AI : MonoBehaviour {
 	}
 
 	void ShootProjectile (){
-		GameObject newNoisewaveObj = Instantiate (noisewavePrefab);
+		GameObject newBulletObj = Instantiate (bulletPrefab);
+
 		if (mySpriteRenderer.flipX == false) {
-			newNoisewaveObj.transform.position = transform.position + Vector3.right;
+			newBulletObj.transform.position = transform.position + Vector3.right;
 		} else {
-			newNoisewaveObj.GetComponent<SpriteRenderer> ().flipX = true;
-			newNoisewaveObj.transform.position = transform.position + Vector3.left;
+			newBulletObj.GetComponent<SpriteRenderer> ().flipX = true;
+			newBulletObj.transform.position = transform.position + Vector3.left;
 		}
 	}
 
