@@ -26,7 +26,9 @@ public class Player_Behavior : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "EnemyProjectile") {
 			if (Player_Control.IfStunned () == false) {
-				TakeDamage (2);
+				int damage = other.GetComponent<Projectile_Behavior> ().GetPower ();
+				TakeDamage (damage);
+
 				if (other.transform.position.x - transform.position.x >= 0) {
 					Player_Control.Stune (1);
 				} else {

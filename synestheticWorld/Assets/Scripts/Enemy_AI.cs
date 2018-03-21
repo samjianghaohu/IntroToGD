@@ -8,6 +8,7 @@ public class Enemy_AI : MonoBehaviour {
 	public float howLongUntilSleep;
 	public float howLongUntilAwake;
 	public float moveSpeed;
+	public float myHealth;
 
 	public GameObject player;
 	public GameObject bulletPrefab;
@@ -27,7 +28,6 @@ public class Enemy_AI : MonoBehaviour {
 	float timeUntilSleep;
 	float timeUntilAwake;
 	float timeOfStunned;
-	float myHealth = 3;
 
 	SpriteRenderer mySpriteRenderer;
 	SpriteRenderer eyeSpriteRenderer;
@@ -126,7 +126,6 @@ public class Enemy_AI : MonoBehaviour {
 	}
 
 	void MoveAround (){
-		//transform.position += moveSpeed * Vector3.left;
 		myRigidbody.velocity = new Vector2 (-moveSpeed, myRigidbody.velocity.y);
 
 		timeUntilTurnBack -= Time.deltaTime;
@@ -164,8 +163,9 @@ public class Enemy_AI : MonoBehaviour {
 		if (other.tag == "PlayerProjectile") {
 			if (Stage_Utilities.compareColorsLoose(other.GetComponent<SpriteRenderer> ().color, weakColor)) {
 				if (state != STUNNED) {
-					
-					TakeDamage (1);
+					int damage = other.GetComponent<Projectile_Behavior> ().GetPower ();
+					TakeDamage (damage);
+
 					if (myHealth <= 0) {
 						Destroy (this.gameObject);
 					} else {

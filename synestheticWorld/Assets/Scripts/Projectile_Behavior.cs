@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Projectile_Behavior : MonoBehaviour {
 	public float projectileSpeed;
+	public int projectilePower;
 
 	GameObject camera;
-	Vector2 originalPos;
 	SpriteRenderer mySpriteRenderer;
 
 	// Use this for initialization
 	void Start () {
-		originalPos = transform.position;
 		camera = GameObject.FindWithTag ("MainCamera");
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 	}
@@ -38,5 +37,9 @@ public class Projectile_Behavior : MonoBehaviour {
 
 			Destroy (this.gameObject);
 		}
+	}
+
+	public int GetPower(){
+		return projectilePower;
 	}
 }

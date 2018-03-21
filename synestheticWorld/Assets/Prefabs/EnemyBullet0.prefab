@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpeed: 0.15
+  projectilePower: 2
 --- !u!212 &212457432006413402
 SpriteRenderer:
   m_ObjectHideFlags: 1
