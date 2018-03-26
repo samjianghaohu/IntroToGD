@@ -15,6 +15,7 @@ public class Player_Control : MonoBehaviour {
 	public LayerMask myLayerMask;
 
 	public static bool ifWin = false;
+	public AudioClip attack;
 
 	static int bulletNum = 0;
 	static int incomingDirect = 0;
@@ -28,6 +29,7 @@ public class Player_Control : MonoBehaviour {
 	GameObject projectilePrefab;
 	Rigidbody2D myRigidbody;
 	SpriteRenderer eyeSpriteRenderer;
+	AudioSource attackPlayer;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +39,8 @@ public class Player_Control : MonoBehaviour {
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
+
+		attackPlayer = transform.GetChild(2).GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -116,6 +120,10 @@ public class Player_Control : MonoBehaviour {
 					newSoundwaveObj.transform.position = transform.position + Vector3.left;
 				}
 
+				attackPlayer.clip = attack;
+				attackPlayer.loop = false;
+				attackPlayer.Play ();
+
 				bulletNum += 1;
 				sDelay = shootDelay;
 			}
@@ -143,6 +151,12 @@ public class Player_Control : MonoBehaviour {
 			if (abilityNum >= 2) {
 				mySpriteRenderer.color = abilityList [1].abilityColor;
 				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [1].abilityColor;
+			}
+		}
+		if (Input.GetKeyDown (KeyCode.D)) {
+			if (abilityNum >= 3) {
+				mySpriteRenderer.color = abilityList [2].abilityColor;
+				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [2].abilityColor;
 			}
 		}
 //		if (currentAbility < 0) {

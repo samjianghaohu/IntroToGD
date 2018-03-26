@@ -58,7 +58,6 @@ public class Enemy_AI : MonoBehaviour {
 			CheckPlayer ();
 		}
 
-		Debug.Log (moveSpeed);
 
 		if (state == PATROL) {
 			timeUntilSleep = howLongUntilSleep;

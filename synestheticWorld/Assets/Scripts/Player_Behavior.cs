@@ -17,10 +17,6 @@ public class Player_Behavior : MonoBehaviour {
 
 	void TakeDamage(float damage){
 		playerHealth -= damage;
-
-		if (playerHealth <= 0) {
-			Debug.Log ("You Died!");
-		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
