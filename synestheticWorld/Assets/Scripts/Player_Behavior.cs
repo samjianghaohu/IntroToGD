@@ -20,9 +20,15 @@ public class Player_Behavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag == "EnemyProjectile") {
+		if (other.tag == "EnemyProjectile" || other.tag == "Enemy") {
 			if (Player_Control.IfStunned () == false) {
-				int damage = other.GetComponent<Projectile_Behavior> ().GetPower ();
+				int damage;
+
+				if (other.tag == "Enemy") {
+					damage = 1;
+				} else {
+					damage = other.GetComponent<Projectile_Behavior> ().GetPower ();
+				}
 				TakeDamage (damage);
 
 				if (other.transform.position.x - transform.position.x >= 0) {
@@ -31,7 +37,10 @@ public class Player_Behavior : MonoBehaviour {
 					Player_Control.Stune (-1);
 				}
 			}
-			Destroy (other.gameObject);
+
+			if (other.tag == "EnemyProjectile") {
+				Destroy (other.gameObject);
+			}
 		}
 		if (other.tag == "Portal") {
 			Player_Control.ifWin = CheckWinningCondition ();
