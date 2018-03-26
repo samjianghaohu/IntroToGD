@@ -54,12 +54,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color0: {r: 1, g: 1, b: 1, a: 0}
   match0: {r: 0, g: 0, b: 0, a: 1}
+  clip0: {fileID: 0}
   color1: {r: 0.9647059, g: 0, b: 0.8980392, a: 1}
   match1: {r: 0.7137255, g: 0.96862745, b: 0.24313726, a: 1}
+  clip1: {fileID: 8300000, guid: 19eb6ef598330449781a002e951b2199, type: 3}
   color2: {r: 0.5529412, g: 0.8156863, b: 1, a: 1}
-  match2: {r: 1, g: 0.5699534, b: 0.43382353, a: 1}
+  match2: {r: 1, g: 0.5686275, b: 0.43529412, a: 1}
+  clip2: {fileID: 8300000, guid: 701dd08d79d8844d1977ad6fe58a602f, type: 3}
   color3: {r: 1, g: 0.7529412, b: 0, a: 1}
   match3: {r: 0.078431375, g: 0.5803922, b: 0.8, a: 1}
+  clip3: {fileID: 8300000, guid: 47677713d433e4fc2bd651666c03d88d, type: 3}
   camera: {fileID: 0}
   player: {fileID: 0}
   moveBG: {fileID: 0}
