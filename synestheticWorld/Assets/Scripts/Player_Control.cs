@@ -31,6 +31,8 @@ public class Player_Control : MonoBehaviour {
 	SpriteRenderer eyeSpriteRenderer;
 	AudioSource attackPlayer;
 
+	[SerializeField] Player_SoundControl soundController;
+
 	// Use this for initialization
 	void Start () {
 		projectilePrefab = bulletPrefab;
@@ -104,6 +106,7 @@ public class Player_Control : MonoBehaviour {
 			if (hit != null && hit.collider != null && hit.collider.transform.parent.tag == "Floor") {
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+					soundController.PlayJumpSound ();
 				}
 			}
 		}

@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Player_SoundControl : MonoBehaviour {
 
-	public AudioClip walk;
-	public AudioClip jump;
+	public AudioClip walkClip;
+	public AudioClip jumpClip;
+
+	int NONE = 0;
+	int WALK = 1;
+	int JUMP = 2;
+	int mpCurrentClip = 0;
 
 	AudioSource movePlayer;
 	Rigidbody2D myRigidbody;
@@ -18,25 +23,50 @@ public class Player_SoundControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (myRigidbody != null) {
-			if ((Player_Control.IfStunned () == false) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0)) {
-				movePlayer.clip = walk;
-				movePlayer.loop = true;
+		
+		if ((Player_Control.IfStunned () == false) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0)) {
+			PlayWalkSound ();
+		} else {
+			StopWalkSound ();
+		}
+//		} else if (Input.GetKeyDown (KeyCode.Space) && (myRigidbody.velocity.y == 0)) {
+//			Debug.Log ("Jump");
+//			movePlayer.clip = jumpClip;
+//			movePlayer.loop = false;
+//			movePlayer.Play ();
+//		} else {
+//			movePlayer.Stop ();
+//		}
 
-				if (movePlayer.isPlaying == false) {
-					movePlayer.Play ();
-				}
-			} else {
-				if ((movePlayer.clip == walk) && movePlayer.isPlaying) {
-					movePlayer.Stop ();
-				}
-			}
+	}
 
-			if ((Input.GetKeyDown (KeyCode.Space)) && (myRigidbody.velocity.y == 0)) {
-				movePlayer.clip = jump;
-				movePlayer.loop = false;
-				movePlayer.Play ();
-			}
+	public void PlayWalkSound(){
+		movePlayer.clip = walkClip;
+		movePlayer.loop = true;
+
+		if (movePlayer.isPlaying == false) {
+			movePlayer.Play ();
+		}
+
+		mpCurrentClip = WALK;
+	}
+
+	public void StopWalkSound(){
+		if ((mpCurrentClip == WALK) && movePlayer.isPlaying) {
+			movePlayer.Stop ();
 		}
 	}
+
+	public void PlayJumpSound(){
+//		if (mpCurrentClip != JUMP && movePlayer.isPlaying) {
+//			movePlayer.Stop ();
+//		}
+
+		movePlayer.clip = jumpClip;
+		movePlayer.loop = false;
+		movePlayer.Play ();
+
+		mpCurrentClip = JUMP;
+	}
+
 }

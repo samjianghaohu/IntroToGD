@@ -4518,6 +4518,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attack: {fileID: 8300000, guid: 1b82483a485cc4d28870f921652f7bc4, type: 3}
+  soundController: {fileID: 1390123883}
 --- !u!114 &1390123878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4602,8 +4603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c512dac3c2a4afea09ad64580dd0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walk: {fileID: 8300000, guid: f8268b47cedf04608816be96ac982cd6, type: 3}
-  jump: {fileID: 8300000, guid: 0e6a41b9efb1e43f28e6f03ebdac8717, type: 3}
+  walkClip: {fileID: 8300000, guid: f8268b47cedf04608816be96ac982cd6, type: 3}
+  jumpClip: {fileID: 8300000, guid: 0e6a41b9efb1e43f28e6f03ebdac8717, type: 3}
 --- !u!4 &1407769449 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4142410177184724, guid: c6b01b605a6ff4c9e99e3303fcaac8e8,
