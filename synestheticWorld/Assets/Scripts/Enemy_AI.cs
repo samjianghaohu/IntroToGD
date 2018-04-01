@@ -2,61 +2,77 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_AI : MonoBehaviour {
+public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls its behaviors.
+
+	//Time thresholds for different actions/states
 	public float howLongUntilTurnBack;
 	public float howLongUntilNextShoot;
 	public float howLongUntilSleep;
 	public float howLongUntilAwake;
+
+
+	//Basic attributes of the enemy
 	public float moveSpeed;
 	public float myHealth;
+
 
 	public GameObject player;
 	public GameObject bulletPrefab;
 	public LayerMask myLayerMask;
 	public Color weakColor;
 
-	public AudioClip attack;
-	public AudioClip right;
-	public AudioClip wrong;
-
 	public static GameObject weakPoint;
 
+
+	//Current and pervious state trackers
 	int PATROL = 0;
 	int FIRE = 1;
 	int STUNNED = 2;
 	int state;
 	int prevState;
 
+
+	//Time counter for actions/states
 	float timeUntilTurnBack;
 	float timeUntilNextShoot;
 	float timeUntilSleep;
 	float timeUntilAwake;
 	float timeOfStunned;
 
-	AudioSource myPlayer;
+
 	SpriteRenderer mySpriteRenderer;
 	SpriteRenderer eyeSpriteRenderer;
 	Rigidbody2D myRigidbody;
 	Color prevColor;
 
+	[SerializeField] Enemy_SoundControl soundController;
+
+
 	// Use this for initialization
 	void Start () {
+
+		//Enemy starts with patrolling
 		state = PATROL;
 
+
+		//Initialize time counters
 		timeUntilTurnBack = howLongUntilTurnBack;
 		timeUntilNextShoot = 0;
 		timeUntilSleep = howLongUntilSleep;
 		timeUntilAwake = 0;
 
-		myPlayer = GetComponent<AudioSource> ();
+
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();
 
 	}
-	
+
+
 	// Update is called once per frame
 	void FixedUpdate () {
+
+		//What to do when it's sleeping
 		if (timeUntilAwake > 0) {
 			timeUntilAwake -= Time.deltaTime;
 		}
@@ -65,6 +81,7 @@ public class Enemy_AI : MonoBehaviour {
 		}
 
 
+		//What to do when it's patrolling
 		if (state == PATROL) {
 			timeUntilSleep = howLongUntilSleep;
 			MoveAround ();
@@ -159,12 +176,7 @@ public class Enemy_AI : MonoBehaviour {
 			newBulletObj.transform.position = transform.position + Vector3.left;
 		}
 
-		myPlayer.clip = attack;
-		myPlayer.loop = false;
-
-		if (myPlayer.isPlaying == false) {
-			myPlayer.Play ();
-		}
+		soundController.PlayAttackSound ();
 	}
 
 	void TakeDamage(float damage){
@@ -175,11 +187,7 @@ public class Enemy_AI : MonoBehaviour {
 		if (other.tag == "PlayerProjectile") {
 			if (Stage_Utilities.compareColorsLoose (weakColor, Color.white) || Stage_Utilities.compareColorsLoose (other.GetComponent<SpriteRenderer> ().color, weakColor)) {
 				if (state != STUNNED) {
-					myPlayer.clip = right;
-					myPlayer.loop = false;
-					if (myPlayer.isPlaying == false) {
-						myPlayer.Play ();
-					}
+					soundController.PlayResponseSound (1);
 						
 					int damage = other.GetComponent<Projectile_Behavior> ().GetPower ();
 					TakeDamage (damage);
@@ -198,11 +206,7 @@ public class Enemy_AI : MonoBehaviour {
 				Player_Control.decreaseBulletNum ();
 				Destroy (other.gameObject);
 			} else {
-				myPlayer.clip = wrong;
-				myPlayer.loop = false;
-				if (myPlayer.isPlaying == false) {
-					myPlayer.Play ();
-				}
+				soundController.PlayResponseSound (0);
 			}
 		}
 	}

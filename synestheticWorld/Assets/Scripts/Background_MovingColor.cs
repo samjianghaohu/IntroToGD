@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Background_MovingColor : MonoBehaviour {
+public class Background_MovingColor : MonoBehaviour {//This script moves the color block behind the bg image.
 
 	public float movingSpeed;
 	public GameObject camera;
+
+
 	// Use this for initialization
 	void Start () {
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		if (transform.position.x >= (camera.transform.position.x + 12)) {

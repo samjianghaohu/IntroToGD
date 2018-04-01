@@ -15,7 +15,6 @@ public class Player_Control : MonoBehaviour {
 	public LayerMask myLayerMask;
 
 	public static bool ifWin = false;
-	public AudioClip attack;
 
 	static int bulletNum = 0;
 	static int incomingDirect = 0;
@@ -29,7 +28,6 @@ public class Player_Control : MonoBehaviour {
 	GameObject projectilePrefab;
 	Rigidbody2D myRigidbody;
 	SpriteRenderer eyeSpriteRenderer;
-	AudioSource attackPlayer;
 
 	[SerializeField] Player_SoundControl soundController;
 
@@ -40,9 +38,7 @@ public class Player_Control : MonoBehaviour {
 
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
-		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
-
-		attackPlayer = transform.GetChild(2).GetComponent<AudioSource> ();
+		eyeSpriteRenderer = transform.GetChild (0).GetComponent<SpriteRenderer> ();
 	}
 	
 	// Update is called once per frame
@@ -123,9 +119,7 @@ public class Player_Control : MonoBehaviour {
 					newSoundwaveObj.transform.position = transform.position + Vector3.left;
 				}
 
-				attackPlayer.clip = attack;
-				attackPlayer.loop = false;
-				attackPlayer.Play ();
+				soundController.PlayAttackSound ();
 
 				bulletNum += 1;
 				sDelay = shootDelay;
