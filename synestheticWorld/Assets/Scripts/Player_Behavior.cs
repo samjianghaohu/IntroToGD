@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Behavior : MonoBehaviour {
-	static float playerHealth = 20;
+	static int playerHealth = 20;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +15,7 @@ public class Player_Behavior : MonoBehaviour {
 		
 	}
 
-	void TakeDamage(float damage){
+	void TakeDamage(int damage){
 		playerHealth -= damage;
 	}
 
@@ -72,7 +72,7 @@ public class Player_Behavior : MonoBehaviour {
 		}
 	}
 
-	public static float getHealth(){
+	public static int getHealth(){
 		return playerHealth;
 	}
 

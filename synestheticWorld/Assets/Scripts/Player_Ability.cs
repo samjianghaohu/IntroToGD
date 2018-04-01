@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Player_Ability {
+public class Player_Ability {//This script defines a class that contain details of a player ability
 
-	public Sprite abilitySprite;
 	public Color abilityColor;
-	//public GameObject projectilePrefab;
 
-	public Player_Ability(Sprite newIcon, Color newColor){
-		abilitySprite = newIcon;
+
+	public Player_Ability(Color newColor){
 		abilityColor = newColor;
-		//projectilePrefab = newProjectile;
 	}
 
 }
