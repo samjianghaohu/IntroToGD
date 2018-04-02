@@ -5212,6 +5212,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   soundController: {fileID: 1390123883}
+  myBehavior: {fileID: 1390123878}
 --- !u!114 &1390123878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7350,6 +7351,7 @@ MonoBehaviour:
   ability2: {fileID: 1927575032}
   ability3: {fileID: 1026564585}
   health: {fileID: 1037156694}
+  player: {fileID: 1390123872}
 --- !u!114 &1939421612
 MonoBehaviour:
   m_ObjectHideFlags: 0

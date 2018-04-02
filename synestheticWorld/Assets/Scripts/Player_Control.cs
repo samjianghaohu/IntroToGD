@@ -30,6 +30,7 @@ public class Player_Control : MonoBehaviour {
 	SpriteRenderer eyeSpriteRenderer;
 
 	[SerializeField] Player_SoundControl soundController;
+	[SerializeField] Player_Behavior myBehavior;
 
 	// Use this for initialization
 	void Start () {
@@ -78,7 +79,7 @@ public class Player_Control : MonoBehaviour {
 		}
 
 
-		if (transform.position.y < (Stage_Info.getDownBorder() - 2) || Player_Behavior.getHealth () <= 0) {
+		if (transform.position.y < (Stage_Info.getDownBorder() - 2) || myBehavior.getHealth () <= 0) {
 			ResetGameParas ();
 			SceneManager.LoadScene ("stageFail");
 		}
@@ -156,29 +157,11 @@ public class Player_Control : MonoBehaviour {
 				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [2].abilityColor;
 			}
 		}
-//		if (currentAbility < 0) {
-//			mySpriteRenderer.color = new Color (1, 1, 1);
-//			projectilePrefab = soundwavePrefab;
-//		} else {
-//			mySpriteRenderer.color = abilityList [currentAbility].abilityColor;
-//			projectilePrefab = abilityList [currentAbility].projectilePrefab;
-//		}
-//			
-//		if (Input.GetKeyDown (KeyCode.A)) {
-//			if (currentAbility > -1) {
-//				currentAbility -= 1;
-//			}
-//		}
-//		if (Input.GetKeyDown (KeyCode.D)) {
-//			if (currentAbility < (abilityNum - 1)) {
-//				currentAbility += 1;
-//			}
-//		}
 	}
 
 	void ResetGameParas(){
 		Player_AbilityStack.resetAbilities ();
-		Player_Behavior.resetHealth ();
+		myBehavior.resetHealth ();
 		ifWin = false;
 		mySpriteRenderer.color = new Color (1, 1, 1);
 		projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);

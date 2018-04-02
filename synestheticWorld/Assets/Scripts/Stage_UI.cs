@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Stage_UI : MonoBehaviour {//This script draws UI on stage
+
+	//ability icons and health bar
 	public Image ability1;
 	public Image ability2;
 	public Image ability3;
 	public Image health;
+	public GameObject player;
 
 
 	Image[] abilities = new Image[3];
@@ -34,15 +37,13 @@ public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 		abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
 		abilityList = Player_AbilityStack.GetAbilityList ();
 
-
 		UpdateAbilityIcons ();
 		UpdateHealthIcons ();
 	}
 
 
 	void UpdateHealthIcons(){
-		int healthNum = Player_Behavior.getHealth ();
-
+		int healthNum = player.GetComponent<Player_Behavior> ().getHealth ();
 
 		for (int i = 0; i < 20; i++) {
 			Color healthColor = health.transform.GetChild (i).GetComponent<Image> ().color;

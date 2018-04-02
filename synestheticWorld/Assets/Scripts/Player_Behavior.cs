@@ -2,24 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Behavior : MonoBehaviour {
-	static int playerHealth = 20;
+public class Player_Behavior : MonoBehaviour {//This scripts determines player behaviors (damage, health, portal)
+	
+	int playerHealth = 20;
+
 
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
+
 	void TakeDamage(int damage){
 		playerHealth -= damage;
 	}
 
+
 	void OnTriggerEnter2D(Collider2D other){
+
+		//when hit by enemy projectile
 		if (other.tag == "EnemyProjectile" || other.tag == "Enemy") {
 			if (Player_Control.IfStunned () == false) {
 				int damage;
@@ -42,10 +49,14 @@ public class Player_Behavior : MonoBehaviour {
 				Destroy (other.gameObject);
 			}
 		}
+
+
+		//when reach portal
 		if (other.tag == "Portal") {
 			Player_Control.ifWin = CheckWinningCondition ();
 		}
 	}
+
 
 	bool CheckWinningCondition(){
 		int currentAbilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
@@ -54,8 +65,6 @@ public class Player_Behavior : MonoBehaviour {
 		Color[] targetAbilities = Stage_WinningCondition.GetTargetList ();
 
 		int collectedTargetNum = 0;
-
-
 		for (int i = 0; i < currentAbilityNum; i++) {
 			for (int j = 0; j < targetAbilities.Length; j++) {
 				if (Stage_Utilities.compareColorsLoose(currentAbilityList[i].abilityColor, targetAbilities [j])) {
@@ -72,11 +81,13 @@ public class Player_Behavior : MonoBehaviour {
 		}
 	}
 
-	public static int getHealth(){
+
+	public int getHealth(){
 		return playerHealth;
 	}
 
-	public static void resetHealth(){
+
+	public void resetHealth(){
 		playerHealth = 20;
 	}
 }
