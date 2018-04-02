@@ -6,11 +6,13 @@ public class Projectile_Behavior : MonoBehaviour {
 	public float projectileSpeed;
 	public int projectilePower;
 
+	GameObject player;
 	GameObject camera;
 	SpriteRenderer mySpriteRenderer;
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindWithTag ("Player");
 		camera = GameObject.FindWithTag ("MainCamera");
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 	}
@@ -32,7 +34,7 @@ public class Projectile_Behavior : MonoBehaviour {
 	void ProjectileDisappear(){
 		if ((camera != null) && (transform.position.x > (camera.transform.position.x + 9) || transform.position.x < (camera.transform.position.x - 9))) {
 			if (this.tag == "PlayerProjectile") {
-				Player_Control.decreaseBulletNum ();
+				player.GetComponent<Player_Control> ().decreaseBulletNum ();
 			}
 
 			Destroy (this.gameObject);

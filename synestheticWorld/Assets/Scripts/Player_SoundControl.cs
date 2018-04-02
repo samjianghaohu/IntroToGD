@@ -36,10 +36,12 @@ public class Player_SoundControl : MonoBehaviour {//This script controls sound o
 	void Update () {
 
 		//Determining walk state
-		if ((Player_Control.IfStunned () == false) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0)) {
-			PlayWalkSound ();
-		} else {
-			StopWalkSound ();
+		if (myRigidbody != null) {
+			if ((Player_Control.IfStunned () == false) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0)) {
+				PlayWalkSound ();
+			} else {
+				StopWalkSound ();
+			}
 		}
 	}
 

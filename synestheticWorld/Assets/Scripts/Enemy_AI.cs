@@ -9,6 +9,7 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 	public float howLongUntilNextShoot;
 	public float howLongUntilSleep;
 	public float howLongUntilAwake;
+	public float howLongToStayWarning;
 
 
 	//Basic attributes of the enemy
@@ -21,13 +22,12 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 	public LayerMask myLayerMask;
 	public Color weakColor;
 
-	public static GameObject weakPoint;
-
 
 	//Current and pervious state trackers
 	int PATROL = 0;
-	int FIRE = 1;
-	int STUNNED = 2;
+	int WARNING = 1;
+	int FIRE = 2;
+	int STUNNED = 3;
 	int state;
 	int prevState;
 
@@ -38,6 +38,7 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 	float timeUntilSleep;
 	float timeUntilAwake;
 	float timeOfStunned;
+	float timeOfWarning;
 
 
 	SpriteRenderer mySpriteRenderer;
@@ -45,8 +46,9 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 	Rigidbody2D myRigidbody;
 	Color prevColor;
 
-	[SerializeField] Enemy_SoundControl soundController;
 
+	[SerializeField] Enemy_SoundControl soundController;
+	[SerializeField] Enemy_Animation animController;
 
 	// Use this for initialization
 	void Start () {
@@ -60,8 +62,10 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 		timeUntilNextShoot = 0;
 		timeUntilSleep = howLongUntilSleep;
 		timeUntilAwake = 0;
+		timeOfWarning = howLongToStayWarning;
 
 
+		//Initialize components
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();
@@ -79,13 +83,36 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 		if (timeUntilAwake <= 0) {
 			CheckPlayer ();
 		}
-
+			
 
 		//What to do when it's patrolling
 		if (state == PATROL) {
 			timeUntilSleep = howLongUntilSleep;
 			MoveAround ();
 		}
+
+
+		//What to do when it's warning the player
+		if (state == WARNING) {
+			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
+
+			animController.MakeWarn ();
+
+			timeOfWarning -= Time.deltaTime;
+
+			//exit warning and go to fire
+			if (timeOfWarning <= 0) {
+				animController.StopWarn ();
+				state = FIRE;
+				timeOfWarning = howLongToStayWarning;
+			}
+		}
+		if (state != WARNING) {//Turn off warning animation
+			animController.StopWarn ();
+		}
+
+
+		//What to do when it's supposed to shoot
 		if (state == FIRE) {
 			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
 
@@ -102,6 +129,12 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 				timeUntilAwake = howLongUntilAwake;
 			}
 		}
+		if (state != FIRE) {
+			timeUntilNextShoot = 0;
+		}
+
+
+		//What to do when it's stunned
 		if (state == STUNNED) {
 			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
 
@@ -112,50 +145,60 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 				mySpriteRenderer.color = prevColor;
 				state = prevState;
 			}
-
+		}
+		if (state != STUNNED) {
+			timeOfStunned = 0.2f;
 		}
 
 	}
 
+
+	//Check if player is in front or behind
 	void CheckPlayer(){
 		if ((transform.position.x >= player.transform.position.x && mySpriteRenderer.flipX == true) || (transform.position.x < player.transform.position.x && mySpriteRenderer.flipX == false)) {
 			RaycastCheck ();
 		} else {
-			if (state == FIRE) {
+			if (state != PATROL) {
 				state = PATROL;
 			}
 		}
 
 	}
 
+
+	//If player is in front, check if it's blocked by floors or close enough
 	void RaycastCheck(){
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, (player.transform.position - transform.position), Mathf.Infinity, myLayerMask);
+
 		if (hit != null && hit.collider != null && hit.collider.gameObject.tag == "Player") {
 			if (hit.distance <= 7.2f) {
 				if (state == PATROL) {
-					state = FIRE;
+					state = WARNING;
 				}
 			} else {
-				if (state == FIRE) {
+				if (state != PATROL) {
 					state = PATROL;
 				}
 			}
 		} else {
-			if (state == FIRE) {
+			if (state != PATROL) {
 				state = PATROL;
 			}
 		}
 	}
 
+
+	//Move around when patrolling
 	void MoveAround (){
 		myRigidbody.velocity = new Vector2 (-moveSpeed, myRigidbody.velocity.y);
 
 		timeUntilTurnBack -= Time.deltaTime;
-		if (timeUntilTurnBack < 0) {
+		if (timeUntilTurnBack < 0) {//Turn back
 			moveSpeed *= -1;
 			timeUntilTurnBack = howLongUntilTurnBack;
 		}
 
+		//Flip enemy sprite when moving in different directions
 		if (moveSpeed < 0) {
 			mySpriteRenderer.flipX = false;
 			eyeSpriteRenderer.flipX = false;
@@ -166,6 +209,8 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 
 	}
 
+
+	//Shoot bullets when firing
 	void ShootProjectile (){
 		GameObject newBulletObj = Instantiate (bulletPrefab);
 
@@ -179,12 +224,17 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 		soundController.PlayAttackSound ();
 	}
 
+
 	void TakeDamage(float damage){
 		myHealth -= damage;
 	}
 
+
+	//When shot by a bullet
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "PlayerProjectile") {
+
+			//When hit by the right bullet
 			if (Stage_Utilities.compareColorsLoose (weakColor, Color.white) || Stage_Utilities.compareColorsLoose (other.GetComponent<SpriteRenderer> ().color, weakColor)) {
 				if (state != STUNNED) {
 					soundController.PlayResponseSound (1);
@@ -195,17 +245,22 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 					if (myHealth <= 0) {
 						Destroy (this.gameObject);
 					} else {
-						timeOfStunned = 0.2f;
-						prevColor = mySpriteRenderer.color;
-						prevState = state;
+						if (!Stage_Utilities.compareColorsLoose (mySpriteRenderer.color, Color.red)) {
+							prevColor = mySpriteRenderer.color;
+						}
+						if (state != STUNNED) {
+							prevState = state;
+						}
 						state = STUNNED;
 					}
 
 				}
 
-				Player_Control.decreaseBulletNum ();
+				player.GetComponent<Player_Control>().decreaseBulletNum ();
 				Destroy (other.gameObject);
 			} else {
+				
+				//When hit by the wrong bullet
 				soundController.PlayResponseSound (0);
 			}
 		}

@@ -16,7 +16,7 @@ public class Player_Control : MonoBehaviour {
 
 	public static bool ifWin = false;
 
-	static int bulletNum = 0;
+	int bulletNum = 0;
 	static int incomingDirect = 0;
 	static bool ifStunned = false;
 	static float timeOfStunned;
@@ -160,6 +160,7 @@ public class Player_Control : MonoBehaviour {
 	}
 
 	void ResetGameParas(){
+		Debug.Log ("Reset");
 		Player_AbilityStack.resetAbilities ();
 		myBehavior.resetHealth ();
 		ifWin = false;
@@ -176,11 +177,13 @@ public class Player_Control : MonoBehaviour {
 		incomingDirect = damgeDirect;
 	}
 
+
 	public static bool IfStunned(){
 		return ifStunned;
 	}
 
-	public static void decreaseBulletNum(){
+
+	public void decreaseBulletNum(){
 		bulletNum -= 1;
 	}
 

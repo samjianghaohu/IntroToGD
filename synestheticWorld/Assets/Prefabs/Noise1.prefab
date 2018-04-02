@@ -373,6 +373,7 @@ MonoBehaviour:
   howLongUntilNextShoot: 2
   howLongUntilSleep: 5
   howLongUntilAwake: 2
+  howLongToStayWarning: 0.5
   moveSpeed: 2.5
   myHealth: 3
   player: {fileID: 0}
@@ -383,6 +384,7 @@ MonoBehaviour:
     m_Bits: 1280
   weakColor: {r: 0.9647059, g: 0, b: 0.8980392, a: 1}
   soundController: {fileID: 114573165250784582}
+  animController: {fileID: 114480166709818178}
 --- !u!114 &114480166709818178
 MonoBehaviour:
   m_ObjectHideFlags: 1

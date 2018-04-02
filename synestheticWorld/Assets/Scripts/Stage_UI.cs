@@ -37,6 +37,7 @@ public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 		abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
 		abilityList = Player_AbilityStack.GetAbilityList ();
 
+
 		UpdateAbilityIcons ();
 		UpdateHealthIcons ();
 	}
@@ -44,6 +45,7 @@ public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 
 	void UpdateHealthIcons(){
 		int healthNum = player.GetComponent<Player_Behavior> ().getHealth ();
+
 
 		for (int i = 0; i < 20; i++) {
 			Color healthColor = health.transform.GetChild (i).GetComponent<Image> ().color;
