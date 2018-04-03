@@ -39,10 +39,8 @@ public class Player_Animation : MonoBehaviour {
 		blinkDelay -= Time.deltaTime;
 
 		if (blinkDelay <= 0) {
-			myAnim.SetBool ("IsBlinking", true);
+			myAnim.SetTrigger ("MakeBlink");
 			blinkDelay = timeUntilBlink;
-		} else {
-			//myAnim.SetBool ("IsBlinking", false);
 		}
 	}
 }
