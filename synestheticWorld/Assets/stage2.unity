@@ -5253,7 +5253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallMultiplier: 2.5
-  lowJumpMultiplier: 100
+  lowJumpMultiplier: 4.5
 --- !u!95 &1390123881
 Animator:
   serializedVersion: 3
