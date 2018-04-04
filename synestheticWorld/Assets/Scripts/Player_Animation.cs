@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Animation : MonoBehaviour {
+public class Player_Animation : MonoBehaviour {//This scripts control player animations
+
+	//delay for blinking
 	public float timeUntilBlink;
 
-	int BREATHE = 0;
-	int WALK = 1;
-	int STOP = 2;
-	int state = 0;
 
+	//counter for blinking delay
 	float blinkDelay;
 
 	Animator myAnim;
@@ -17,32 +16,80 @@ public class Player_Animation : MonoBehaviour {
 
 	[SerializeField] Player_Control myControl;
 
+
 	// Use this for initialization
 	void Start () {
 		blinkDelay = timeUntilBlink;
 		myAnim = GetComponent<Animator> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
-		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myControl.IfStunned() == false)){
-			myAnim.SetBool ("IsWalking", true);
-			myAnim.SetBool ("IsStopping", false);
-		} else if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
-			myAnim.SetBool ("IsWalking", false);
-			myAnim.SetBool ("IsStopping", true);
-		} else {
+		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0) && (myControl.IfStunned () == false)) {
+			MakeWalk ();
+		}
+		if (Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.RightArrow)) {
+			MakeStop ();
+		}
+		if ((myRigidbody != null) && (myRigidbody.velocity.y > 0)) {
+			MakeJump ();
+		}
+		if ((myRigidbody != null) && (myRigidbody.velocity.y < 0)) {
+			MakeFall ();
+		}
+		if ((myRigidbody != null) && (myRigidbody.velocity.x == 0) && (myRigidbody.velocity.y == 0)){
 			MakeBlink ();
 		}
 	}
 
-	void MakeBlink(){
+
+	//functions that set animation bools
+	public void MakeWalk(){
+		myAnim.SetBool ("IsJumping", false);
+		myAnim.SetBool ("IsFalling", false);
+		myAnim.SetBool ("IsWalking", true);
+		myAnim.SetBool ("IsStopping", false);
+	}
+
+
+	public void MakeStop(){
+		myAnim.SetBool ("IsJumping", false);
+		myAnim.SetBool ("IsFalling", false);
+		myAnim.SetBool ("IsWalking", false);
+		myAnim.SetBool ("IsStopping", true);
+	}
+
+
+	public void MakeBlink(){
 		blinkDelay -= Time.deltaTime;
 
 		if (blinkDelay <= 0) {
-			myAnim.SetTrigger ("MakeBlink");
+			myAnim.SetBool ("IsBlinking", true);
 			blinkDelay = timeUntilBlink;
+		} else {
+			myAnim.SetBool ("IsBlinking", false);
 		}
+
+		myAnim.SetBool ("IsBreathing", true);
+		myAnim.SetBool ("IsJumping", false);
+		myAnim.SetBool ("IsFalling", false);
+	}
+
+
+	public void MakeJump(){
+		myAnim.SetBool ("IsJumping", true);
+		myAnim.SetBool ("IsFalling", false);
+		myAnim.SetBool ("IsWalking", false);
+		myAnim.SetBool ("IsStopping", false);
+	}
+
+
+	public void MakeFall(){
+		myAnim.SetBool ("IsJumping", false);
+		myAnim.SetBool ("IsFalling", true);
+		myAnim.SetBool ("IsWalking", false);
+		myAnim.SetBool ("IsStopping", false);
 	}
 }
