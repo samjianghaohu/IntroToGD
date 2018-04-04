@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Behavior : MonoBehaviour {//This scripts determines player behaviors (damage, health, portal)
 	
 	int playerHealth = 20;
+	[SerializeField] Player_Control myControl;
 
 
 	// Use this for initialization
@@ -26,9 +27,9 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 
 	void OnTriggerEnter2D(Collider2D other){
 
-		//when hit by enemy projectile
+		//when hit by enemy projectile or touched by enemy
 		if (other.tag == "EnemyProjectile" || other.tag == "Enemy") {
-			if (Player_Control.IfStunned () == false) {
+			if (myControl.IfStunned () == false) {
 				int damage;
 
 				if (other.tag == "Enemy") {
@@ -39,9 +40,9 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 				TakeDamage (damage);
 
 				if (other.transform.position.x - transform.position.x >= 0) {
-					Player_Control.Stune (1);
+					myControl.Stune (1);
 				} else {
-					Player_Control.Stune (-1);
+					myControl.Stune (-1);
 				}
 			}
 
@@ -53,7 +54,7 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 
 		//when reach portal
 		if (other.tag == "Portal") {
-			Player_Control.ifWin = CheckWinningCondition ();
+			myControl.ifWin = CheckWinningCondition ();
 		}
 	}
 

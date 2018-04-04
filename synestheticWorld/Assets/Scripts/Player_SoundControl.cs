@@ -21,6 +21,8 @@ public class Player_SoundControl : MonoBehaviour {//This script controls sound o
 	AudioSource attackPlayer;
 	Rigidbody2D myRigidbody;
 
+	[SerializeField] Player_Control myControl;
+
 
 	// Use this for initialization
 	void Start () {
@@ -37,7 +39,7 @@ public class Player_SoundControl : MonoBehaviour {//This script controls sound o
 
 		//Determining walk state
 		if (myRigidbody != null) {
-			if ((Player_Control.IfStunned () == false) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0)) {
+			if ((myControl.IfStunned () == false) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0)) {
 				PlayWalkSound ();
 			} else {
 				StopWalkSound ();

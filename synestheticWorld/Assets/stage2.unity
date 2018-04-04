@@ -5211,6 +5211,7 @@ MonoBehaviour:
   myLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  ifWin: 0
   soundController: {fileID: 1390123883}
   myBehavior: {fileID: 1390123878}
 --- !u!114 &1390123878
@@ -5224,6 +5225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb8a487e95c84ef8897d9724fab503f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myControl: {fileID: 1390123877}
 --- !u!114 &1390123879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5283,6 +5285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeUntilBlink: 2
+  myControl: {fileID: 1390123877}
 --- !u!114 &1390123883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5297,6 +5300,7 @@ MonoBehaviour:
   walkClip: {fileID: 8300000, guid: f8268b47cedf04608816be96ac982cd6, type: 3}
   jumpClip: {fileID: 8300000, guid: 0e6a41b9efb1e43f28e6f03ebdac8717, type: 3}
   attackClip: {fileID: 8300000, guid: 1b82483a485cc4d28870f921652f7bc4, type: 3}
+  myControl: {fileID: 1390123877}
 --- !u!4 &1407769449 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4142410177184724, guid: c6b01b605a6ff4c9e99e3303fcaac8e8,

@@ -14,13 +14,13 @@ public class Player_Control : MonoBehaviour {
 	public GameObject portal;
 	public LayerMask myLayerMask;
 
-	public static bool ifWin = false;
+	public bool ifWin = false;
 
 	int bulletNum = 0;
-	static int incomingDirect = 0;
-	static bool ifStunned = false;
-	static float timeOfStunned;
-	static Color prevColor;
+	int incomingDirect = 0;
+	bool ifStunned = false;
+	float timeOfStunned;
+	Color prevColor;
 	static SpriteRenderer mySpriteRenderer;
 
 	int currentAbility = -1;
@@ -32,6 +32,7 @@ public class Player_Control : MonoBehaviour {
 	[SerializeField] Player_SoundControl soundController;
 	[SerializeField] Player_Behavior myBehavior;
 
+
 	// Use this for initialization
 	void Start () {
 		projectilePrefab = bulletPrefab;
@@ -41,11 +42,12 @@ public class Player_Control : MonoBehaviour {
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild (0).GetComponent<SpriteRenderer> ();
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 
-		if (ifWin == true) {
+		if (ifWin) {
 			Destroy (myRigidbody);
 			transform.position = Vector2.MoveTowards (transform.position, portal.transform.position, 2f * Time.deltaTime);
 
@@ -53,7 +55,7 @@ public class Player_Control : MonoBehaviour {
 				ResetGameParas ();
 				SceneManager.LoadScene (nextStage);
 			}
-		} else if (ifStunned == true) {
+		} else if (ifStunned) {
 			if (incomingDirect == 1) {
 				mySpriteRenderer.flipX = false;
 				eyeSpriteRenderer.flipX = false;
@@ -170,7 +172,7 @@ public class Player_Control : MonoBehaviour {
 
 
 
-	public static void Stune(int damgeDirect){
+	public void Stune(int damgeDirect){
 		prevColor = mySpriteRenderer.color;
 		timeOfStunned = 0.2f;
 		ifStunned = true;
@@ -178,7 +180,7 @@ public class Player_Control : MonoBehaviour {
 	}
 
 
-	public static bool IfStunned(){
+	public bool IfStunned(){
 		return ifStunned;
 	}
 

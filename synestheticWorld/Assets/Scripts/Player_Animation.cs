@@ -15,6 +15,8 @@ public class Player_Animation : MonoBehaviour {
 	Animator myAnim;
 	Rigidbody2D myRigidbody;
 
+	[SerializeField] Player_Control myControl;
+
 	// Use this for initialization
 	void Start () {
 		blinkDelay = timeUntilBlink;
@@ -24,7 +26,7 @@ public class Player_Animation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (Player_Control.IfStunned() == false)){
+		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myControl.IfStunned() == false)){
 			myAnim.SetBool ("IsWalking", true);
 			myAnim.SetBool ("IsStopping", false);
 		} else if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
