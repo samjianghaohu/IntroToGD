@@ -28,9 +28,11 @@ public class Player_Control : MonoBehaviour {
 	GameObject projectilePrefab;
 	Rigidbody2D myRigidbody;
 	SpriteRenderer eyeSpriteRenderer;
+	SpriteRenderer attackSpriteRenderer;
 
 	[SerializeField] Player_SoundControl soundController;
 	[SerializeField] Player_Behavior myBehavior;
+	[SerializeField] Player_Animation myAnimation;
 
 
 	// Use this for initialization
@@ -41,6 +43,7 @@ public class Player_Control : MonoBehaviour {
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild (0).GetComponent<SpriteRenderer> ();
+		attackSpriteRenderer = transform.GetChild (3).GetComponent<SpriteRenderer> ();
 	}
 
 
@@ -95,11 +98,13 @@ public class Player_Control : MonoBehaviour {
 			myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = true;
 			eyeSpriteRenderer.flipX = true;
+			attackSpriteRenderer.flipX = true;
 		} 
 		if (Input.GetKey (KeyCode.RightArrow)) {
 			myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = false;
 			eyeSpriteRenderer.flipX = false;
+			attackSpriteRenderer.flipX = false;
 		}
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			if (hit != null && hit.collider != null && hit.collider.transform.parent.tag == "Floor") {
@@ -114,6 +119,8 @@ public class Player_Control : MonoBehaviour {
 	void ShootProjectile(){
 		if (Input.GetKeyDown (KeyCode.X)) {
 			if (bulletNum < maxBulletNum && sDelay <= 0) {
+				myAnimation.MakeAttack ();
+
 				GameObject newSoundwaveObj = Instantiate (projectilePrefab);
 				if (mySpriteRenderer.flipX == false) {
 					newSoundwaveObj.transform.position = transform.position + Vector3.right;
@@ -127,6 +134,8 @@ public class Player_Control : MonoBehaviour {
 				bulletNum += 1;
 				sDelay = shootDelay;
 			}
+		} else {
+			myAnimation.StopAttack ();
 		}
 
 		sDelay -= Time.deltaTime;

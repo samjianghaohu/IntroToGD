@@ -29,17 +29,13 @@ public class Player_Animation : MonoBehaviour {//This scripts control player ani
 	void Update () {
 		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0) && (myControl.IfStunned () == false)) {
 			MakeWalk ();
-		}
-		if (Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.RightArrow)) {
+		}else if (Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.RightArrow)) {
 			MakeStop ();
-		}
-		if ((myRigidbody != null) && (myRigidbody.velocity.y > 0)) {
+		}else if ((myRigidbody != null) && (myRigidbody.velocity.y > 0)) {
 			MakeJump ();
-		}
-		if ((myRigidbody != null) && (myRigidbody.velocity.y < 0)) {
+		}else if ((myRigidbody != null) && (myRigidbody.velocity.y < 0)) {
 			MakeFall ();
-		}
-		if ((myRigidbody != null) && (myRigidbody.velocity.x == 0) && (myRigidbody.velocity.y == 0)){
+		}else if ((myRigidbody != null) && (myRigidbody.velocity.x == 0) && (myRigidbody.velocity.y == 0)){
 			MakeBlink ();
 		}
 	}
@@ -51,14 +47,17 @@ public class Player_Animation : MonoBehaviour {//This scripts control player ani
 		myAnim.SetBool ("IsFalling", false);
 		myAnim.SetBool ("IsWalking", true);
 		myAnim.SetBool ("IsStopping", false);
+		myAnim.SetBool ("IsBreathing", false);
 	}
 
 
 	public void MakeStop(){
+		Debug.Log ("Stop");
+		myAnim.SetBool ("IsStopping", true);
 		myAnim.SetBool ("IsJumping", false);
 		myAnim.SetBool ("IsFalling", false);
 		myAnim.SetBool ("IsWalking", false);
-		myAnim.SetBool ("IsStopping", true);
+		myAnim.SetBool ("IsBreathing", false);
 	}
 
 
@@ -75,6 +74,8 @@ public class Player_Animation : MonoBehaviour {//This scripts control player ani
 		myAnim.SetBool ("IsBreathing", true);
 		myAnim.SetBool ("IsJumping", false);
 		myAnim.SetBool ("IsFalling", false);
+		myAnim.SetBool ("IsWalking", false);
+		myAnim.SetBool ("IsStopping", false);
 	}
 
 
@@ -83,6 +84,7 @@ public class Player_Animation : MonoBehaviour {//This scripts control player ani
 		myAnim.SetBool ("IsFalling", false);
 		myAnim.SetBool ("IsWalking", false);
 		myAnim.SetBool ("IsStopping", false);
+		myAnim.SetBool ("IsBreathing", false);
 	}
 
 
@@ -91,5 +93,16 @@ public class Player_Animation : MonoBehaviour {//This scripts control player ani
 		myAnim.SetBool ("IsFalling", true);
 		myAnim.SetBool ("IsWalking", false);
 		myAnim.SetBool ("IsStopping", false);
+		myAnim.SetBool ("IsBreathing", false);
+	}
+
+
+	public void MakeAttack(){
+		myAnim.SetBool ("IsAttacking", true);
+	}
+
+
+	public void StopAttack(){
+		myAnim.SetBool ("IsAttacking", false);
 	}
 }
