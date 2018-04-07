@@ -109,6 +109,7 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 		}
 		if (state != WARNING) {//Turn off warning animation
 			animController.StopWarn ();
+			timeOfWarning = howLongToStayWarning;
 		}
 
 

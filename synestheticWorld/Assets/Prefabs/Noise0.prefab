@@ -428,7 +428,7 @@ MonoBehaviour:
   howLongUntilNextShoot: 2
   howLongUntilSleep: 5
   howLongUntilAwake: 2
-  howLongToStayWarning: 0.5
+  howLongToStayWarning: 1
   moveSpeed: 2.5
   myHealth: 3
   player: {fileID: 0}
