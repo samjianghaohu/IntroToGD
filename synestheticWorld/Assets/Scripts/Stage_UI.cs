@@ -23,6 +23,10 @@ public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 	// Use this for initialization
 	void Start () {
 
+		//initialize health circle
+		health.fillAmount = 1;
+
+
 		//initialize ability orb array
 		abilities [0] = ability1;
 		abilities [1] = ability2;
@@ -45,18 +49,15 @@ public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 
 	void UpdateHealthIcons(){
 		int healthNum = player.GetComponent<Player_Behavior> ().getHealth ();
+		float healthAmount = healthNum / 20f;
+
+		health.fillAmount = healthAmount;
 
 
-		for (int i = 0; i < 20; i++) {
-			Color healthColor = health.transform.GetChild (i).GetComponent<Image> ().color;
-
-			if (i < healthNum) {
-				healthColor = new Color (healthColor.r, healthColor.g, healthColor.b, 255);
-			} else {
-				healthColor = new Color (healthColor.r, healthColor.g, healthColor.b, 0);
-			}
-
-			health.transform.GetChild (i).GetComponent<Image> ().color = healthColor;
+		if (healthAmount <= 0.3f) {
+			health.color = Color.red;
+		} else {
+			health.color = Color.white;
 		}
 	}
 

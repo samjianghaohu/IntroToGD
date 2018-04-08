@@ -44,6 +44,9 @@ public class Player_Control : MonoBehaviour {
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild (0).GetComponent<SpriteRenderer> ();
 		attackSpriteRenderer = transform.GetChild (3).GetComponent<SpriteRenderer> ();
+
+
+		InitializeSprites ();
 	}
 
 
@@ -88,6 +91,19 @@ public class Player_Control : MonoBehaviour {
 			ResetGameParas ();
 			SceneManager.LoadScene ("stageFail");
 		}
+
+	}
+
+
+	public void InitializeSprites (){
+		mySpriteRenderer.flipX = false;
+		mySpriteRenderer.color = new Color (1, 1, 1);
+
+		eyeSpriteRenderer.flipX = false;
+		eyeSpriteRenderer.color = new Color (1, 1, 1);
+
+		attackSpriteRenderer.flipX = false;
+		attackSpriteRenderer.color = new Color (1, 1, 1);
 
 	}
 
@@ -148,23 +164,27 @@ public class Player_Control : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Z)) {
 			mySpriteRenderer.color = new Color (1, 1, 1);
+			attackSpriteRenderer.color = new Color (1, 1, 1);
 			projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
 		}
 		if (Input.GetKeyDown (KeyCode.A)) {
 			if (abilityNum >= 1) {
 				mySpriteRenderer.color = abilityList [0].abilityColor;
+				attackSpriteRenderer.color = abilityList [0].abilityColor;
 				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.S)) {
 			if (abilityNum >= 2) {
 				mySpriteRenderer.color = abilityList [1].abilityColor;
+				attackSpriteRenderer.color = abilityList [1].abilityColor;
 				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [1].abilityColor;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.D)) {
 			if (abilityNum >= 3) {
 				mySpriteRenderer.color = abilityList [2].abilityColor;
+				attackSpriteRenderer.color = abilityList [2].abilityColor;
 				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [2].abilityColor;
 			}
 		}
