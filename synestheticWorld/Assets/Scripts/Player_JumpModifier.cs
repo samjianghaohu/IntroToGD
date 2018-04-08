@@ -23,7 +23,7 @@ public class Player_JumpModifier : MonoBehaviour {//This scripts modifies jump
 		if (myrigidbody != null) {
 			if (myrigidbody.velocity.y < 0) {//fall slower/jump higher when you hold jump key
 				myrigidbody.gravityScale = fallMultiplier;
-			} else if (myrigidbody.velocity.y > 0 && !Input.GetKey (KeyCode.Space)) {//fall faster when you tap jump key
+			} else if (myrigidbody.velocity.y > 0 && !Input.GetKey (KeyCode.UpArrow)) {//fall faster when you tap jump key
 				myrigidbody.gravityScale = lowJumpMultiplier;
 			} else {
 				myrigidbody.gravityScale = 1f;

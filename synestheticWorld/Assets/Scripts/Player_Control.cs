@@ -122,7 +122,7 @@ public class Player_Control : MonoBehaviour {
 			eyeSpriteRenderer.flipX = false;
 			attackSpriteRenderer.flipX = false;
 		}
-		if (Input.GetKeyDown(KeyCode.Space)) {
+		if (Input.GetKeyDown(KeyCode.UpArrow)) {
 			if (hit != null && hit.collider != null && hit.collider.transform.parent.tag == "Floor") {
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
@@ -133,7 +133,7 @@ public class Player_Control : MonoBehaviour {
 	}
 
 	void ShootProjectile(){
-		if (Input.GetKeyDown (KeyCode.X)) {
+		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (bulletNum < maxBulletNum && sDelay <= 0) {
 				myAnimation.MakeAttack ();
 
@@ -162,30 +162,44 @@ public class Player_Control : MonoBehaviour {
 		int abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();	
 		List<Player_Ability> abilityList = Player_AbilityStack.GetAbilityList ();
 
+
 		if (Input.GetKeyDown (KeyCode.Z)) {
-			mySpriteRenderer.color = new Color (1, 1, 1);
-			attackSpriteRenderer.color = new Color (1, 1, 1);
-			projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
-		}
-		if (Input.GetKeyDown (KeyCode.A)) {
 			if (abilityNum >= 1) {
-				mySpriteRenderer.color = abilityList [0].abilityColor;
-				attackSpriteRenderer.color = abilityList [0].abilityColor;
-				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
+				if (!Stage_Utilities.compareColorsLoose (mySpriteRenderer.color, abilityList [0].abilityColor)) {
+					mySpriteRenderer.color = abilityList [0].abilityColor;
+					attackSpriteRenderer.color = abilityList [0].abilityColor;
+					projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
+				} else {
+					mySpriteRenderer.color = new Color (1, 1, 1);
+					attackSpriteRenderer.color = new Color (1, 1, 1);
+					projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+				}
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.S)) {
+		if (Input.GetKeyDown (KeyCode.X)) {
 			if (abilityNum >= 2) {
-				mySpriteRenderer.color = abilityList [1].abilityColor;
-				attackSpriteRenderer.color = abilityList [1].abilityColor;
-				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [1].abilityColor;
+				if (!Stage_Utilities.compareColorsLoose (mySpriteRenderer.color, abilityList [1].abilityColor)) {
+					mySpriteRenderer.color = abilityList [1].abilityColor;
+					attackSpriteRenderer.color = abilityList [1].abilityColor;
+					projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [1].abilityColor;
+				} else {
+					mySpriteRenderer.color = new Color (1, 1, 1);
+					attackSpriteRenderer.color = new Color (1, 1, 1);
+					projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+				}
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.D)) {
+		if (Input.GetKeyDown (KeyCode.C)) {
 			if (abilityNum >= 3) {
-				mySpriteRenderer.color = abilityList [2].abilityColor;
-				attackSpriteRenderer.color = abilityList [2].abilityColor;
-				projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [2].abilityColor;
+				if (!Stage_Utilities.compareColorsLoose (mySpriteRenderer.color, abilityList [2].abilityColor)) {
+					mySpriteRenderer.color = abilityList [2].abilityColor;
+					attackSpriteRenderer.color = abilityList [2].abilityColor;
+					projectilePrefab.GetComponent<SpriteRenderer> ().color = abilityList [2].abilityColor;
+				} else {
+					mySpriteRenderer.color = new Color (1, 1, 1);
+					attackSpriteRenderer.color = new Color (1, 1, 1);
+					projectilePrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+				}
 			}
 		}
 	}
