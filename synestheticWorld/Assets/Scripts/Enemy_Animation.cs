@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Animation : MonoBehaviour {//This scripts controls enemy animation
+public class Enemy_Animation : MonoBehaviour {//This script controls enemy animation
 
-	//time between each blink
+	//Time between each blink
 	public float timeUntilBlink;
 	float blinkDelay;
 
@@ -19,7 +19,7 @@ public class Enemy_Animation : MonoBehaviour {//This scripts controls enemy anim
 		myRigidbody = GetComponent<Rigidbody2D> ();
 
 
-		//initialize bink delay
+		//Initialize bink delay
 		blinkDelay = timeUntilBlink;
 	}
 
@@ -33,7 +33,7 @@ public class Enemy_Animation : MonoBehaviour {//This scripts controls enemy anim
 		}
 
 
-		//blink every timeUntilBink
+		//Blink every timeUntilBink
 		blinkDelay -= Time.deltaTime;
 		if (blinkDelay <= 0) {
 			MakeBlink ();
@@ -42,7 +42,7 @@ public class Enemy_Animation : MonoBehaviour {//This scripts controls enemy anim
 	}
 
 
-	//functions that set animation bools
+	//Functions that set animation bools
 	public void MakeWalk(){
 		myAnim.SetBool ("IsWalking", true);
 		myAnim.SetBool ("IsStopping", false);

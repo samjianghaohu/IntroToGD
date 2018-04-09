@@ -4622,7 +4622,7 @@ GameObject:
   - component: {fileID: 1384868831}
   m_Layer: 0
   m_Name: BackgroundMoving
-  m_TagString: Untagged
+  m_TagString: MovingBG
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4837,13 +4837,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1420955708012116, guid: f7cd9109db03d4a98a68e8dc0f0b4f42,
     type: 2}
   portal: {fileID: 890386114}
+  stage: {fileID: 1939421608}
   myLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  ifWin: 0
-  soundController: {fileID: 1390123883}
-  myBehavior: {fileID: 1390123878}
-  myAnimation: {fileID: 1390123882}
 --- !u!114 &1390123878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4855,7 +4852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb8a487e95c84ef8897d9724fab503f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myControl: {fileID: 1390123877}
+  stage: {fileID: 1939421608}
 --- !u!114 &1390123879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4930,7 +4927,6 @@ MonoBehaviour:
   walkClip: {fileID: 8300000, guid: f8268b47cedf04608816be96ac982cd6, type: 3}
   jumpClip: {fileID: 8300000, guid: 0e6a41b9efb1e43f28e6f03ebdac8717, type: 3}
   attackClip: {fileID: 8300000, guid: 1b82483a485cc4d28870f921652f7bc4, type: 3}
-  myControl: {fileID: 1390123877}
 --- !u!1 &1405205554
 GameObject:
   m_ObjectHideFlags: 0
@@ -6780,9 +6776,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43eb5708089f41ef95b8c469886ff16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1390123872}
   startX: 0
   startY: 0
+  player: {fileID: 1390123872}
+  stage: {fileID: 1939421608}
 --- !u!1 &2138493370
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls its behaviors.
+public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 	//Time thresholds for different actions/states
 	public float howLongUntilTurnBack;
@@ -47,8 +47,10 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 	Color prevColor;
 
 
+	//Accessing other components on enemy
 	[SerializeField] Enemy_SoundControl soundController;
 	[SerializeField] Enemy_Animation animController;
+
 
 	// Use this for initialization
 	void Start () {
@@ -76,11 +78,11 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		//What to do when it's sleeping
+		//Wait until waking up when it's sleeping
 		if (timeUntilAwake > 0) {
 			timeUntilAwake -= Time.deltaTime;
 		}
-		if (timeUntilAwake <= 0) {
+		if (timeUntilAwake <= 0) {//Only able to see player when it's awake
 			CheckPlayer ();
 		}
 			
@@ -100,14 +102,14 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 
 			timeOfWarning -= Time.deltaTime;
 
-			//exit warning and go to fire
+			//Exit warning and go to fire
 			if (timeOfWarning <= 0) {
 				animController.StopWarn ();
 				state = FIRE;
 				timeOfWarning = howLongToStayWarning;
 			}
 		}
-		if (state != WARNING) {//Turn off warning animation
+		if (state != WARNING) {//Turn off warning animation and reset warning time when it's not warning
 			animController.StopWarn ();
 			timeOfWarning = howLongToStayWarning;
 		}
@@ -125,12 +127,12 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 				timeUntilNextShoot = howLongUntilNextShoot;
 			}
 
-			if (timeUntilSleep <= 0) {
+			if (timeUntilSleep <= 0) {//If it stays in shooting for too long, go back to patrolling and sleep
 				state = PATROL;
 				timeUntilAwake = howLongUntilAwake;
 			}
 		}
-		if (state != FIRE) {
+		if (state != FIRE) {//Reset shooting delay when it quits shooting
 			timeUntilNextShoot = 0;
 		}
 
@@ -142,13 +144,11 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 			mySpriteRenderer.color = Color.red;
 			timeOfStunned -= Time.deltaTime;
 
-			if (timeOfStunned <= 0) {
+			if (timeOfStunned <= 0) {//Go back to previous state and normal color and reset stun time when it quits stun
 				mySpriteRenderer.color = prevColor;
+				timeOfStunned = 0.2f;
 				state = prevState;
 			}
-		}
-		if (state != STUNNED) {
-			timeOfStunned = 0.2f;
 		}
 
 	}
@@ -156,7 +156,7 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 
 	//Check if player is in front or behind
 	void CheckPlayer(){
-		if ((transform.position.x >= player.transform.position.x && mySpriteRenderer.flipX == true) || (transform.position.x < player.transform.position.x && mySpriteRenderer.flipX == false)) {
+		if ((transform.position.x >= player.transform.position.x && mySpriteRenderer.flipX) || (transform.position.x < player.transform.position.x && !mySpriteRenderer.flipX)) {
 			RaycastCheck ();
 		} else {
 			if (state != PATROL) {
@@ -198,6 +198,7 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 			moveSpeed *= -1;
 			timeUntilTurnBack = howLongUntilTurnBack;
 		}
+
 
 		//Flip enemy sprite when moving in different directions
 		if (moveSpeed < 0) {
@@ -259,9 +260,7 @@ public class Enemy_AI : MonoBehaviour {//This script moves enemies and controls 
 
 				player.GetComponent<Player_Control>().decreaseBulletNum ();
 				Destroy (other.gameObject);
-			} else {
-				
-				//When hit by the wrong bullet
+			} else {//When hit by the wrong bullet
 				soundController.PlayResponseSound (0);
 			}
 		}

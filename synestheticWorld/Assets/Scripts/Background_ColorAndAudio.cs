@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Background_ColorAndAudio : MonoBehaviour {
+public class Background_ColorAndAudio : MonoBehaviour {//This scripts manages background color and audio
+
+	//Declare color-audio groups
 	public Color color0;
 	public Color match0;
 	public AudioClip clip0;
@@ -19,32 +21,39 @@ public class Background_ColorAndAudio : MonoBehaviour {
 	public Color match3;
 	public AudioClip clip3;
 
-	public GameObject camera;
-	public GameObject player;
-	public GameObject moveBG;
 
+	GameObject moveBG;
 	Camera cam;
 	AudioSource bgmPlayer;
-	Dictionary<Color, Color> colorDict = new Dictionary<Color, Color> ();
-	Dictionary<Color, AudioClip> audioDict = new Dictionary<Color, AudioClip> ();
+
 	SpriteRenderer mySpriteRenderer;
 	SpriteRenderer playerSprite;
 
+	Dictionary<Color, Color> colorDict = new Dictionary<Color, Color> ();
+	Dictionary<Color, AudioClip> audioDict = new Dictionary<Color, AudioClip> ();
+
+
 	// Use this for initialization
 	void Start () {
-		cam = camera.GetComponent<Camera> ();
+		moveBG = GameObject.FindWithTag ("MovingBG");
+		cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
 		bgmPlayer = transform.parent.GetComponent<AudioSource> ();
-		mySpriteRenderer = GetComponent<SpriteRenderer> ();
-		playerSprite = player.GetComponent<SpriteRenderer> ();
 
+		mySpriteRenderer = GetComponent<SpriteRenderer> ();
+		playerSprite = GameObject.FindWithTag ("Player").GetComponent<SpriteRenderer> ();
+
+
+		//Intialize dictionaries
 		InitializeDict ();
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		ChangeBGColor ();
 		ChangeBGM ();
 	}
+
 
 	void InitializeDict(){
 		colorDict.Add (color0, match0);
@@ -57,22 +66,32 @@ public class Background_ColorAndAudio : MonoBehaviour {
 		audioDict.Add (color2, clip2);
 		audioDict.Add (color3, clip3);
 	}
-		
+
+
+	//Change background color according to player's color
 	void ChangeBGColor(){
-		if (Stage_Utilities.compareColorsLoose (playerSprite.color, Color.red) == false) {
+		if (!Stage_Utilities.compareColorsLoose (playerSprite.color, Color.red)) {
 			moveBG.GetComponent<SpriteRenderer> ().color = playerSprite.color;
 
+
+			//Get the matching color from the dictionary
 			Color matchedColor;
 			colorDict.TryGetValue (playerSprite.color, out matchedColor);
 			matchedColor = new Color (matchedColor.r, matchedColor.g, matchedColor.b, 255);
+
+
+			//Color the background with the matching color
 			mySpriteRenderer.color = matchedColor;
 			cam.backgroundColor = matchedColor;
 		}
 	}
 
+
+	//Change background music according to player's color
 	void ChangeBGM(){
-		if (Stage_Utilities.compareColorsLoose (playerSprite.color, Color.red) == false) {
-			
+		if (!Stage_Utilities.compareColorsLoose (playerSprite.color, Color.red)) {
+
+			//Get the matching audio clip from the dictionary
 			AudioClip bgmClip;
 			audioDict.TryGetValue (playerSprite.color, out bgmClip);
 

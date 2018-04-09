@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Animation : MonoBehaviour {//This scripts control player animations
+public class Player_Animation : MonoBehaviour {//This script controls player animations
 
-	//delay for blinking
+	//Delay for blinking
 	public float timeUntilBlink;
 
 
-	//counter for blinking delay
+	//Counter for blinking delay
 	float blinkDelay;
 
 	Animator myAnim;
@@ -41,7 +41,7 @@ public class Player_Animation : MonoBehaviour {//This scripts control player ani
 	}
 
 
-	//functions that set animation bools
+	//Functions that set animation bools
 	public void MakeWalk(){
 		myAnim.SetBool ("IsJumping", false);
 		myAnim.SetBool ("IsFalling", false);
@@ -52,7 +52,6 @@ public class Player_Animation : MonoBehaviour {//This scripts control player ani
 
 
 	public void MakeStop(){
-		Debug.Log ("Stop");
 		myAnim.SetBool ("IsStopping", true);
 		myAnim.SetBool ("IsJumping", false);
 		myAnim.SetBool ("IsFalling", false);

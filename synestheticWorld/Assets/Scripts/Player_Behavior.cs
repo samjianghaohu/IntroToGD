@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Behavior : MonoBehaviour {//This scripts determines player behaviors (damage, health, portal)
-	
+
+	public GameObject stage;
+
 	int playerHealth = 20;
-	[SerializeField] Player_Control myControl;
+	Player_Control myControl;
+	Player_AbilityStack myAStack;
 
 
 	// Use this for initialization
 	void Start () {
-		
+		myControl = GetComponent<Player_Control> ();
+		myAStack = GetComponent<Player_AbilityStack> ();
 	}
 
 
@@ -27,7 +31,7 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 
 	void OnTriggerEnter2D(Collider2D other){
 
-		//when hit by enemy projectile or touched by enemy
+		//When hit by enemy projectile or touched by enemy
 		if (other.tag == "EnemyProjectile" || other.tag == "Enemy") {
 			if (myControl.IfStunned () == false) {
 				int damage;
@@ -52,19 +56,27 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 		}
 
 
-		//when reach portal
+		//When reach portal
 		if (other.tag == "Portal") {
-			myControl.ifWin = CheckWinningCondition ();
+			if (CheckWinningCondition ()){
+				myControl.Win ();
+			}
 		}
 	}
 
 
 	bool CheckWinningCondition(){
-		int currentAbilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
-		List<Player_Ability> currentAbilityList = Player_AbilityStack.GetAbilityList ();
 
-		Color[] targetAbilities = Stage_WinningCondition.GetTargetList ();
+		//Get current abilities
+		int currentAbilityNum = myAStack.GetAvailableAbilityNum ();
+		List<Player_Ability> currentAbilityList = myAStack.GetAbilityList ();
 
+
+		//Get target abilities
+		Color[] targetAbilities = stage.GetComponent<Stage_WinningCondition> ().GetTargetList ();
+
+
+		//See if current abilities match target abilities
 		int collectedTargetNum = 0;
 		for (int i = 0; i < currentAbilityNum; i++) {
 			for (int j = 0; j < targetAbilities.Length; j++) {
@@ -74,6 +86,7 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 				}
 			}
 		}
+
 
 		if (collectedTargetNum == targetAbilities.Length) {
 			return true;

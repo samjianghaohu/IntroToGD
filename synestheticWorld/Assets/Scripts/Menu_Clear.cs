@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Menu_Clear : MonoBehaviour {
+public class Menu_Clear : MonoBehaviour {//This script loads next scene
+
 	public int nextScene;
+
 
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey(KeyCode.Return)) {

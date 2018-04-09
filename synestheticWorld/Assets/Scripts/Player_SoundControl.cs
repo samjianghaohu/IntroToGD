@@ -20,8 +20,7 @@ public class Player_SoundControl : MonoBehaviour {//This script controls sound o
 	AudioSource movePlayer;
 	AudioSource attackPlayer;
 	Rigidbody2D myRigidbody;
-
-	[SerializeField] Player_Control myControl;
+	Player_Control myControl;
 
 
 	// Use this for initialization
@@ -29,6 +28,7 @@ public class Player_SoundControl : MonoBehaviour {//This script controls sound o
 		movePlayer = transform.GetChild(1).GetComponent<AudioSource> ();
 		attackPlayer = transform.GetChild(2).GetComponent<AudioSource> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();
+		myControl = GetComponent<Player_Control> ();
 
 		mpCurrentClip = NONE;
 	}
@@ -39,7 +39,7 @@ public class Player_SoundControl : MonoBehaviour {//This script controls sound o
 
 		//Determining walk state
 		if (myRigidbody != null) {
-			if ((myControl.IfStunned () == false) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0)) {
+			if (!myControl.IfStunned () && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0)) {
 				PlayWalkSound ();
 			} else {
 				StopWalkSound ();
@@ -53,7 +53,7 @@ public class Player_SoundControl : MonoBehaviour {//This script controls sound o
 		movePlayer.clip = walkClip;
 		movePlayer.loop = true;
 
-		if (movePlayer.isPlaying == false) {
+		if (!movePlayer.isPlaying) {
 			movePlayer.Play ();
 		}
 

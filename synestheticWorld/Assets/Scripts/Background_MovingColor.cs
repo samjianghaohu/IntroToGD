@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Background_MovingColor : MonoBehaviour {//This script moves the color block behind the bg image.
+public class Background_MovingColor : MonoBehaviour {//This script moves the color block behind the background image.
 
 	public float movingSpeed;
 	public GameObject camera;

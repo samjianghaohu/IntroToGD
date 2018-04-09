@@ -38,8 +38,8 @@ public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 	void Update () {
 
 		//get player's current abilities
-		abilityNum = Player_AbilityStack.GetAvailableAbilityNum ();
-		abilityList = Player_AbilityStack.GetAbilityList ();
+		abilityNum = player.GetComponent<Player_AbilityStack>().GetAvailableAbilityNum ();
+		abilityList = player.GetComponent<Player_AbilityStack>().GetAbilityList ();
 
 
 		UpdateAbilityIcons ();

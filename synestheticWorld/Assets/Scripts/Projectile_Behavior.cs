@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_Behavior : MonoBehaviour {
+public class Projectile_Behavior : MonoBehaviour {//This scripts defines bullet behaviors
+
+	//Basic attributes of a bullet
 	public float projectileSpeed;
 	public int projectilePower;
+
 
 	GameObject player;
 	GameObject camera;
 	SpriteRenderer mySpriteRenderer;
+
 
 	// Use this for initialization
 	void Start () {
@@ -16,12 +20,14 @@ public class Projectile_Behavior : MonoBehaviour {
 		camera = GameObject.FindWithTag ("MainCamera");
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 	}
-	
+
+
 	// Update is called once per frame
 	void FixedUpdate () {
 		ProjectileFly ();
 		ProjectileDisappear ();
 	}
+
 
 	void ProjectileFly(){
 		if (mySpriteRenderer.flipX == false) {
@@ -31,6 +37,8 @@ public class Projectile_Behavior : MonoBehaviour {
 		}
 	}
 
+
+	//Bullet disappears when flying out of camera
 	void ProjectileDisappear(){
 		if ((camera != null) && (transform.position.x > (camera.transform.position.x + 9) || transform.position.x < (camera.transform.position.x - 9))) {
 			if (this.tag == "PlayerProjectile") {
@@ -40,6 +48,7 @@ public class Projectile_Behavior : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
+
 
 	public int GetPower(){
 		return projectilePower;
