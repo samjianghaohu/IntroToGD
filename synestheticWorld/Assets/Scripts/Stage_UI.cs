@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 
-	//ability icons and health bar
+	//Ability icons and health bar
 	public Image ability1;
 	public Image ability2;
 	public Image ability3;
@@ -23,11 +23,11 @@ public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 	// Use this for initialization
 	void Start () {
 
-		//initialize health circle
+		//Initialize health circle
 		health.fillAmount = 1;
 
 
-		//initialize ability orb array
+		//Initialize ability orb array
 		abilities [0] = ability1;
 		abilities [1] = ability2;
 		abilities [2] = ability3;
@@ -37,7 +37,7 @@ public class Stage_UI : MonoBehaviour {//This script draws UI on stage
 	// Update is called once per frame
 	void Update () {
 
-		//get player's current abilities
+		//Get player's current abilities
 		abilityNum = player.GetComponent<Player_AbilityStack>().GetAvailableAbilityNum ();
 		abilityList = player.GetComponent<Player_AbilityStack>().GetAbilityList ();
 

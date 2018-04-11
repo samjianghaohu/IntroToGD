@@ -17,7 +17,6 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	public float myHealth;
 
 
-	public GameObject player;
 	public GameObject bulletPrefab;
 	public LayerMask myLayerMask;
 	public Color weakColor;
@@ -41,6 +40,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	float timeOfWarning;
 
 
+	GameObject player;
 	SpriteRenderer mySpriteRenderer;
 	SpriteRenderer eyeSpriteRenderer;
 	Rigidbody2D myRigidbody;
@@ -68,6 +68,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 
 		//Initialize components
+		player = GameObject.FindWithTag("Player");
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();

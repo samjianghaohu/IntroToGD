@@ -22,7 +22,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	//Relevant parameters
 	int bulletNum = 0;
 	int incomingDirect = 0;
-	int currentAbility = -1;
 
 	float sDelay = 0f;
 	float timeOfStunned = 0f;
@@ -68,6 +67,8 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 		if (ifWin) {//Move towards portal center if winning condition is met
 			Destroy (myRigidbody);
+			soundController.enabled = false;
+			myAnimation.enabled = false;
 			transform.position = Vector2.MoveTowards (transform.position, portal.transform.position, 2f * Time.deltaTime);
 
 			if (transform.position == portal.transform.position) {
@@ -79,10 +80,12 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			if (incomingDirect == 1) {
 				mySpriteRenderer.flipX = false;
 				eyeSpriteRenderer.flipX = false;
+				attackSpriteRenderer.flipX = false;
 				transform.position += 0.04f * Vector3.left;
 			} else {
 				mySpriteRenderer.flipX = true;
 				eyeSpriteRenderer.flipX = true;
+				attackSpriteRenderer.flipX = true;
 				transform.position += 0.04f * Vector3.right;
 			}
 			mySpriteRenderer.color = Color.red;
@@ -256,15 +259,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			}
 		}
 
-	}
-
-
-	void ResetGameParas(){
-		myAStack.resetAbilities ();
-		myBehavior.resetHealth ();
-		ifWin = false;
-		mySpriteRenderer.color = new Color (1, 1, 1);
-		bulletPrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
 	}
 
 
