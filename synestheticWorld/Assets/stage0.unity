@@ -2264,6 +2264,16 @@ Prefab:
       propertyPath: crystal1
       value: 
       objectReference: {fileID: 1155098215}
+    - target: {fileID: 50050988407545118, guid: 4d86d767f7bdf4d8dab08056c629be89,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50050988407545118, guid: 4d86d767f7bdf4d8dab08056c629be89,
+        type: 2}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d86d767f7bdf4d8dab08056c629be89, type: 2}
   m_IsPrefabParent: 0

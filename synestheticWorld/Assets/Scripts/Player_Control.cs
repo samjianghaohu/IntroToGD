@@ -63,7 +63,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		if (ifWin) {//Move towards portal center if winning condition is met
 			Destroy (myRigidbody);

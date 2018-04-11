@@ -5177,25 +5177,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1553226306805290, guid: 4d86d767f7bdf4d8dab08056c629be89, type: 2}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 114796174112880866, guid: 4d86d767f7bdf4d8dab08056c629be89,
-        type: 2}
-      propertyPath: portal
-      value: 
-      objectReference: {fileID: 890386114}
-    - target: {fileID: 114796174112880866, guid: 4d86d767f7bdf4d8dab08056c629be89,
-        type: 2}
-      propertyPath: stage
-      value: 
-      objectReference: {fileID: 1939421608}
-    - target: {fileID: 114554173179823240, guid: 4d86d767f7bdf4d8dab08056c629be89,
-        type: 2}
-      propertyPath: stage
-      value: 
-      objectReference: {fileID: 1939421608}
     - target: {fileID: 114431442828240084, guid: 4d86d767f7bdf4d8dab08056c629be89,
         type: 2}
       propertyPath: crystal0
@@ -5211,11 +5192,21 @@ Prefab:
       propertyPath: crystal2
       value: 
       objectReference: {fileID: 296763242}
+    - target: {fileID: 114554173179823240, guid: 4d86d767f7bdf4d8dab08056c629be89,
+        type: 2}
+      propertyPath: stage
+      value: 
+      objectReference: {fileID: 1939421608}
     - target: {fileID: 114796174112880866, guid: 4d86d767f7bdf4d8dab08056c629be89,
         type: 2}
-      propertyPath: nextStage
-      value: 5
-      objectReference: {fileID: 0}
+      propertyPath: portal
+      value: 
+      objectReference: {fileID: 890386114}
+    - target: {fileID: 114796174112880866, guid: 4d86d767f7bdf4d8dab08056c629be89,
+        type: 2}
+      propertyPath: stage
+      value: 
+      objectReference: {fileID: 1939421608}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d86d767f7bdf4d8dab08056c629be89, type: 2}
   m_IsPrefabParent: 0

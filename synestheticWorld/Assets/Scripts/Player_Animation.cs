@@ -22,12 +22,24 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 		blinkDelay = timeUntilBlink;
 		myAnim = GetComponent<Animator> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();
+
+
+		//Initialize animation bools
+		myAnim.SetBool ("IsJumping", false);
+		myAnim.SetBool ("IsFalling", false);
+		myAnim.SetBool ("IsWalking", false);
+		myAnim.SetBool ("IsStopping", false);
+		myAnim.SetBool ("IsBreathing", false);
+		myAnim.SetBool ("IsBlinking", false);
+		myAnim.SetBool ("IsAttacking", false);
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0) && (myControl.IfStunned () == false)) {
+		Debug.Log (myRigidbody.velocity.y);
+
+		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0) && !myControl.IfStunned ()) {
 			MakeWalk ();
 		}else if (Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.RightArrow)) {
 			MakeStop ();

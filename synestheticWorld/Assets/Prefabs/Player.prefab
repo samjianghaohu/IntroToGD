@@ -133,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553226306805290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.46, y: -1.21, z: 0}
+  m_LocalPosition: {x: -4.3, y: -0.91316676, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4376649051569536}
@@ -451,7 +451,7 @@ MonoBehaviour:
   jumpHeight: 12
   shootDelay: 0.1
   maxBulletNum: 4
-  nextStage: 3
+  nextStage: 5
   bulletPrefab: {fileID: 1420955708012116, guid: f7cd9109db03d4a98a68e8dc0f0b4f42,
     type: 2}
   portal: {fileID: 0}
