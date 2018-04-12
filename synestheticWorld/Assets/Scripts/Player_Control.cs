@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Security.AccessControl;
 
 public class Player_Control : MonoBehaviour {//This script defines player control and some releveant behaviors
+
+	public static Player_Control instance; //DASHA
 
 	//Declare relevent attributes and objects
 	public float xSpeed;
@@ -29,12 +32,25 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	bool ifStunned = false;
 	bool ifWin = false;
 
+	//DASHA
+	public static Player_Control Instance { 
+		get{ 
+			if (instance == null) {
+				instance = GameObject.FindObjectOfType<Player_Control> ();
+			}
+			return instance;
+		}
+	}
+
 
 	Color prevColor;
 	Rigidbody2D myRigidbody;
-	SpriteRenderer mySpriteRenderer;
+	public SpriteRenderer mySpriteRenderer; //DASHA added public 
 	SpriteRenderer eyeSpriteRenderer;
 	SpriteRenderer attackSpriteRenderer;
+
+	[SerializeField] 
+ 	GameObject PlayerGhost; 
 
 	Player_SoundControl soundController;
 	Player_Behavior myBehavior;
@@ -142,12 +158,14 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			mySpriteRenderer.flipX = true;
 			eyeSpriteRenderer.flipX = true;
 			attackSpriteRenderer.flipX = true;
+
 		} 
 		if (Input.GetKey (KeyCode.RightArrow)) {
 			myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
 			mySpriteRenderer.flipX = false;
 			eyeSpriteRenderer.flipX = false;
 			attackSpriteRenderer.flipX = false;
+			GameObject GhostBaby = Instantiate (PlayerGhost, transform.position, transform.rotation);
 		}
 
 
@@ -157,6 +175,8 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
 					soundController.PlayJumpSound ();
+					//when player hits the top platform 
+
 				}
 			}
 		}
