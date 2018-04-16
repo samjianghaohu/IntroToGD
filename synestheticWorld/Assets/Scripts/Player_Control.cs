@@ -47,6 +47,8 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	}
 
 
+
+
 	Color prevColor;
 	Rigidbody2D myRigidbody;
 	public SpriteRenderer mySpriteRenderer; //DASHA ∆ to public 
@@ -179,8 +181,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 		}
 
-//		GameObject dustObject = Instantiate(dustPuff, this.transform.position, this.transform.rotation) as GameObject;
-//		dustParticle = dustObject.GetComponent<ParticleSystem>();
 
 
 		//Jump, only doable when player's on the ground)
@@ -189,8 +189,10 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
 					soundController.PlayJumpSound ();
+					//instantiate dust Particles
 					GameObject dustObject = Instantiate(dustPuff, this.transform.position, this.transform.rotation) as GameObject;
 					dustParticle = dustObject.GetComponent<ParticleSystem>();
+					dustPuff.GetComponent<ParticleSystem> ().startColor = new Color (1, 1, 1);
 					Destroy (dustObject, 2f);
 
 				}
@@ -247,6 +249,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 		List<Player_Ability> abilityList = myAStack.GetAbilityList ();
 
 
+
 		if (Input.GetKeyDown (KeyCode.Z)) {
 			if (abilityNum >= 1) {//Only able to use the first ability when ability number is greater than 1
 
@@ -255,13 +258,14 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 					mySpriteRenderer.color = abilityList [0].abilityColor;
 					attackSpriteRenderer.color = abilityList [0].abilityColor;
 					bulletPrefab.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
-					dustPuff.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
+					dustPuff.GetComponent<ParticleSystem> ().startColor = abilityList [0].abilityColor;
 
 
 				} else {//Switch back to original if currently using it
 					mySpriteRenderer.color = new Color (1, 1, 1);
 					attackSpriteRenderer.color = new Color (1, 1, 1);
 					bulletPrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+					dustPuff.GetComponent<ParticleSystem> ().startColor = new Color (1, 1, 1);
 				}
 			}
 		}
@@ -273,10 +277,12 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 					mySpriteRenderer.color = abilityList [1].abilityColor;
 					attackSpriteRenderer.color = abilityList [1].abilityColor;
 					bulletPrefab.GetComponent<SpriteRenderer> ().color = abilityList [1].abilityColor;
+					dustPuff.GetComponent<ParticleSystem> ().startColor = abilityList [1].abilityColor;
 				} else {
 					mySpriteRenderer.color = new Color (1, 1, 1);
 					attackSpriteRenderer.color = new Color (1, 1, 1);
 					bulletPrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+					dustPuff.GetComponent<ParticleSystem> ().startColor = new Color (1, 1, 1);
 				}
 			}
 		}
@@ -288,10 +294,12 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 					mySpriteRenderer.color = abilityList [2].abilityColor;
 					attackSpriteRenderer.color = abilityList [2].abilityColor;
 					bulletPrefab.GetComponent<SpriteRenderer> ().color = abilityList [2].abilityColor;
+					dustPuff.GetComponent<ParticleSystem> ().startColor = abilityList [2].abilityColor;
 				} else {
 					mySpriteRenderer.color = new Color (1, 1, 1);
 					attackSpriteRenderer.color = new Color (1, 1, 1);
 					bulletPrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+					dustPuff.GetComponent<ParticleSystem> ().startColor = new Color (1, 1, 1);
 				}
 			}
 		}
