@@ -49,7 +49,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 	Color prevColor;
 	Rigidbody2D myRigidbody;
-	public SpriteRenderer mySpriteRenderer; //DASHA added public 
+	public SpriteRenderer mySpriteRenderer; //DASHA ∆ to public 
 	SpriteRenderer eyeSpriteRenderer;
 	SpriteRenderer attackSpriteRenderer;
 
@@ -146,6 +146,10 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 		bulletPrefab.GetComponent<SpriteRenderer> ().flipX = false;
 		bulletPrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+
+		PlayerGhost.GetComponent<SpriteRenderer> ().flipX = false; 
+		PlayerGhost.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
+
 	}
 
 
@@ -154,6 +158,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 		//Raycast towards ground
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, Mathf.Infinity, myLayerMask);
+		GameObject GhostBaby = Instantiate (PlayerGhost, transform.position, transform.rotation);
 
 
 		//Move left and right
@@ -162,6 +167,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			mySpriteRenderer.flipX = true;
 			eyeSpriteRenderer.flipX = true;
 			attackSpriteRenderer.flipX = true;
+			GhostBaby.GetComponent<SpriteRenderer> ().flipX= true;
 
 		} 
 		if (Input.GetKey (KeyCode.RightArrow)) {
@@ -169,8 +175,12 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			mySpriteRenderer.flipX = false;
 			eyeSpriteRenderer.flipX = false;
 			attackSpriteRenderer.flipX = false;
-			GameObject GhostBaby = Instantiate (PlayerGhost, transform.position, transform.rotation);
+			GhostBaby.GetComponent<SpriteRenderer> ().flipX = false;
+
 		}
+
+//		GameObject dustObject = Instantiate(dustPuff, this.transform.position, this.transform.rotation) as GameObject;
+//		dustParticle = dustObject.GetComponent<ParticleSystem>();
 
 
 		//Jump, only doable when player's on the ground)
@@ -245,7 +255,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 					mySpriteRenderer.color = abilityList [0].abilityColor;
 					attackSpriteRenderer.color = abilityList [0].abilityColor;
 					bulletPrefab.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
-					//dustPuff.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
+					dustPuff.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
 
 
 				} else {//Switch back to original if currently using it
