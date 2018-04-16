@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_GhostSprite : MonoBehaviour {
+public class Player_GhostSprite : MonoBehaviour { //Creates the ghost of the character 
 
 
 	SpriteRenderer sprite;

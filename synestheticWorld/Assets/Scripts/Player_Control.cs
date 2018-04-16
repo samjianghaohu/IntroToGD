@@ -21,6 +21,10 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	public GameObject stage;
 	public LayerMask myLayerMask;
 
+	public GameObject dustPuff;
+	private ParticleSystem dustParticle;
+
+
 
 	//Relevant parameters
 	int bulletNum = 0;
@@ -175,7 +179,9 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
 					soundController.PlayJumpSound ();
-					//when player hits the top platform 
+					GameObject dustObject = Instantiate(dustPuff, this.transform.position, this.transform.rotation) as GameObject;
+					dustParticle = dustObject.GetComponent<ParticleSystem>();
+					Destroy (dustObject, 2f);
 
 				}
 			}
@@ -239,6 +245,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 					mySpriteRenderer.color = abilityList [0].abilityColor;
 					attackSpriteRenderer.color = abilityList [0].abilityColor;
 					bulletPrefab.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
+					//dustPuff.GetComponent<SpriteRenderer> ().color = abilityList [0].abilityColor;
 
 
 				} else {//Switch back to original if currently using it
