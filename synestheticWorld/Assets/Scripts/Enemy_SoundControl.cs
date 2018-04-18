@@ -16,7 +16,7 @@ public class Enemy_SoundControl : MonoBehaviour {//This script controls enemy au
 	// Use this for initialization
 	void Start () {
 		attackPlayer = transform.GetChild(1).GetComponent<AudioSource> ();
-		responsePlayer = transform.GetChild(2).GetComponent<AudioSource> ();
+		responsePlayer = transform.GetChild(3).GetComponent<AudioSource> ();
 	}
 
 

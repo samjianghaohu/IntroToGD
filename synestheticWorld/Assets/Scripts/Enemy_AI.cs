@@ -43,6 +43,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	GameObject player;
 	SpriteRenderer mySpriteRenderer;
 	SpriteRenderer eyeSpriteRenderer;
+	SpriteRenderer attackSpriteRenderer;
 	Rigidbody2D myRigidbody;
 	Color prevColor;
 
@@ -69,8 +70,12 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 		//Initialize components
 		player = GameObject.FindWithTag("Player");
+
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
+		attackSpriteRenderer = transform.GetChild (2).GetComponent<SpriteRenderer> ();
+		attackSpriteRenderer.color = weakColor;
+
 		myRigidbody = GetComponent<Rigidbody2D> ();
 
 	}
@@ -152,6 +157,10 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 			}
 		}
 
+
+		//Update the direction of attack sprite
+		attackSpriteRenderer.flipX = mySpriteRenderer.flipX;
+
 	}
 
 
@@ -215,6 +224,12 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 	//Shoot bullets when firing
 	void ShootProjectile (){
+
+		//Trigger attack animation
+		animController.MakeAttack ();
+
+
+		//Instantiate a bullet
 		GameObject newBulletObj = Instantiate (bulletPrefab);
 
 		if (mySpriteRenderer.flipX == false) {

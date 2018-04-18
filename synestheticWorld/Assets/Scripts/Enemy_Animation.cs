@@ -69,4 +69,9 @@ public class Enemy_Animation : MonoBehaviour {//This script controls enemy anima
 		myAnim.SetTrigger ("MakeBlink");
 	}
 
+
+	public void MakeAttack(){
+		myAnim.SetTrigger("MakeAttack");
+	}
+
 }
