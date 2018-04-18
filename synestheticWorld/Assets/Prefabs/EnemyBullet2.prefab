@@ -80,6 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 0.3
   projectilePower: 1
+  bulletGhostPrefab: {fileID: 1521615599122084, guid: ea2b3e3f8f8824023aa54ab70d098d8d,
+    type: 2}
 --- !u!212 &212634098434706152
 SpriteRenderer:
   m_ObjectHideFlags: 1

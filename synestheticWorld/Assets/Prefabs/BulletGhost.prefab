@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4454383841333730}
   - component: {fileID: 212290356107689288}
-  - component: {fileID: 114474099658142090}
+  - component: {fileID: 114156098635480996}
   m_Layer: 0
-  m_Name: playerGhost
+  m_Name: BulletGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114474099658142090
+--- !u!114 &114156098635480996
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

@@ -78,8 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f48a2888f6d485fa9d2b44d184eb1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 0.28
+  projectileSpeed: 0.24
   projectilePower: 1
+  bulletGhostPrefab: {fileID: 1521615599122084, guid: ea2b3e3f8f8824023aa54ab70d098d8d,
+    type: 2}
 --- !u!212 &212778098162660660
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -115,7 +117,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0798c799c0a804327b44a20c7852046b, type: 3}
-  m_Color: {r: 0.9647059, g: 0, b: 0.8980392, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

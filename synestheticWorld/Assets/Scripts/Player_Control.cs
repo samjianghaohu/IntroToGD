@@ -6,8 +6,6 @@ using System.Security.AccessControl;
 
 public class Player_Control : MonoBehaviour {//This script defines player control and some releveant behaviors
 
-	public static Player_Control instance; //DASHA
-
 	//Declare relevent attributes and objects
 	public float xSpeed;
 	public float jumpHeight;
@@ -25,7 +23,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	private ParticleSystem dustParticle;
 
 
-
 	//Relevant parameters
 	int bulletNum = 0;
 	int incomingDirect = 0;
@@ -36,27 +33,12 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	bool ifStunned = false;
 	bool ifWin = false;
 
-	//DASHA
-	public static Player_Control Instance { 
-		get{ 
-			if (instance == null) {
-				instance = GameObject.FindObjectOfType<Player_Control> ();
-			}
-			return instance;
-		}
-	}
-
-
-
 
 	Color prevColor;
 	Rigidbody2D myRigidbody;
-	public SpriteRenderer mySpriteRenderer; //DASHA ∆ to public 
+	SpriteRenderer mySpriteRenderer; //DASHA ∆ to public 
 	SpriteRenderer eyeSpriteRenderer;
-	SpriteRenderer attackSpriteRenderer;
-
-	[SerializeField] 
- 	GameObject PlayerGhost; 
+	SpriteRenderer attackSpriteRenderer; 
 
 	Player_SoundControl soundController;
 	Player_Behavior myBehavior;
@@ -148,10 +130,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 		bulletPrefab.GetComponent<SpriteRenderer> ().flipX = false;
 		bulletPrefab.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
-
-		PlayerGhost.GetComponent<SpriteRenderer> ().flipX = false; 
-		PlayerGhost.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
-
 	}
 
 
@@ -160,7 +138,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 		//Raycast towards ground
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, Mathf.Infinity, myLayerMask);
-		GameObject GhostBaby = Instantiate (PlayerGhost, transform.position, transform.rotation);
 
 
 		//Move left and right
@@ -169,7 +146,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			mySpriteRenderer.flipX = true;
 			eyeSpriteRenderer.flipX = true;
 			attackSpriteRenderer.flipX = true;
-			GhostBaby.GetComponent<SpriteRenderer> ().flipX= true;
 
 		} 
 		if (Input.GetKey (KeyCode.RightArrow)) {
@@ -177,7 +153,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			mySpriteRenderer.flipX = false;
 			eyeSpriteRenderer.flipX = false;
 			attackSpriteRenderer.flipX = false;
-			GhostBaby.GetComponent<SpriteRenderer> ().flipX = false;
 
 		}
 
@@ -191,7 +166,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 					soundController.PlayJumpSound ();
 
 
-					//instantiate dust Particles
+					//Instantiate dust Particles
 					GameObject dustObject = Instantiate(dustPuff, (this.transform.position + 0.4f * Vector3.down), Quaternion.Euler(new Vector3(-90, 0, 0))) as GameObject;
 					ParticleSystem dust = dustObject.GetComponent<ParticleSystem> ();
 					dust.startColor = mySpriteRenderer.color;
