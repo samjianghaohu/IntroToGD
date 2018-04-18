@@ -6,22 +6,23 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 
 	//Delay for blinking
 	public float timeUntilBlink;
-
+	public float walkingAnimPadding;
 
 	//Counter for blinking delay
 	float blinkDelay;
 
 	Animator myAnim;
 	Rigidbody2D myRigidbody;
-
-	[SerializeField] Player_Control myControl;
+	Player_Control myControl;
 
 
 	// Use this for initialization
 	void Start () {
 		blinkDelay = timeUntilBlink;
+
 		myAnim = GetComponent<Animator> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();
+		myControl = GetComponent<Player_Control> ();
 
 
 		//Initialize animation bools
@@ -37,15 +38,15 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log (myRigidbody.velocity.y);
+		Debug.Log (myRigidbody.velocity.y);
 
-		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0) && !myControl.IfStunned ()) {
+		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y >= 0 - walkingAnimPadding) && (myRigidbody.velocity.y <= 0 + walkingAnimPadding) && !myControl.IfStunned ()) {
 			MakeWalk ();
 		}else if (Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.RightArrow)) {
 			MakeStop ();
-		}else if ((myRigidbody != null) && (myRigidbody.velocity.y > 0)) {
+		}else if ((myRigidbody != null) && (myRigidbody.velocity.y > 0 + walkingAnimPadding)) {
 			MakeJump ();
-		}else if ((myRigidbody != null) && (myRigidbody.velocity.y < 0)) {
+		}else if ((myRigidbody != null) && (myRigidbody.velocity.y < 0 - walkingAnimPadding)) {
 			MakeFall ();
 		}else if ((myRigidbody != null) && (myRigidbody.velocity.x == 0) && (myRigidbody.velocity.y == 0)){
 			MakeBlink ();

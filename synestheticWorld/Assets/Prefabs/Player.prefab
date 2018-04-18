@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeUntilBlink: 2
-  myControl: {fileID: 114796174112880866}
+  walkingAnimPadding: 1
 --- !u!114 &114554173179823240
 MonoBehaviour:
   m_ObjectHideFlags: 1
