@@ -189,7 +189,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			//and not during the mandatory delay between each shoot
 			if (bulletNum < maxBulletNum && sDelay <= 0) {
 
-				//Turn on attack animation
+				//Trigger attack animation
 				myAnimation.MakeAttack ();
 
 
@@ -211,8 +211,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			}
 
 
-		} else {//Turn off attack animation when not shooting
-			myAnimation.StopAttack ();
 		}
 
 		sDelay -= Time.deltaTime;

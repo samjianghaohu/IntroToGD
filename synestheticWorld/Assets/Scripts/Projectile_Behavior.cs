@@ -63,7 +63,7 @@ public class Projectile_Behavior : MonoBehaviour {//This scripts defines bullet 
 		ghostBaby.transform.position = ghostPos;
 		ghostBaby.transform.localScale = transform.localScale;
 		ghostBaby.GetComponent<SpriteRenderer> ().sprite = ghostSprite;
-		ghostBaby.GetComponent<SpriteRenderer> ().color = new Color(ghostColor.r, ghostColor.g, ghostColor.b, 0.2f);
+		ghostBaby.GetComponent<SpriteRenderer> ().color = new Color(ghostColor.r, ghostColor.g, ghostColor.b, 0.15f);
 		ghostBaby.GetComponent<SpriteRenderer> ().flipX = mySpriteRenderer.flipX;
 	}
 

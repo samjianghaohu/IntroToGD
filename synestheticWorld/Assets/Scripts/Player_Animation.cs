@@ -109,11 +109,8 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 
 
 	public void MakeAttack(){
-		myAnim.SetBool ("IsAttacking", true);
+		//myAnim.SetBool ("IsAttacking", true);
+		myAnim.SetTrigger("MakeAttack");
 	}
 
-
-	public void StopAttack(){
-		myAnim.SetBool ("IsAttacking", false);
-	}
 }

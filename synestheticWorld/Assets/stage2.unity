@@ -5187,11 +5187,6 @@ Prefab:
       propertyPath: stage
       value: 
       objectReference: {fileID: 1939421608}
-    - target: {fileID: 212103833042724022, guid: 4d86d767f7bdf4d8dab08056c629be89,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d86d767f7bdf4d8dab08056c629be89, type: 2}
   m_IsPrefabParent: 0
