@@ -37,7 +37,7 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (myRigidbody.velocity.y);
+		//Debug.Log (myRigidbody.velocity.y);
 
 		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y == 0) && !myControl.IfStunned ()) {
 			MakeWalk ();

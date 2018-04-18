@@ -189,11 +189,15 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 				if (hit.distance <= 0.6f) {
 					myRigidbody.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
 					soundController.PlayJumpSound ();
+
+
 					//instantiate dust Particles
-					GameObject dustObject = Instantiate(dustPuff, this.transform.position, this.transform.rotation) as GameObject;
-					dustParticle = dustObject.GetComponent<ParticleSystem>();
-					dustPuff.GetComponent<ParticleSystem> ().startColor = new Color (1, 1, 1);
-					Destroy (dustObject, 2f);
+					GameObject dustObject = Instantiate(dustPuff, (this.transform.position + 0.4f * Vector3.down), Quaternion.Euler(new Vector3(-90, 0, 0))) as GameObject;
+					ParticleSystem dust = dustObject.GetComponent<ParticleSystem> ();
+					dust.startColor = mySpriteRenderer.color;
+					dust.Play ();
+
+					Destroy (dustObject, 1f);
 
 				}
 			}
