@@ -8,6 +8,7 @@ public class Stage_Info : MonoBehaviour {//This script contains stage border pos
 	public float stageRightBorder;
 	public float stageUpBorder;
 	public float stageDownBorder;
+	public int nextStage;
 
 
 	// Use this for initialization
@@ -22,19 +23,27 @@ public class Stage_Info : MonoBehaviour {//This script contains stage border pos
 
 
 	//functions that get each border positions
-	public float getLeftBorder(){
+	public float GetLeftBorder(){
 		return stageLeftBorder;
 	}
 
-	public float getRightBorder(){
+
+	public float GetRightBorder(){
 		return stageRightBorder;
 	}
 
-	public float getUpBorder(){
+
+	public float GetUpBorder(){
 		return stageUpBorder;
 	}
 
-	public float getDownBorder(){
+
+	public float GetDownBorder(){
 		return stageDownBorder;
+	}
+
+
+	public int GetNextStage(){
+		return nextStage;
 	}
 }

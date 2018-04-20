@@ -11,7 +11,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	public float jumpHeight;
 	public float shootDelay;
 	public int maxBulletNum;
-	public int nextStage;
 
 
 	public GameObject bulletPrefab;
@@ -76,6 +75,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			transform.position = Vector2.MoveTowards (transform.position, portal.transform.position, 2f * Time.deltaTime);
 
 			if (transform.position == portal.transform.position) {
+				int nextStage = stage.GetComponent<Stage_Info> ().GetNextStage ();
 				SceneManager.LoadScene (nextStage);
 			}
 
@@ -111,7 +111,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 
 		//Conditions for game over
-		if (transform.position.y < (stage.GetComponent<Stage_Info>().getDownBorder() - 2) || myBehavior.getHealth () <= 0) {
+		if (transform.position.y < (stage.GetComponent<Stage_Info>().GetDownBorder() - 2) || myBehavior.getHealth () <= 0) {
 			SceneManager.LoadScene ("stageFail");
 		}
 

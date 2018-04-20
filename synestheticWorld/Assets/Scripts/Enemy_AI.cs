@@ -10,6 +10,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	public float howLongUntilSleep;
 	public float howLongUntilAwake;
 	public float howLongToStayWarning;
+	public float dyingTimer;
 
 
 	//Basic attributes of the enemy
@@ -18,6 +19,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 
 	public GameObject bulletPrefab;
+	public GameObject explodePrefab;
 	public LayerMask myLayerMask;
 	public Color weakColor;
 
@@ -248,6 +250,26 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	}
 
 
+	//Explode process
+	void Explode(){
+
+		//Enemy body disappear
+		mySpriteRenderer.color = new Color (1, 1, 1, 0);
+
+
+		//Instantiate explode effect
+		GameObject explodeObject = Instantiate (explodePrefab, this.transform.position, Quaternion.Euler (new Vector3 (-90, 0, 0))) as GameObject;
+		ParticleSystem explode = explodeObject.GetComponent<ParticleSystem> ();
+		explode.startColor = weakColor;
+		explode.Play ();
+
+
+		//Destory effect and enemy itself
+		Destroy (explodeObject, 1f);
+		Destroy (this.gameObject);
+	}
+
+
 	//When shot by a bullet
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "PlayerProjectile") {
@@ -260,8 +282,12 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 					int damage = other.GetComponent<Projectile_Behavior> ().GetPower ();
 					TakeDamage (damage);
 
+
+					//Explode if health <= 0 after taking damage
 					if (myHealth <= 0) {
-						Destroy (this.gameObject);
+						Explode ();
+					
+					//Stunned if not dead after taking damage
 					} else {
 						if (!Stage_Utilities.compareColorsLoose (mySpriteRenderer.color, Color.red)) {
 							prevColor = mySpriteRenderer.color;
@@ -276,7 +302,10 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 				player.GetComponent<Player_Control>().decreaseBulletNum ();
 				Destroy (other.gameObject);
-			} else {//When hit by the wrong bullet
+
+			
+			//Play nasty chord when hit by the wrong bullet
+			} else {
 				soundController.PlayResponseSound (0);
 			}
 		}

@@ -32,14 +32,13 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 		myAnim.SetBool ("IsStopping", false);
 		myAnim.SetBool ("IsBreathing", false);
 		myAnim.SetBool ("IsBlinking", false);
-		myAnim.SetBool ("IsAttacking", false);
 	}
 
 
 	// Update is called once per frame
 	void Update () {
 		
-		if ((myRigidbody != null) && (myRigidbody.velocity.x != 0) && (myRigidbody.velocity.y >= 0 - walkingAnimPadding) && (myRigidbody.velocity.y <= 0 + walkingAnimPadding) && !myControl.IfStunned ()) {
+		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) && (myRigidbody.velocity.y >= 0 - walkingAnimPadding) && (myRigidbody.velocity.y <= 0 + walkingAnimPadding)){
 			MakeWalk ();
 		}else if (Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.RightArrow)) {
 			MakeStop ();
@@ -109,7 +108,6 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 
 
 	public void MakeAttack(){
-		//myAnim.SetBool ("IsAttacking", true);
 		myAnim.SetTrigger("MakeAttack");
 	}
 

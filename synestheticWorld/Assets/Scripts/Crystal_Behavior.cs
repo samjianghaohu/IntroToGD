@@ -31,6 +31,7 @@ public class Crystal_Behavior : MonoBehaviour {//This script controls crystal be
 		if (ifAbsorbing) {
 			FadeOut ();
 
+	
 			//Update the position of absorb effect with player's position
 			absorbObject.transform.position = player.transform.position;
 		}

@@ -5835,6 +5835,7 @@ MonoBehaviour:
   stageRightBorder: 55
   stageUpBorder: 48
   stageDownBorder: -5
+  nextStage: 5
 --- !u!4 &1939421610
 Transform:
   m_ObjectHideFlags: 0
