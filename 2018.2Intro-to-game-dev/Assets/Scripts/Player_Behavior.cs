@@ -7,12 +7,15 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 	public GameObject stage;
 
 	int playerHealth = 20;
+
+	GameObject portal;
 	Player_Control myControl;
 	Player_AbilityStack myAStack;
 
 
 	// Use this for initialization
 	void Start () {
+		portal = GameObject.FindWithTag ("Portal");
 		myControl = GetComponent<Player_Control> ();
 		myAStack = GetComponent<Player_AbilityStack> ();
 	}
@@ -20,7 +23,16 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 
 	// Update is called once per frame
 	void Update () {
-		
+		UpdatePortalState ();
+	}
+
+
+	//Activate the portal when winning conditions are met
+	void UpdatePortalState(){
+		if (CheckWinningCondition ()) {
+			Debug.Log ("Activate");
+			portal.GetComponent<Portal_Parent> ().ActivatePortal();
+		}
 	}
 
 
@@ -63,7 +75,7 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 
 		//When reach portal
 		if (other.tag == "Portal") {
-			if (CheckWinningCondition ()){
+			if (CheckWinningCondition()){
 				myControl.Win ();
 			}
 		}

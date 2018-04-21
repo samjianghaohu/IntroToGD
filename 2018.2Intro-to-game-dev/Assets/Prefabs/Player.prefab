@@ -467,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage: {fileID: 0}
+  portal: {fileID: 0}
 --- !u!114 &114796174112880866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -482,7 +483,6 @@ MonoBehaviour:
   jumpHeight: 12
   shootDelay: 0.15
   maxBulletNum: 3
-  nextStage: 3
   bulletPrefab: {fileID: 1420955708012116, guid: f7cd9109db03d4a98a68e8dc0f0b4f42,
     type: 2}
   portal: {fileID: 0}
