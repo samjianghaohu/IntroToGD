@@ -30,7 +30,6 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 	//Activate the portal when winning conditions are met
 	void UpdatePortalState(){
 		if (CheckWinningCondition ()) {
-			Debug.Log ("Activate");
 			portal.GetComponent<Portal_Parent> ().ActivatePortal();
 		}
 	}

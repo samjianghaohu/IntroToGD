@@ -99,7 +99,7 @@ public class Background_ColorAndAudio : MonoBehaviour {//This scripts manages ba
 				bgmPlayer.clip = bgmClip;
 				bgmPlayer.loop = true;
 
-				if (bgmPlayer.isPlaying == false) {
+				if ((bgmPlayer.clip != null) && (bgmPlayer.isPlaying == false)) {
 					bgmPlayer.Play ();
 				}
 			}

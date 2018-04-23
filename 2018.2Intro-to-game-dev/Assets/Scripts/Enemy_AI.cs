@@ -10,7 +10,6 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	public float howLongUntilSleep;
 	public float howLongUntilAwake;
 	public float howLongToStayWarning;
-	public float dyingTimer;
 
 
 	//Basic attributes of the enemy
