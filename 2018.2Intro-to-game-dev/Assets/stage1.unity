@@ -3861,6 +3861,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1904395248624772, guid: 1cac1cb43e06d4cbc8dec3e59cc1b40e,
         type: 2}
+    - target: {fileID: 114867352451681972, guid: d5dae1bcc006e4164bd0c294083f8386,
+        type: 2}
+      propertyPath: getClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 88d7a7aff8394435d982ec47f473e193, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d5dae1bcc006e4164bd0c294083f8386, type: 2}
   m_IsPrefabParent: 0
@@ -6193,7 +6198,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4128205234259440, guid: 405a0e96a72574f6580b36aded4262f5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 15.37
+      value: 15.27
       objectReference: {fileID: 0}
     - target: {fileID: 4128205234259440, guid: 405a0e96a72574f6580b36aded4262f5, type: 2}
       propertyPath: m_LocalPosition.z
