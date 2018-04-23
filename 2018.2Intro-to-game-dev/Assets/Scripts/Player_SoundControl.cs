@@ -79,6 +79,7 @@ public class Player_SoundControl : MonoBehaviour {//This script controls sound o
 	public void PlayAttackSound(){
 		attackPlayer.clip = attackClip;
 		attackPlayer.loop = false;
+		attackPlayer.pitch = Random.Range (0.7f, 1.3f);
 		attackPlayer.Play ();
 	}
 

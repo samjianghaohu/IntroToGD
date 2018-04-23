@@ -211,14 +211,15 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 				//Trigger attack animation
 				myAnimation.MakeAttack ();
 
+				float yPosOffset = Random.Range (-0.2f, 0.2f);
 
 				//Instantiate bullets, position and flip depending on which direction player's shooting
 				GameObject newSoundwaveObj = Instantiate (bulletPrefab);
 				if (mySpriteRenderer.flipX == false) {
-					newSoundwaveObj.transform.position = transform.position + Vector3.right;
+					newSoundwaveObj.transform.position = transform.position + Vector3.right + yPosOffset * Vector3.up;
 				} else {
 					newSoundwaveObj.GetComponent<SpriteRenderer> ().flipX = true;
-					newSoundwaveObj.transform.position = transform.position + Vector3.left;
+					newSoundwaveObj.transform.position = transform.position + Vector3.left + yPosOffset * Vector3.up;
 				}
 
 
