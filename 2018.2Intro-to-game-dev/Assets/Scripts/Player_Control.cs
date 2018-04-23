@@ -10,6 +10,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	public float xSpeed;
 	public float jumpHeight;
 	public float shootDelay;
+	public float dyingTime;
 	public int maxBulletNum;
 
 
@@ -28,9 +29,11 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 	float sDelay = 0f;
 	float timeOfStunned = 0f;
+	float dyingTimer = 1f;
 
 	bool ifStunned = false;
 	bool ifWin = false;
+	bool ifDead = false;
 
 
 	Color prevColor;
@@ -101,7 +104,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			}
 
 
-		} else {//Normal condition
+		} else if (!ifDead) {//Normal condition
 			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
 
 			PlayerMove ();
@@ -112,12 +115,23 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 		//Conditions for game over
 		if (transform.position.y < (stage.GetComponent<Stage_Info>().GetDownBorder() - 2) || myBehavior.getHealth () <= 0) {
+			ifDead = true;
+
 
 			//Record failing state and the current stage to come back to
 			Menu_Clear.ifFailed = true;
 			Menu_Clear.failedScene = stage.GetComponent<Stage_Info> ().nextStage - 1;
 
-			SceneManager.LoadScene ("stageFail");
+
+			//Player turns black when dying
+			Color dyingColor = Color.Lerp(Color.black, mySpriteRenderer.color, dyingTimer);
+			mySpriteRenderer.color = dyingColor;
+			eyeSpriteRenderer.color = dyingColor;
+			dyingTimer -= Time.deltaTime / dyingTime;
+
+			if (dyingTimer <= 0) {
+				SceneManager.LoadScene ("stageFail");
+			}
 		}
 
 	}
@@ -299,6 +313,11 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 	public bool IfStunned(){
 		return ifStunned;
+	}
+
+
+	public bool IsDead(){
+		return ifDead;
 	}
 
 

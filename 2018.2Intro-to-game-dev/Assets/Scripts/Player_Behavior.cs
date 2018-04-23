@@ -44,7 +44,7 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 
 		//When hit by enemy projectile or touched by enemy
 		if (other.tag == "EnemyProjectile" || other.tag == "Enemy") {
-			if (myControl.IfStunned () == false) {
+			if (!myControl.IsDead() && !myControl.IfStunned ()) {
 
 
 				//Take damage
