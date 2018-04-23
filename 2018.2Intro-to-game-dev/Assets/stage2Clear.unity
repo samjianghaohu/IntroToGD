@@ -226,7 +226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7, y: -64.57642}
+  m_AnchoredPosition: {x: 28, y: -64.57642}
   m_SizeDelta: {x: 457.6, y: 65.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &672457807
@@ -255,7 +255,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 50
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d1989a230f94fcebe69ba8fccbbf73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 0
+  nextScene: 10
 --- !u!1 &758553950
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.068207, y: 13.119743}
+  m_AnchoredPosition: {x: 19, y: 13.119743}
   m_SizeDelta: {x: 548.6, y: 140.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758553952
@@ -370,13 +370,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 80
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FAIL!
+  m_Text: SECTOR 2 CLEAR!
 --- !u!222 &758553953
 CanvasRenderer:
   m_ObjectHideFlags: 0

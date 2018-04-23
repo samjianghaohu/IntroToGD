@@ -112,6 +112,11 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 		//Conditions for game over
 		if (transform.position.y < (stage.GetComponent<Stage_Info>().GetDownBorder() - 2) || myBehavior.getHealth () <= 0) {
+
+			//Record failing state and the current stage to come back to
+			Menu_Clear.ifFailed = true;
+			Menu_Clear.failedScene = stage.GetComponent<Stage_Info> ().nextStage - 1;
+
 			SceneManager.LoadScene ("stageFail");
 		}
 

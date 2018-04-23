@@ -6790,7 +6790,7 @@ MonoBehaviour:
   stageRightBorder: 60
   stageUpBorder: 25
   stageDownBorder: -20
-  nextStage: 3
+  nextStage: 6
 --- !u!4 &1939421610
 Transform:
   m_ObjectHideFlags: 0

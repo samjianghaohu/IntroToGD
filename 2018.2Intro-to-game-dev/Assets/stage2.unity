@@ -5543,7 +5543,7 @@ Prefab:
         type: 2}
       propertyPath: crystal1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1155098215}
     - target: {fileID: 114796174112880866, guid: 4d86d767f7bdf4d8dab08056c629be89,
         type: 2}
       propertyPath: nextStage
@@ -6217,7 +6217,7 @@ MonoBehaviour:
   stageRightBorder: 71
   stageUpBorder: 5
   stageDownBorder: -25
-  nextStage: 3
+  nextStage: 9
 --- !u!4 &1939421610
 Transform:
   m_ObjectHideFlags: 0
@@ -6259,8 +6259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetAbility0: {r: 0.9647059, g: 0, b: 0.8980392, a: 1}
-  targetAbility1: {r: 0.5529412, g: 0.8156863, b: 1, a: 1}
-  targetAbility2: {r: 1, g: 0.7529412, b: 0, a: 1}
+  targetAbility1: {r: 1, g: 0.7529412, b: 0, a: 1}
+  targetAbility2: {r: 1, g: 1, b: 1, a: 1}
   targetAbilityNum: 2
 --- !u!114 &1939421613
 MonoBehaviour:

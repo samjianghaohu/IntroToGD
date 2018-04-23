@@ -18,14 +18,32 @@ EditorBuildSettings:
     path: Assets/postTutorial.unity
     guid: 03e9a33a75c9649d3ba9831bf2eb0250
   - enabled: 1
+    path: Assets/stage1Intro.unity
+    guid: 1f648dc836d574fc697e7c05d7b9513a
+  - enabled: 1
     path: Assets/stage1.unity
     guid: 7cc0eb2be9b63424c9d00c6aeca9f49a
   - enabled: 1
+    path: Assets/stage1Clear.unity
+    guid: ea2621b6e44d14cb38f2a46a8b5f9ef3
+  - enabled: 1
+    path: Assets/stage2Intro.unity
+    guid: 823246a9c975b46f6ae0bc9d79b5b688
+  - enabled: 1
     path: Assets/stage2.unity
+    guid: 692f84d71b1d545a8a59b85d60196d53
+  - enabled: 1
+    path: Assets/stage2Clear.unity
+    guid: de0ffb9617b164c69b7dfb3d83d9e140
+  - enabled: 1
+    path: Assets/stage3Intro.unity
+    guid: a2490634f9ced4f749a2de41aed4dc73
+  - enabled: 1
+    path: Assets/stage3.unity
     guid: 203606766b38b48e19dcf5509bd26bc8
   - enabled: 1
-    path: Assets/stageClear1.unity
-    guid: ec26e41d3816b4ed2a73882e924881a8
+    path: Assets/stage3Clear.unity
+    guid: 18f7b7eed47ef4a8da9c105529c6cc7b
   - enabled: 1
     path: Assets/stageFail.unity
     guid: 316261eeb0a21477f9ea5364a56a66e3
