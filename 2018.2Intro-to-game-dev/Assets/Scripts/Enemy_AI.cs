@@ -10,6 +10,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	public float howLongUntilSleep;
 	public float howLongUntilAwake;
 	public float howLongToStayWarning;
+	public float howLongToStayStunned;
 
 
 	//Basic attributes of the enemy
@@ -37,8 +38,8 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	float timeUntilNextShoot;
 	float timeUntilSleep;
 	float timeUntilAwake;
-	float timeOfStunned;
 	float timeOfWarning;
+	float timeOfStunned;
 
 
 	GameObject player;
@@ -50,8 +51,8 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 
 	//Accessing other components on enemy
-	[SerializeField] Enemy_SoundControl soundController;
-	[SerializeField] Enemy_Animation animController;
+	Enemy_SoundControl soundController;
+	Enemy_Animation animController;
 
 
 	// Use this for initialization
@@ -76,6 +77,9 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 		eyeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer> ();
 		attackSpriteRenderer = transform.GetChild (2).GetComponent<SpriteRenderer> ();
 		attackSpriteRenderer.color = weakColor;
+
+		soundController = GetComponent<Enemy_SoundControl> ();
+		animController = GetComponent<Enemy_Animation> ();
 
 		myRigidbody = GetComponent<Rigidbody2D> ();
 
@@ -139,23 +143,36 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 				timeUntilAwake = howLongUntilAwake;
 			}
 		}
-		if (state != FIRE) {//Reset shooting delay when it quits shooting
-			timeUntilNextShoot = 0;
-		}
 
 
 		//What to do when it's stunned
 		if (state == STUNNED) {
+			
+			//Stop when it's stunned
 			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
 
-			mySpriteRenderer.color = Color.red;
+
+			//Trigger stun animation
+			animController.MakeStun();
+
 			timeOfStunned -= Time.deltaTime;
 
-			if (timeOfStunned <= 0) {//Go back to previous state and normal color and reset stun time when it quits stun
+
+			//Color goes back to normal after half of the stun time, otherwise being red
+			if (timeOfStunned <= (howLongToStayStunned / 2f)) {
 				mySpriteRenderer.color = prevColor;
-				timeOfStunned = 0.2f;
+			} else {
+				mySpriteRenderer.color = Color.red;
+			}
+
+
+			//Stop stun animation and go back to previous state when timer's up
+			if (timeOfStunned <= 0) {
 				state = prevState;
 			}
+		}
+		if (state != STUNNED) {
+			animController.StopStun();
 		}
 
 
@@ -285,21 +302,25 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 					//Explode if health <= 0 after taking damage
 					if (myHealth <= 0) {
 						Explode ();
-					
-					//Stunned if not dead after taking damage
+			
+			
+					//Stun if not dead after taking damage
 					} else {
-						if (!Stage_Utilities.compareColorsLoose (mySpriteRenderer.color, Color.red)) {
-							prevColor = mySpriteRenderer.color;
-						}
-						if (state != STUNNED) {
-							prevState = state;
-						}
-						state = STUNNED;
-					}
 
-				}
+						//Store the current color and state to come back to after stun is over
+						prevColor = mySpriteRenderer.color;
+						prevState = state;
+
+
+						//Set stun timer and stun state
+						if (prevState != STUNNED) {
+							timeOfStunned = howLongToStayStunned;
+							state = STUNNED;
+						}
+					}
 					
-				Destroy (other.gameObject);
+					Destroy (other.gameObject);
+				}
 
 			
 			//Play nasty chord when hit by the wrong bullet

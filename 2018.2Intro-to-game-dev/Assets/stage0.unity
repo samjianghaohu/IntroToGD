@@ -4689,6 +4689,26 @@ Prefab:
       value: 
       objectReference: {fileID: 1577771958690454, guid: 1db794ccc6ea0459b96b3da2d83262ae,
         type: 2}
+    - target: {fileID: 212800491524188626, guid: 4d86d767f7bdf4d8dab08056c629be89,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212800491524188626, guid: 4d86d767f7bdf4d8dab08056c629be89,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212992991718472148, guid: 4d86d767f7bdf4d8dab08056c629be89,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114796174112880866, guid: 4d86d767f7bdf4d8dab08056c629be89,
+        type: 2}
+      propertyPath: timeOfStunned
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d86d767f7bdf4d8dab08056c629be89, type: 2}
   m_IsPrefabParent: 0

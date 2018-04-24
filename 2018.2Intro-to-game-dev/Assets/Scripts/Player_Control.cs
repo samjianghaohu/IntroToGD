@@ -11,6 +11,7 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	public float jumpHeight;
 	public float shootDelay;
 	public float dyingTime;
+	public float timeOfStunned;
 	public int maxBulletNum;
 
 
@@ -23,11 +24,9 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	private ParticleSystem dustParticle;
 
 
-	//Relevant parameters
-	int incomingDirect = 0;
-
+	//time counters
 	float sDelay = 0f;
-	float timeOfStunned = 0f;
+	float stunTimer = 0f;
 	float dyingTimer = 1f;
 
 	bool ifStunned = false;
@@ -70,7 +69,8 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	// Update is called once per frame
 	void Update () {
 
-		if (ifWin) {//Move towards portal center if winning condition is met
+		//Move towards portal center if winning condition is met
+		if (ifWin) {
 			Destroy (myRigidbody);
 			soundController.enabled = false;
 			myAnimation.enabled = false;
@@ -82,23 +82,25 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			}
 
 
-		} else if (ifStunned) {//Knock back and turn red when stunned
-			if (incomingDirect == 1) {
-				mySpriteRenderer.flipX = false;
-				eyeSpriteRenderer.flipX = false;
-				attackSpriteRenderer.flipX = false;
-				transform.position += 0.04f * Vector3.left;
-			} else {
-				mySpriteRenderer.flipX = true;
-				eyeSpriteRenderer.flipX = true;
-				attackSpriteRenderer.flipX = true;
-				transform.position += 0.04f * Vector3.right;
-			}
-			mySpriteRenderer.color = Color.red;
-			timeOfStunned -= Time.deltaTime;
+		} else if (ifStunned) {
+			
+			//Trigger stun animation when stunned
+			myAnimation.MakeStun ();
 
-			if (timeOfStunned <= 0) {
+			stunTimer -= Time.deltaTime;
+
+
+			//Color goes back to normal after half of the stun time, otherwise being red
+			if (stunTimer <= (timeOfStunned / 2f)) {
 				mySpriteRenderer.color = prevColor;
+			} else {
+				mySpriteRenderer.color = Color.red;
+			}
+
+
+			//Stop stun animation and quit stun state when timer's zero
+			if (stunTimer <= 0) {
+				myAnimation.StopStun ();
 				ifStunned = false;
 			}
 
@@ -306,11 +308,31 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 	}
 
 
-	public void Stune(int damgeDirect){
+	public void Stune(int damageDirect){
+
+		//Store the color player will return back to after stun
 		prevColor = mySpriteRenderer.color;
-		timeOfStunned = 0.2f;
+
+
+		//Knock player back depending on bullet direction
+		if (damageDirect == 1) {
+			mySpriteRenderer.flipX = false;
+			eyeSpriteRenderer.flipX = false;
+			attackSpriteRenderer.flipX = false;
+			myRigidbody.AddForce(Vector2.left * 0.8f, ForceMode2D.Impulse);
+			//transform.position += 0.4f * Vector3.left;
+		} else {
+			mySpriteRenderer.flipX = true;
+			eyeSpriteRenderer.flipX = true;
+			attackSpriteRenderer.flipX = true;
+			myRigidbody.AddForce(Vector2.right * 0.8f, ForceMode2D.Impulse);
+			//transform.position += 0.4f * Vector3.right;
+		}
+
+
+		//Set stun timer and set stun state
+		stunTimer = timeOfStunned;
 		ifStunned = true;
-		incomingDirect = damgeDirect;
 	}
 
 

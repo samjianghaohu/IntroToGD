@@ -214,7 +214,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &61247539966070938
 BoxCollider2D:
@@ -473,7 +473,7 @@ MonoBehaviour:
   howLongUntilSleep: 5
   howLongUntilAwake: 2
   howLongToStayWarning: 0.5
-  dyingTimer: 0
+  howLongToStayStunned: 0.5
   moveSpeed: 4
   myHealth: 3
   bulletPrefab: {fileID: 1900422532747528, guid: 7f1337fde693d407086e5ae70b70576e,
@@ -484,8 +484,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1280
   weakColor: {r: 0.5529412, g: 0.8156863, b: 1, a: 1}
-  soundController: {fileID: 114155828932406456}
-  animController: {fileID: 114923665919989908}
 --- !u!114 &114923665919989908
 MonoBehaviour:
   m_ObjectHideFlags: 1

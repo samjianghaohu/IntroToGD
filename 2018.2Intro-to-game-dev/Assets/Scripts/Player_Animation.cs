@@ -109,4 +109,14 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 		myAnim.SetTrigger("MakeAttack");
 	}
 
+
+	public void MakeStun(){
+		myAnim.SetBool ("IsStunned", true);
+	}
+
+
+	public void StopStun(){
+		myAnim.SetBool ("IsStunned", false);
+	}
+
 }

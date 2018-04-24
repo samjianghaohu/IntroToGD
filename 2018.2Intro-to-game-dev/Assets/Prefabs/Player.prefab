@@ -482,6 +482,7 @@ MonoBehaviour:
   jumpHeight: 12
   shootDelay: 0.15
   dyingTime: 1
+  timeOfStunned: 0.7
   maxBulletNum: 3
   bulletPrefab: {fileID: 1420955708012116, guid: f7cd9109db03d4a98a68e8dc0f0b4f42,
     type: 2}

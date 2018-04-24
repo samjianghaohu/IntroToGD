@@ -76,7 +76,7 @@ public class Background_ColorAndAudio : MonoBehaviour {//This scripts manages ba
 
 			//Get the matching color from the dictionary
 			Color matchedColor;
-			colorDict.TryGetValue (playerSprite.color, out matchedColor);
+			colorDict.TryGetValue (new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 1f), out matchedColor);
 			matchedColor = new Color (matchedColor.r, matchedColor.g, matchedColor.b, 255);
 
 
