@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Projectile_Behavior : MonoBehaviour {//This scripts defines bullet behaviors
 
-	//Instance of this object used to create "ghosts"
-	public static Projectile_Behavior instance; 
-
-
 	//Basic attributes of a bullet
 	public float projectileSpeed;
 	public int projectilePower;
@@ -16,16 +12,6 @@ public class Projectile_Behavior : MonoBehaviour {//This scripts defines bullet 
 	GameObject player;
 	GameObject camera;
 	SpriteRenderer mySpriteRenderer;
-
-
-	public static Projectile_Behavior Instance { 
-		get{ 
-			if (instance == null) {
-				instance = GameObject.FindObjectOfType<Projectile_Behavior> ();
-			}
-			return instance;
-		}
-	}
 
 
 	// Use this for initialization
@@ -56,9 +42,9 @@ public class Projectile_Behavior : MonoBehaviour {//This scripts defines bullet 
 
 	void CreateGhosts(){
 		GameObject ghostBaby = Instantiate (bulletGhostPrefab);
-		Vector3 ghostPos = Projectile_Behavior.Instance.transform.position;
-		Sprite ghostSprite = Projectile_Behavior.Instance.GetComponent<SpriteRenderer> ().sprite;
-		Color ghostColor = Projectile_Behavior.Instance.GetComponent<SpriteRenderer> ().color;
+		Vector3 ghostPos = this.transform.position;
+		Sprite ghostSprite = this.GetComponent<SpriteRenderer> ().sprite;
+		Color ghostColor = this.GetComponent<SpriteRenderer> ().color;
 
 		ghostBaby.transform.position = ghostPos;
 		ghostBaby.transform.localScale = transform.localScale;
@@ -83,4 +69,5 @@ public class Projectile_Behavior : MonoBehaviour {//This scripts defines bullet 
 	public int GetPower(){
 		return projectilePower;
 	}
+		
 }
