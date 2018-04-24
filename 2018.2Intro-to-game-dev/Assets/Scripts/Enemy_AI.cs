@@ -300,7 +300,6 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 				}
 					
 				Destroy (other.gameObject);
-				player.GetComponent<Player_Control>().decreaseBulletNum ();
 
 			
 			//Play nasty chord when hit by the wrong bullet

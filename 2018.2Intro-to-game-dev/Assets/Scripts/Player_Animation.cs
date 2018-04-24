@@ -13,7 +13,6 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 
 	Animator myAnim;
 	Rigidbody2D myRigidbody;
-	Player_Control myControl;
 
 
 	// Use this for initialization
@@ -22,7 +21,6 @@ public class Player_Animation : MonoBehaviour {//This script controls player ani
 
 		myAnim = GetComponent<Animator> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();
-		myControl = GetComponent<Player_Control> ();
 
 
 		//Initialize animation bools

@@ -24,7 +24,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 
 	//Relevant parameters
-	int bulletNum = 0;
 	int incomingDirect = 0;
 
 	float sDelay = 0f;
@@ -201,6 +200,9 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 	//Shoot bullets
 	void ShootProjectile(){
+		GameObject[] bulletArray = GameObject.FindGameObjectsWithTag ("PlayerProjectile");
+		int bulletNum = bulletArray.Length;
+
 		if (Input.GetKeyDown (KeyCode.Space)) {
 
 
@@ -319,11 +321,6 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 
 	public bool IsDead(){
 		return ifDead;
-	}
-
-
-	public void decreaseBulletNum(){
-		bulletNum -= 1;
 	}
 
 

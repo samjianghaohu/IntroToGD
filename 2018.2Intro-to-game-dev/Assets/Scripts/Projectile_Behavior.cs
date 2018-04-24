@@ -9,14 +9,12 @@ public class Projectile_Behavior : MonoBehaviour {//This scripts defines bullet 
 	public int projectilePower;
 
 	public GameObject bulletGhostPrefab;
-	GameObject player;
 	GameObject camera;
 	SpriteRenderer mySpriteRenderer;
 
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindWithTag ("Player");
 		camera = GameObject.FindWithTag ("MainCamera");
 		mySpriteRenderer = GetComponent<SpriteRenderer> ();
 	}
@@ -57,10 +55,6 @@ public class Projectile_Behavior : MonoBehaviour {//This scripts defines bullet 
 	//Bullet disappears when flying out of camera
 	void ProjectileDisappear(){
 		if ((camera != null) && (transform.position.x > (camera.transform.position.x + 9) || transform.position.x < (camera.transform.position.x - 9))) {
-			if (this.tag == "PlayerProjectile") {
-				player.GetComponent<Player_Control> ().decreaseBulletNum ();
-			}
-
 			Destroy (this.gameObject);
 		}
 	}
