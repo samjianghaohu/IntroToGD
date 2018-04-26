@@ -35,30 +35,25 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 	}
 
 
-	void TakeDamage(int damage){
+	public void TakeDamage(int damage){
 		playerHealth -= damage;
 	}
 
 
 	void OnTriggerEnter2D(Collider2D other){
 
-		//When hit by enemy projectile or touched by enemy
-		if (other.tag == "EnemyProjectile" || other.tag == "Enemy") {
+		//When hit by enemy projectile
+		if (other.tag == "EnemyProjectile") {
 			if (!myControl.IsDead() && !myControl.IfStunned ()) {
 
 
 				//Take damage
-				int damage;
-
-				if (other.tag == "Enemy") {
-					damage = 1;
-				} else {
-					damage = other.GetComponent<Projectile_Behavior> ().GetPower ();
-				}
+				int damage = other.GetComponent<Projectile_Behavior> ().GetPower ();
 				TakeDamage (damage);
 
 
 				//Stun after taking damage
+				//If bullets come from the right, pass in 1, else pass in -1;
 				if (other.transform.position.x - transform.position.x >= 0) {
 					myControl.Stune (1);
 				} else {
@@ -66,9 +61,8 @@ public class Player_Behavior : MonoBehaviour {//This scripts determines player b
 				}
 			}
 
-			if (other.tag == "EnemyProjectile") {
-				Destroy (other.gameObject);
-			}
+			Destroy (other.gameObject);
+		
 		}
 
 

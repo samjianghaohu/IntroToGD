@@ -320,13 +320,11 @@ public class Player_Control : MonoBehaviour {//This script defines player contro
 			eyeSpriteRenderer.flipX = false;
 			attackSpriteRenderer.flipX = false;
 			myRigidbody.AddForce(Vector2.left * 0.8f, ForceMode2D.Impulse);
-			//transform.position += 0.4f * Vector3.left;
 		} else {
 			mySpriteRenderer.flipX = true;
 			eyeSpriteRenderer.flipX = true;
 			attackSpriteRenderer.flipX = true;
-			myRigidbody.AddForce(Vector2.right * 0.8f, ForceMode2D.Impulse);
-			//transform.position += 0.4f * Vector3.right;
+			myRigidbody.AddForce(Vector2.right * 0.8f, ForceMode2D.Impulse);		
 		}
 
 

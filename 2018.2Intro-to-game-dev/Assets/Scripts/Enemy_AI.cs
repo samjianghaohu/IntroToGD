@@ -21,6 +21,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	public GameObject bulletPrefab;
 	public GameObject explodePrefab;
 	public LayerMask myLayerMask;
+	public LayerMask collisionLayerMask;
 	public Color weakColor;
 
 
@@ -87,7 +88,10 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
+
+		//Always do collision check with player
+		PlayerCollisionCheck();
 
 		//Wait until waking up when it's sleeping
 		if (timeUntilAwake > 0) {
@@ -160,7 +164,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 
 			//Color goes back to normal after half of the stun time, otherwise being red
 			if (timeOfStunned <= (howLongToStayStunned / 2f)) {
-				mySpriteRenderer.color = prevColor;
+				mySpriteRenderer.color = Color.white;
 			} else {
 				mySpriteRenderer.color = Color.red;
 			}
@@ -182,14 +186,35 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	}
 
 
+	void PlayerCollisionCheck(){
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, (player.transform.position - transform.position), Mathf.Infinity, collisionLayerMask);
+
+		if (hit != null && hit.collider != null && hit.collider.gameObject.tag == "Player") {
+
+			//If player touches enemy, player takes damage and stun
+			if ((hit.distance <= 0.8f) && !player.GetComponent<Player_Control> ().IfStunned ()) {
+				player.GetComponent<Player_Behavior> ().TakeDamage (1);
+
+				int touchDirection;
+				if (transform.position.x >= player.transform.position.x) {
+					touchDirection = 1;
+				} else {
+					touchDirection = -1;
+				}
+
+				player.GetComponent<Player_Control> ().Stune (touchDirection);
+			}
+		}
+
+	}
+
+
 	//Check if player is in front or behind
 	void CheckPlayer(){
 		if ((transform.position.x >= player.transform.position.x && mySpriteRenderer.flipX) || (transform.position.x < player.transform.position.x && !mySpriteRenderer.flipX)) {
 			RaycastCheck ();
 		} else {
-			if (state != PATROL) {
-				state = PATROL;
-			}
+			state = PATROL;
 		}
 
 	}
@@ -199,20 +224,27 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	void RaycastCheck(){
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, (player.transform.position - transform.position), Mathf.Infinity, myLayerMask);
 
+
+		//If enemy is able to see player
 		if (hit != null && hit.collider != null && hit.collider.gameObject.tag == "Player") {
+
+
+			//Warn player if player is close to enemy
 			if (hit.distance <= 7.2f) {
 				if (state == PATROL) {
 					state = WARNING;
 				}
+
+			
+			//Stay patrolling if player is far away
 			} else {
-				if (state != PATROL) {
-					state = PATROL;
-				}
-			}
-		} else {
-			if (state != PATROL) {
 				state = PATROL;
 			}
+
+
+		//Stay patrolling if player is blocked and enemy can't see it
+		} else {
+			state = PATROL;
 		}
 	}
 
@@ -286,8 +318,9 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	}
 
 
-	//When shot by a bullet
 	void OnTriggerEnter2D(Collider2D other){
+
+		//When hit by player bullets
 		if (other.tag == "PlayerProjectile") {
 
 			//When hit by the right bullet
@@ -307,8 +340,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 					//Stun if not dead after taking damage
 					} else {
 
-						//Store the current color and state to come back to after stun is over
-						prevColor = mySpriteRenderer.color;
+						//Store the current state to come back to after stun is over
 						prevState = state;
 
 
