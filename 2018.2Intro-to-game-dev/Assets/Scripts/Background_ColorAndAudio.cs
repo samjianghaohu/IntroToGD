@@ -22,9 +22,11 @@ public class Background_ColorAndAudio : MonoBehaviour {//This scripts manages ba
 	public AudioClip clip3;
 
 
+	GameObject player;
 	GameObject moveBG;
 	Camera cam;
 	AudioSource bgmPlayer;
+	AudioClip bgmClip;
 
 	SpriteRenderer mySpriteRenderer;
 	SpriteRenderer playerSprite;
@@ -35,6 +37,7 @@ public class Background_ColorAndAudio : MonoBehaviour {//This scripts manages ba
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindWithTag ("Player");
 		moveBG = GameObject.FindWithTag ("MovingBG");
 		cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
 		bgmPlayer = transform.parent.GetComponent<AudioSource> ();
@@ -89,20 +92,25 @@ public class Background_ColorAndAudio : MonoBehaviour {//This scripts manages ba
 
 	//Change background music according to player's color
 	void ChangeBGM(){
-		if (!Stage_Utilities.compareColorsLoose (playerSprite.color, Color.red)) {
+		Debug.Log (bgmPlayer.isPlaying);
 
-			//Get the matching audio clip from the dictionary
-			AudioClip bgmClip;
+		//Get the matching audio clip from the dictionary if player isn't chaning color because of stun
+		if (!player.GetComponent<Player_Control>().IfStunned()) {
 			audioDict.TryGetValue (playerSprite.color, out bgmClip);
+		}
 
-			if (bgmPlayer.clip != bgmClip) {
-				bgmPlayer.clip = bgmClip;
-				bgmPlayer.loop = true;
 
-				if ((bgmPlayer.clip != null) && (bgmPlayer.isPlaying == false)) {
-					bgmPlayer.Play ();
-				}
-			}
+		//Update clip when clip changes
+		if (bgmPlayer.clip != bgmClip) {
+			bgmPlayer.clip = bgmClip;
+		}
+
+
+		//Set playback to loop and play if the clip isn't null and the player isn't playing
+		bgmPlayer.loop = true;
+
+		if ((bgmPlayer.clip != null) && (bgmPlayer.isPlaying == false)) {
+			bgmPlayer.Play ();
 		}
 	}
 }

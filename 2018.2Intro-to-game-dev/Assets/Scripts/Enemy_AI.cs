@@ -176,6 +176,7 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 			}
 		}
 		if (state != STUNNED) {
+			mySpriteRenderer.color = Color.white;
 			animController.StopStun();
 		}
 
@@ -209,12 +210,18 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 	}
 
 
-	//Check if player is in front or behind
 	void CheckPlayer(){
+
+		//Do raycast on player if it's facing the player
 		if ((transform.position.x >= player.transform.position.x && mySpriteRenderer.flipX) || (transform.position.x < player.transform.position.x && !mySpriteRenderer.flipX)) {
 			RaycastCheck ();
+
+		
+		//Otherwise, unless it's stunned, it should always be patrolling
 		} else {
-			state = PATROL;
+			if (state != STUNNED) {
+				state = PATROL;
+			}
 		}
 
 	}
@@ -236,15 +243,19 @@ public class Enemy_AI : MonoBehaviour {//This script defines enemy behaviors.
 				}
 
 			
-			//Stay patrolling if player is far away
+			//If player is far away, unless enemy is stunned, enemy should patrol
 			} else {
-				state = PATROL;
+				if (state != STUNNED) {
+					state = PATROL;
+				}
 			}
 
 
-		//Stay patrolling if player is blocked and enemy can't see it
+		//Unless enemy is stunned, it should tay patrolling if player is blocked and enemy can't see it
 		} else {
-			state = PATROL;
+			if (state != STUNNED) {
+				state = PATROL;
+			}
 		}
 	}
 

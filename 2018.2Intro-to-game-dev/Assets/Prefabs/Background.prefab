@@ -64,9 +64,6 @@ MonoBehaviour:
   color3: {r: 1, g: 0.7529412, b: 0, a: 1}
   match3: {r: 0.078431375, g: 0.5803922, b: 0.8, a: 1}
   clip3: {fileID: 8300000, guid: 47677713d433e4fc2bd651666c03d88d, type: 3}
-  camera: {fileID: 0}
-  player: {fileID: 0}
-  moveBG: {fileID: 0}
 --- !u!212 &212830448986921820
 SpriteRenderer:
   m_ObjectHideFlags: 1
